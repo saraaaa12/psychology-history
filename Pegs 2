@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تاریخ روان‌شناسی | از آغاز تا علم</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Tahoma, Arial, sans-serif;
+            background: #f7f5f2;
+            color: #302b35;
+            line-height: 2;
+        }
+
+        header {
+            background: #ffffff;
+            border-bottom: 1px solid #e8e1dc;
+            padding: 18px 25px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            max-width: 1100px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 21px;
+            font-weight: bold;
+            color: #66507f;
+        }
+
+        .logo span {
+            color: #b88761;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #66507f;
+            font-size: 14px;
+        }
+
+        .hero {
+            background:
+                radial-gradient(circle at 80% 20%, #e8dff1, transparent 30%),
+                radial-gradient(circle at 10% 80%, #ead9ca, transparent 28%);
+            padding: 90px 25px;
+            text-align: center;
+        }
+
+        .hero small {
+            color: #b07f59;
+            font-weight: bold;
+        }
+
+        .hero h1 {
+            font-size: 45px;
+            color: #382f42;
+            margin: 15px 0;
+        }
+
+        .hero p {
+            max-width: 700px;
+            margin: auto;
+            color: #6f6970;
+            font-size: 16px;
+        }
+
+        main {
+            max-width: 950px;
+            margin: auto;
+            padding: 70px 25px;
+        }
+
+        .intro {
+            background: white;
+            padding: 35px;
+            border-radius: 22px;
+            margin-bottom: 50px;
+            border: 1px solid #ebe5df;
+            box-shadow: 0 10px 30px rgba(50,40,60,.05);
+        }
+
+        .intro h2 {
+            color: #66507f;
+            margin-bottom: 15px;
+        }
+
+        .era {
+            position: relative;
+            padding: 35px;
+            margin: 35px 0;
+            background: white;
+            border-radius: 22px;
+            border-right: 5px solid #8a6ba5;
+            box-shadow: 0 10px 30px rgba(50,40,60,.05);
+        }
+
+        .era-number {
+            color: #b07f59;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .era h2 {
+            color: #4d3d5d;
+            margin: 5px 0 15px;
+            font-size: 25px;
+        }
+
+        .era p {
+            color: #666;
+            font-size: 15px;
+        }
+
+        .highlight {
+            margin-top: 20px;
+            background: #f0ebf3;
+            padding: 18px 22px;
+            border-radius: 14px;
+            color: #59496a;
+            font-size: 14px;
+        }
+
+        .year {
+            display: inline-block;
+            background: #eee5f2;
+            color: #705788;
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+        .back {
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .back a {
+            display: inline-block;
+            background: #6e578e;
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            transition: .3s;
+        }
+
+        .back a:hover {
+            background: #57436f;
+            transform: translateY(-2px);
+        }
+
+        footer {
+            background: #302a35;
+            color: #aaa;
+            text-align: center;
+            padding: 30px;
+            font-size: 13px;
+        }
+
+        @media(max-width:700px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .era,
+            .intro {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <nav>
+        <div class="logo">
+            روان‌شناسی<span>‌نامه</span>
+        </div>
+
+        <a href="index.html">← بازگشت به صفحه اصلی</a>
+    </nav>
+</header>
+
+
+<section class="hero">
+
+    <small>HISTORY OF PSYCHOLOGY</small>
+
+    <h1>
+        سفر طولانی ذهن انسان
+    </h1>
+
+    <p>
+        روان‌شناسی یک‌شبه به وجود نیامد؛
+        این علم حاصل قرن‌ها پرسش، مشاهده، بحث و پژوهش درباره انسان است.
+    </p>
+
+</section>
+
+
+<main>
+
+    <div class="intro">
+
+        <h2>روان‌شناسی از کجا شروع شد؟</h2>
+
+        <p>
+            پیش از آنکه روان‌شناسی به عنوان یک علم مستقل شکل بگیرد،
+            پرسش‌هایی مانند «ذهن چیست؟»، «انسان چگونه فکر می‌کند؟»
+            و «چه چیزی رفتار ما را تعیین می‌کند؟» بیشتر در قلمرو فلسفه
+            مطرح می‌شدند.
+        </p>
+
+        <p>
+            به تدریج، با رشد علوم طبیعی و استفاده از روش‌های تجربی،
+            مطالعه ذهن و رفتار نیز به سمت رویکرد علمی حرکت کرد.
+        </p>
+
+    </div>
+
+
+    <!-- Era 1 -->
+
+    <article class="era">
+
+        <span class="year">دوران باستان</span>
+
+        <h2>۱. فلسفه و پرسش درباره ذهن</h2>
+
+        <p>
+            در یونان باستان، فیلسوفانی مانند افلاطون و ارسطو درباره
+            ماهیت انسان، ادراک، حافظه، هیجان و رابطه ذهن و بدن
+            نظریه‌پردازی کردند.
+        </p>
+
+        <div class="highlight">
+            <strong>نکته مهم:</strong>
+            در این دوره هنوز روان‌شناسی یک علم مستقل نبود و
+            مطالعه ذهن عمدتاً در چارچوب فلسفه انجام می‌شد.
+        </div>
+
+    </article>
+
+
+    <!-- Era 2 -->
+
+    <article class="era">
+
+        <span class="year">قرن هفدهم</span>
+
+        <h2>۲. ذهن و بدن</h2>
+
+        <p>
+            در دوره جدید، مسئله رابطه ذهن و بدن اهمیت بیشتری پیدا کرد.
+            فیلسوفانی مانند رنه دکارت تلاش کردند توضیح دهند که
+            فرایندهای ذهنی چگونه با بدن ارتباط دارند.
+        </p>
+
+        <div class="highlight">
+            <strong>ایده کلیدی:</strong>
+            مسئله ذهن ـ بدن بعدها به یکی از موضوعات مهم در فلسفه ذهن
+            و علوم روان‌شناختی تبدیل شد.
+        </div>
+
+    </article>
+
+
+    <!-- Era 3 -->
+
+    <article class="era">
+
+        <span class="year">قرن هجدهم و نوزدهم</span>
+
+        <h2>۳. حرکت به سوی مطالعه تجربی</h2>
+
+        <p>
+            پیشرفت فیزیولوژی و علوم اعصاب به دانشمندان اجازه داد
+            برخی فرایندهای حسی و عصبی را به صورت تجربی بررسی کنند.
+            این پیشرفت‌ها زمینه مناسبی برای شکل‌گیری روان‌شناسی علمی
+            فراهم کردند.
+        </p>
+
+        <div class="highlight">
+            <strong>نقطه تحول:</strong>
+            مطالعه احساس، ادراک و زمان واکنش به تدریج از بحث‌های
+            صرفاً فلسفی فاصله گرفت و به آزمایش نزدیک شد.
+        </div>
+
+    </article>
+
+
+    <!-- Era 4 -->
+
+    <article class="era">
+
+        <span class="year">۱۸۷۹</span>
+
+        <h2>۴. تولد روان‌شناسی علمی</h2>
+
+        <p>
+            ویلهلم وونت در شهر لایپزیگ آلمان آزمایشگاهی را برای
+            مطالعه فرایندهای روانی تأسیس کرد. این رویداد معمولاً
+            به عنوان یکی از مهم‌ترین نقاط عطف در تاریخ روان‌شناسی
+            مدرن شناخته می‌شود.
+        </p>
+
+        <div class="highlight">
+            <strong>۱۸۷۹؛ نقطه عطف:</strong>
+            روان‌شناسی بیش از گذشته به سمت یک رشته دانشگاهی و
+            آزمایشگاهی مستقل حرکت کرد.
+        </div>
+
+    </article>
+
+
+    <!-- Era 5 -->
+
+    <article class="era">
+
+        <span class="year">قرن بیستم</span>
+
+        <h2>۵. ظهور مکاتب روان‌شناسی</h2>
+
+        <p>
+            در قرن بیستم، دیدگاه‌های مختلفی درباره ذهن و رفتار شکل گرفتند.
+            روان‌کاوی، رفتارگرایی، گشتالت، انسان‌گرایی و بعدها
+            رویکرد شناختی، هرکدام بر جنبه متفاوتی از انسان تمرکز کردند.
+        </p>
+
+        <div class="highlight">
+            <strong>نتیجه:</strong>
+            تاریخ روان‌شناسی در این دوره به مجموعه‌ای از دیدگاه‌های
+            متفاوت و گاهی رقیب تبدیل شد.
+        </div>
+
+    </article>
+
+
+    <div class="back">
+        <a href="index.html">
+            بازگشت به صفحه اصلی
+        </a>
+    </div>
+
+</main>
+
+
+<footer>
+    © 2026 روان‌شناسی‌نامه | تاریخچه روان‌شناسی
+</footer>
+
+</body>
+</html>
