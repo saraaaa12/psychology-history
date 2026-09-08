@@ -1,1102 +1,966 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>پنل مدیریت | روان‌شناسی‌نامه</title>
 
-  <title>پنل مدیریت | روان‌شناسی‌نامه</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+*{box-sizing:border-box}
+body{
+    margin:0;
+    font-family:Tahoma,Arial,sans-serif;
+    background:#f5f6fa;
+    color:#252733;
+}
+button,input,textarea,select{font-family:inherit}
+button{cursor:pointer}
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+.login-screen{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    background:linear-gradient(135deg,#f5f0ff,#eef7ff);
+}
+.login-box{
+    width:100%;
+    max-width:420px;
+    background:white;
+    padding:35px;
+    border-radius:24px;
+    box-shadow:0 20px 60px rgba(0,0,0,.12);
+}
+.logo{
+    text-align:center;
+    font-size:26px;
+    font-weight:bold;
+    margin-bottom:8px;
+}
+.subtitle{
+    text-align:center;
+    color:#777;
+    margin-bottom:28px;
+}
+.field{
+    margin-bottom:16px;
+}
+.field label{
+    display:block;
+    margin-bottom:7px;
+    font-size:14px;
+    font-weight:bold;
+}
+.field input,
+.field textarea,
+.field select{
+    width:100%;
+    padding:13px 14px;
+    border:1px solid #ddd;
+    border-radius:12px;
+    outline:none;
+    font-size:14px;
+    background:white;
+}
+.field input:focus,
+.field textarea:focus,
+.field select:focus{
+    border-color:#7c5cff;
+}
+.field textarea{
+    min-height:180px;
+    resize:vertical;
+}
+.btn{
+    border:0;
+    border-radius:12px;
+    padding:13px 18px;
+    font-weight:bold;
+}
+.btn-primary{
+    width:100%;
+    background:#7c5cff;
+    color:white;
+}
+.btn-primary:hover{opacity:.9}
+
+.message{
+    display:none;
+    margin-top:15px;
+    padding:12px;
+    border-radius:10px;
+    font-size:13px;
+}
+.message.success{
+    display:block;
+    background:#e9f9ef;
+    color:#18733b;
+}
+.message.error{
+    display:block;
+    background:#fff0f0;
+    color:#b42318;
+}
+
+.admin{
+    display:none;
+    min-height:100vh;
+}
+.sidebar{
+    position:fixed;
+    right:0;
+    top:0;
+    bottom:0;
+    width:250px;
+    background:#171827;
+    color:white;
+    padding:25px 15px;
+    z-index:20;
+}
+.sidebar-logo{
+    font-size:21px;
+    font-weight:bold;
+    padding:0 15px 25px;
+}
+.sidebar-logo small{
+    display:block;
+    font-size:12px;
+    color:#aaa;
+    margin-top:5px;
+}
+.nav-item{
+    padding:13px 15px;
+    border-radius:11px;
+    margin:5px 0;
+    color:#c9c9d3;
+    cursor:pointer;
+}
+.nav-item:hover,
+.nav-item.active{
+    background:#2b2b43;
+    color:white;
+}
+.main{
+    margin-right:250px;
+    padding:30px;
+}
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    margin-bottom:30px;
+}
+.topbar h1{
+    margin:0;
+    font-size:26px;
+}
+.user-area{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+.logout{
+    background:#fff;
+    border:1px solid #ddd;
+    border-radius:10px;
+    padding:9px 13px;
+}
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+    margin-bottom:25px;
+}
+.stat{
+    background:white;
+    border-radius:18px;
+    padding:22px;
+    box-shadow:0 5px 20px rgba(0,0,0,.05);
+}
+.stat span{
+    color:#777;
+    font-size:13px;
+}
+.stat strong{
+    display:block;
+    font-size:28px;
+    margin-top:8px;
+}
+.card{
+    background:white;
+    border-radius:18px;
+    padding:24px;
+    margin-bottom:25px;
+    box-shadow:0 5px 20px rgba(0,0,0,.05);
+}
+.card-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+.card-header h2{
+    margin:0;
+    font-size:19px;
+}
+.add-btn{
+    background:#7c5cff;
+    color:white;
+    border:0;
+    border-radius:11px;
+    padding:11px 16px;
+    font-weight:bold;
+}
+.article-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    padding:16px 0;
+    border-bottom:1px solid #eee;
+}
+.article-row:last-child{border-bottom:0}
+.article-info{
+    min-width:0;
+}
+.article-title{
+    font-weight:bold;
+    margin-bottom:6px;
+}
+.article-meta{
+    font-size:12px;
+    color:#888;
+}
+.badge{
+    display:inline-block;
+    padding:5px 9px;
+    border-radius:20px;
+    font-size:11px;
+    margin-right:5px;
+}
+.badge-published{
+    background:#e8f7ee;
+    color:#19713a;
+}
+.badge-draft{
+    background:#fff5db;
+    color:#8b6500;
+}
+.actions{
+    display:flex;
+    gap:7px;
+    flex-shrink:0;
+}
+.action{
+    border:0;
+    padding:8px 11px;
+    border-radius:9px;
+    font-size:12px;
+}
+.edit{
+    background:#eeeaff;
+    color:#6248d8;
+}
+.delete{
+    background:#fff0f0;
+    color:#c62828;
+}
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+.full{grid-column:1/-1}
+.form-actions{
+    display:flex;
+    justify-content:flex-start;
+    gap:10px;
+    margin-top:18px;
+}
+.save{
+    background:#7c5cff;
+    color:white;
+}
+.cancel{
+    background:#eee;
+}
+.loading{
+    text-align:center;
+    color:#888;
+    padding:25px;
+}
+
+@media(max-width:900px){
+    .sidebar{
+        width:210px;
     }
-
-    body {
-      font-family: Tahoma, Arial, sans-serif;
-      background: #f7f5f2;
-      color: #29252a;
+    .main{
+        margin-right:210px;
     }
-
-    button,
-    input,
-    textarea,
-    select {
-      font-family: inherit;
+    .stats{
+        grid-template-columns:repeat(2,1fr);
     }
-
-    /* ================= LOGIN ================= */
-
-    #loginPage {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      background:
-        radial-gradient(circle at top right, #eadff0, transparent 35%),
-        radial-gradient(circle at bottom left, #dce9e5, transparent 35%),
-        #f7f5f2;
+}
+@media(max-width:700px){
+    .sidebar{
+        position:static;
+        width:100%;
+        min-height:auto;
     }
-
-    .login-box {
-      width: 100%;
-      max-width: 430px;
-      background: rgba(255,255,255,.95);
-      border-radius: 28px;
-      padding: 42px 35px;
-      box-shadow: 0 25px 70px rgba(0,0,0,.12);
+    .main{
+        margin-right:0;
+        padding:18px;
     }
-
-    .login-logo {
-      width: 70px;
-      height: 70px;
-      margin: 0 auto 20px;
-      border-radius: 22px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #6e5978;
-      color: white;
-      font-size: 30px;
+    .stats{
+        grid-template-columns:1fr 1fr;
     }
-
-    .login-box h1 {
-      text-align: center;
-      font-size: 25px;
-      margin-bottom: 8px;
+    .form-grid{
+        grid-template-columns:1fr;
     }
-
-    .login-subtitle {
-      text-align: center;
-      color: #777;
-      font-size: 14px;
-      margin-bottom: 30px;
-      line-height: 1.8;
+    .full{
+        grid-column:auto;
     }
-
-    .input-group {
-      margin-bottom: 18px;
+    .topbar{
+        align-items:flex-start;
+        flex-direction:column;
     }
-
-    .input-group label {
-      display: block;
-      font-size: 14px;
-      margin-bottom: 8px;
-      font-weight: bold;
+    .article-row{
+        align-items:flex-start;
+        flex-direction:column;
     }
+}
 
-    .input-group input,
-    .input-group textarea,
-    .input-group select {
-      width: 100%;
-      padding: 14px 15px;
-      border: 1px solid #ddd6df;
-      border-radius: 13px;
-      background: white;
-      outline: none;
-      font-size: 14px;
-    }
-
-    .input-group textarea {
-      min-height: 180px;
-      resize: vertical;
-      line-height: 2;
-    }
-
-    .input-group input:focus,
-    .input-group textarea:focus,
-    .input-group select:focus {
-      border-color: #8d7199;
-      box-shadow: 0 0 0 4px rgba(141,113,153,.1);
-    }
-
-    .login-btn,
-    .primary-btn {
-      width: 100%;
-      border: none;
-      padding: 15px;
-      border-radius: 14px;
-      background: #6e5978;
-      color: white;
-      font-size: 15px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .login-btn:disabled,
-    .primary-btn:disabled {
-      opacity: .6;
-      cursor: not-allowed;
-    }
-
-    #loginError {
-      display: none;
-      background: #fff0f0;
-      color: #b33b3b;
-      padding: 12px;
-      border-radius: 12px;
-      font-size: 13px;
-      margin-bottom: 15px;
-      line-height: 1.7;
-    }
-
-    /* ================= ADMIN ================= */
-
-    #adminPage {
-      display: none;
-      min-height: 100vh;
-    }
-
-    .sidebar {
-      position: fixed;
-      right: 0;
-      top: 0;
-      width: 260px;
-      height: 100vh;
-      background: #29252a;
-      color: white;
-      padding: 25px 18px;
-      z-index: 100;
-    }
-
-    .brand {
-      padding: 10px 12px 25px;
-      border-bottom: 1px solid rgba(255,255,255,.1);
-      margin-bottom: 20px;
-    }
-
-    .brand h2 {
-      font-size: 20px;
-      margin-bottom: 5px;
-    }
-
-    .brand span {
-      font-size: 12px;
-      color: #bcb4bf;
-    }
-
-    .menu a {
-      display: block;
-      padding: 13px 14px;
-      border-radius: 12px;
-      color: #d8d2d9;
-      text-decoration: none;
-      margin-bottom: 6px;
-      font-size: 14px;
-    }
-
-    .menu a:hover,
-    .menu a.active {
-      background: rgba(255,255,255,.1);
-      color: white;
-    }
-
-    .logout-btn {
-      position: absolute;
-      bottom: 25px;
-      right: 18px;
-      left: 18px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: transparent;
-      color: #ddd;
-      padding: 12px;
-      border-radius: 12px;
-      cursor: pointer;
-    }
-
-    .main {
-      margin-right: 260px;
-      padding: 35px;
-    }
-
-    .topbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 30px;
-    }
-
-    .topbar h1 {
-      font-size: 28px;
-    }
-
-    .user-info {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      background: white;
-      padding: 9px 14px;
-      border-radius: 14px;
-      box-shadow: 0 5px 20px rgba(0,0,0,.05);
-    }
-
-    .avatar {
-      width: 38px;
-      height: 38px;
-      border-radius: 12px;
-      background: #eadff0;
-      color: #6e5978;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-    }
-
-    .card {
-      background: white;
-      border-radius: 20px;
-      padding: 24px;
-      box-shadow: 0 8px 25px rgba(0,0,0,.05);
-      margin-bottom: 20px;
-    }
-
-    .card h2 {
-      font-size: 18px;
-      margin-bottom: 20px;
-    }
-
-    .message {
-      display: none;
-      padding: 14px;
-      border-radius: 12px;
-      margin-bottom: 18px;
-      font-size: 13px;
-      line-height: 1.9;
-      word-break: break-word;
-    }
-
-    .success {
-      display: block;
-      background: #eaf7ed;
-      color: #347447;
-    }
-
-    .error {
-      display: block;
-      background: #fff0f0;
-      color: #b33b3b;
-    }
-
-    .debug-box {
-      margin-top: 15px;
-      background: #29252a;
-      color: #f4f4f4;
-      padding: 14px;
-      border-radius: 12px;
-      font-family: monospace;
-      direction: ltr;
-      text-align: left;
-      font-size: 12px;
-      line-height: 1.7;
-      overflow-x: auto;
-      display: none;
-    }
-
-    @media (max-width: 650px) {
-
-      .sidebar {
-        position: static;
-        width: 100%;
-        height: auto;
-      }
-
-      .logout-btn {
-        position: static;
-        width: 100%;
-        margin-top: 15px;
-      }
-
-      .main {
-        margin-right: 0;
-        padding: 20px;
-      }
-
-      .topbar {
-        align-items: flex-start;
-        gap: 15px;
-        flex-direction: column;
-      }
-
-      .login-box {
-        padding: 32px 22px;
-      }
-    }
-  </style>
+/* dark mode */
+body.dark{
+    background:#101116;
+    color:#eee;
+}
+body.dark .card,
+body.dark .stat,
+body.dark .logout,
+body.dark .login-box{
+    background:#1b1d25;
+    color:#eee;
+}
+body.dark .field input,
+body.dark .field textarea,
+body.dark .field select{
+    background:#111319;
+    color:#eee;
+    border-color:#343744;
+}
+body.dark .article-row{
+    border-color:#30323c;
+}
+body.dark .cancel{
+    background:#30323c;
+    color:white;
+}
+body.dark .login-screen{
+    background:#101116;
+}
+</style>
 </head>
 
 <body>
 
+<!-- LOGIN -->
+<section class="login-screen" id="loginScreen">
+    <div class="login-box">
+        <div class="logo">روان‌شناسی‌نامه</div>
+        <div class="subtitle">ورود به پنل مدیریت</div>
 
-<!-- ================= LOGIN ================= -->
-
-<section id="loginPage">
-
-  <div class="login-box">
-
-    <div class="login-logo">
-      🧠
-    </div>
-
-    <h1>
-      ورود مدیر
-    </h1>
-
-    <p class="login-subtitle">
-      برای ورود به پنل مدیریت روان‌شناسی‌نامه،
-      ایمیل و رمز عبور خود را وارد کنید.
-    </p>
-
-    <div id="loginError"></div>
-
-    <form id="loginForm">
-
-      <div class="input-group">
-
-        <label>
-          ایمیل
-        </label>
-
-        <input
-          type="email"
-          id="email"
-          placeholder="ایمیل مدیر"
-          required
-        >
-
-      </div>
-
-      <div class="input-group">
-
-        <label>
-          رمز عبور
-        </label>
-
-        <input
-          type="password"
-          id="password"
-          placeholder="رمز عبور"
-          required
-        >
-
-      </div>
-
-      <button
-        class="login-btn"
-        id="loginBtn"
-        type="submit"
-      >
-        ورود به پنل
-      </button>
-
-    </form>
-
-  </div>
-
-</section>
-
-
-<!-- ================= ADMIN ================= -->
-
-<section id="adminPage">
-
-  <aside class="sidebar">
-
-    <div class="brand">
-
-      <h2>
-        روان‌شناسی‌نامه
-      </h2>
-
-      <span>
-        پنل مدیریت
-      </span>
-
-    </div>
-
-    <nav class="menu">
-
-      <a
-        href="#addArticle"
-        class="active"
-      >
-        ✏️ افزودن مقاله
-      </a>
-
-    </nav>
-
-    <button
-      class="logout-btn"
-      id="logoutBtn"
-    >
-      خروج از حساب
-    </button>
-
-  </aside>
-
-
-  <main class="main">
-
-    <div class="topbar">
-
-      <div>
-
-        <h1>
-          افزودن مقاله
-        </h1>
-
-        <p style="color:#888;margin-top:7px;">
-          مقاله جدیدت را از اینجا به سایت اضافه کن.
-        </p>
-
-      </div>
-
-      <div class="user-info">
-
-        <div class="avatar">
-          س
+        <div class="field">
+            <label>ایمیل</label>
+            <input id="email" type="email" placeholder="ایمیل مدیر">
         </div>
 
-        <strong id="userEmail">
-          مدیر
-        </strong>
-
-      </div>
-
-    </div>
-
-
-    <div class="card">
-
-      <h2>
-        مقاله جدید ✍️
-      </h2>
-
-
-      <div
-        id="articleMessage"
-        class="message"
-      ></div>
-
-
-      <div
-        id="debugBox"
-        class="debug-box"
-      ></div>
-
-
-      <form id="articleForm">
-
-        <div class="input-group">
-
-          <label>
-            عنوان مقاله
-          </label>
-
-          <input
-            type="text"
-            id="articleTitle"
-            placeholder="مثلاً روان‌شناسی در دوران باستان"
-            required
-          >
-
+        <div class="field">
+            <label>رمز عبور</label>
+            <input id="password" type="password" placeholder="رمز عبور">
         </div>
 
-
-        <div class="input-group">
-
-          <label>
-            دسته‌بندی
-          </label>
-
-          <input
-            type="text"
-            id="articleCategory"
-            placeholder="مثلاً تاریخ روان‌شناسی"
-          >
-
-        </div>
-
-
-        <div class="input-group">
-
-          <label>
-            وضعیت مقاله
-          </label>
-
-          <select id="articleStatus">
-
-            <option value="published">
-              منتشر شده
-            </option>
-
-            <option value="draft">
-              پیش‌نویس
-            </option>
-
-          </select>
-
-        </div>
-
-
-        <div class="input-group">
-
-          <label>
-            متن مقاله
-          </label>
-
-          <textarea
-            id="articleContent"
-            placeholder="متن مقاله را اینجا بنویس..."
-            required
-          ></textarea>
-
-        </div>
-
-
-        <button
-          class="primary-btn"
-          id="saveArticleBtn"
-          type="submit"
-        >
-          💾 ذخیره مقاله
+        <button class="btn btn-primary" id="loginBtn">
+            ورود به پنل
         </button>
 
-      </form>
-
+        <div class="message" id="loginMessage"></div>
     </div>
-
-  </main>
-
 </section>
 
+<!-- ADMIN -->
+<div class="admin" id="adminPanel">
+
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            روان‌شناسی‌نامه
+            <small>پنل مدیریت</small>
+        </div>
+
+        <div class="nav-item active">داشبورد</div>
+        <div class="nav-item" onclick="showArticleForm()">افزودن مقاله</div>
+        <div class="nav-item" onclick="document.getElementById('articlesCard').scrollIntoView({behavior:'smooth'})">
+            مقالات
+        </div>
+        <div class="nav-item" onclick="toggleDark()">حالت شب</div>
+        <div class="nav-item" onclick="window.open('index.html','_blank')">
+            مشاهده سایت
+        </div>
+        <div class="nav-item" onclick="logout()">
+            خروج
+        </div>
+    </aside>
+
+    <main class="main">
+
+        <div class="topbar">
+            <div>
+                <h1>داشبورد</h1>
+                <div style="color:#888;margin-top:6px;font-size:13px">
+                    مدیریت محتوای روان‌شناسی‌نامه
+                </div>
+            </div>
+
+            <div class="user-area">
+                <span id="userEmail"></span>
+                <button class="logout" onclick="logout()">خروج</button>
+            </div>
+        </div>
+
+        <!-- STATS -->
+        <div class="stats">
+            <div class="stat">
+                <span>کل مقالات</span>
+                <strong id="totalArticles">0</strong>
+            </div>
+
+            <div class="stat">
+                <span>منتشر شده</span>
+                <strong id="publishedArticles">0</strong>
+            </div>
+
+            <div class="stat">
+                <span>پیش‌نویس</span>
+                <strong id="draftArticles">0</strong>
+            </div>
+
+            <div class="stat">
+                <span>وضعیت اتصال</span>
+                <strong id="connectionStatus">...</strong>
+            </div>
+        </div>
+
+        <!-- ADD / EDIT FORM -->
+        <div class="card" id="articleFormCard" style="display:none">
+
+            <div class="card-header">
+                <h2 id="formTitle">افزودن مقاله جدید</h2>
+            </div>
+
+            <div class="form-grid">
+
+                <div class="field">
+                    <label>عنوان مقاله</label>
+                    <input id="articleTitle" type="text" placeholder="عنوان مقاله">
+                </div>
+
+                <div class="field">
+                    <label>دسته‌بندی</label>
+                    <input id="articleCategory" type="text" placeholder="مثلاً تاریخ روان‌شناسی">
+                </div>
+
+                <div class="field">
+                    <label>وضعیت</label>
+                    <select id="articleStatus">
+                        <option value="published">منتشر شده</option>
+                        <option value="draft">پیش‌نویس</option>
+                    </select>
+                </div>
+
+                <div class="field full">
+                    <label>متن مقاله</label>
+                    <textarea id="articleContent" placeholder="متن مقاله را اینجا بنویس..."></textarea>
+                </div>
+
+            </div>
+
+            <div class="form-actions">
+                <button class="btn save" id="saveBtn" onclick="saveArticle()">
+                    ذخیره مقاله
+                </button>
+
+                <button class="btn cancel" onclick="hideArticleForm()">
+                    لغو
+                </button>
+            </div>
+
+            <div class="message" id="formMessage"></div>
+        </div>
+
+        <!-- ARTICLES -->
+        <div class="card" id="articlesCard">
+
+            <div class="card-header">
+                <h2>مقالات</h2>
+
+                <button class="add-btn" onclick="showArticleForm()">
+                    + مقاله جدید
+                </button>
+            </div>
+
+            <div id="articlesList">
+                <div class="loading">در حال دریافت مقالات...</div>
+            </div>
+
+        </div>
+
+    </main>
+</div>
 
 <script>
+const SUPABASE_URL = "https://wwzgywcezzzrgiqprdeg.supabase.co";
+const SUPABASE_KEY = "sb_publishable_uEoXARjUJ3XhVNWneTMZjQ_uTzwYyt8";
+
+const { createClient } = supabase;
+const db = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+let editingId = null;
 
 
-/* =========================================
-   SUPABASE CONFIG
-========================================= */
+/* ---------------- LOGIN ---------------- */
 
-const SUPABASE_URL =
-  "https://wwzgywcezzzrgiqprdeg.supabase.co";
+document.getElementById("loginBtn").addEventListener("click", login);
 
-const SUPABASE_KEY =
-  "sb_publishable_uEoXARjUJ3XhVNWneTMZjQ_uTzwYyt8";
+async function login(){
 
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
 
-const supabaseClient =
-  supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-  );
+    if(!email || !password){
+        showMessage("loginMessage","ایمیل و رمز عبور را وارد کن.","error");
+        return;
+    }
 
+    const btn = document.getElementById("loginBtn");
+    btn.disabled = true;
+    btn.textContent = "در حال ورود...";
 
-/* =========================================
-   ELEMENTS
-========================================= */
+    const { data, error } = await db.auth.signInWithPassword({
+        email,
+        password
+    });
 
-const loginPage =
-  document.getElementById("loginPage");
+    btn.disabled = false;
+    btn.textContent = "ورود به پنل";
 
-const adminPage =
-  document.getElementById("adminPage");
+    if(error){
+        showMessage("loginMessage","ورود ناموفق: " + error.message,"error");
+        return;
+    }
 
-const loginForm =
-  document.getElementById("loginForm");
-
-const loginBtn =
-  document.getElementById("loginBtn");
-
-const loginError =
-  document.getElementById("loginError");
-
-const logoutBtn =
-  document.getElementById("logoutBtn");
-
-const userEmail =
-  document.getElementById("userEmail");
-
-const articleForm =
-  document.getElementById("articleForm");
-
-const saveArticleBtn =
-  document.getElementById("saveArticleBtn");
-
-const articleMessage =
-  document.getElementById("articleMessage");
-
-const debugBox =
-  document.getElementById("debugBox");
-
-
-/* =========================================
-   SHOW LOGIN
-========================================= */
-
-function showLogin() {
-
-  adminPage.style.display = "none";
-
-  loginPage.style.display = "flex";
-
+    openAdmin(data.user);
 }
 
 
-/* =========================================
-   SHOW ADMIN
-========================================= */
+/* ---------------- SESSION ---------------- */
 
-function showAdmin(user) {
+async function checkSession(){
 
-  loginPage.style.display = "none";
+    const { data, error } = await db.auth.getSession();
 
-  adminPage.style.display = "block";
+    if(error){
+        console.error(error);
+        return;
+    }
 
-  if (user && user.email) {
-
-    userEmail.textContent =
-      user.email;
-
-  }
-
+    if(data.session){
+        openAdmin(data.session.user);
+    }
 }
 
+db.auth.onAuthStateChange((event, session)=>{
 
-/* =========================================
-   CHECK SESSION
-========================================= */
-
-async function checkSession() {
-
-  try {
-
-    const {
-      data: {
-        session
-      }
-    } =
-    await supabaseClient.auth.getSession();
-
-
-    if (
-      session &&
-      session.user
-    ) {
-
-      showAdmin(
-        session.user
-      );
-
-    } else {
-
-      showLogin();
-
+    if(session){
+        openAdmin(session.user);
+    }else{
+        showLogin();
     }
 
-  } catch (error) {
-
-    console.error(error);
-
-    showLogin();
-
-  }
-
-}
-
-
-/* =========================================
-   LOGIN
-========================================= */
-
-loginForm.addEventListener(
-  "submit",
-  async function(event) {
-
-    event.preventDefault();
-
-
-    loginError.style.display =
-      "none";
-
-
-    const email =
-      document
-        .getElementById("email")
-        .value
-        .trim();
-
-
-    const password =
-      document
-        .getElementById("password")
-        .value;
-
-
-    loginBtn.disabled =
-      true;
-
-    loginBtn.textContent =
-      "در حال ورود...";
-
-
-    try {
-
-      const {
-        data,
-        error
-      } =
-      await supabaseClient.auth
-        .signInWithPassword({
-
-          email: email,
-
-          password: password
-
-        });
-
-
-      if (error) {
-
-        throw error;
-
-      }
-
-
-      showAdmin(
-        data.user
-      );
-
-
-    } catch (error) {
-
-      loginError.textContent =
-        "خطا: " +
-        error.message;
-
-      loginError.style.display =
-        "block";
-
-    }
-
-
-    loginBtn.disabled =
-      false;
-
-    loginBtn.textContent =
-      "ورود به پنل";
-
-  }
-);
-
-
-/* =========================================
-   LOGOUT
-========================================= */
-
-logoutBtn.addEventListener(
-  "click",
-  async function() {
-
-    await supabaseClient.auth.signOut();
-
-    showLogin();
-
-  }
-);
-
-
-/* =========================================
-   SHOW MESSAGE
-========================================= */
-
-function showMessage(
-  text,
-  type,
-  details = ""
-) {
-
-  articleMessage.textContent =
-    text;
-
-  articleMessage.className =
-    "message " + type;
-
-  articleMessage.style.display =
-    "block";
-
-
-  if (details) {
-
-    debugBox.textContent =
-      details;
-
-    debugBox.style.display =
-      "block";
-
-  } else {
-
-    debugBox.style.display =
-      "none";
-
-  }
-
-}
-
-
-/* =========================================
-   SAVE ARTICLE
-========================================= */
-
-articleForm.addEventListener(
-  "submit",
-  async function(event) {
-
-    event.preventDefault();
-
-
-    debugBox.style.display =
-      "none";
-
-    articleMessage.style.display =
-      "none";
-
-
-    const title =
-      document
-        .getElementById("articleTitle")
-        .value
-        .trim();
-
-
-    const category =
-      document
-        .getElementById("articleCategory")
-        .value
-        .trim();
-
-
-    const content =
-      document
-        .getElementById("articleContent")
-        .value
-        .trim();
-
-
-    const status =
-      document
-        .getElementById("articleStatus")
-        .value;
-
-
-    if (
-      !title ||
-      !content
-    ) {
-
-      showMessage(
-        "عنوان و متن مقاله را وارد کن.",
-        "error"
-      );
-
-      return;
-
-    }
-
-
-    saveArticleBtn.disabled =
-      true;
-
-    saveArticleBtn.textContent =
-      "در حال ذخیره...";
-
-
-    try {
-
-      /* -----------------------------
-         بررسی ورود کاربر
-      ----------------------------- */
-
-      const {
-        data: {
-          user
-        }
-      } =
-      await supabaseClient.auth.getUser();
-
-
-      if (!user) {
-
-        throw new Error(
-          "کاربر وارد حساب نشده است."
-        );
-
-      }
-
-
-      /* -----------------------------
-         ارسال مقاله به جدول article
-      ----------------------------- */
-
-      const {
-        data,
-        error
-      } =
-      await supabaseClient
-        .from("article")
-        .insert({
-
-          title: title,
-
-          content: content,
-
-          category: category,
-
-          status: status
-
-        })
-        .select();
-
-
-      /* -----------------------------
-         بررسی خطا
-      ----------------------------- */
-
-      if (error) {
-
-        throw error;
-
-      }
-
-
-      /* -----------------------------
-         موفقیت
-      ----------------------------- */
-
-      showMessage(
-        "✅ مقاله با موفقیت ثبت شد!",
-        "success"
-      );
-
-
-      articleForm.reset();
-
-
-      console.log(
-        "Article inserted:",
-        data
-      );
-
-
-    } catch (error) {
-
-      console.error(
-        "SUPABASE ERROR:",
-        error
-      );
-
-
-      let details =
-        "";
-
-
-      if (error.message) {
-
-        details +=
-          "message: " +
-          error.message +
-          "\n\n";
-
-      }
-
-
-      if (error.code) {
-
-        details +=
-          "code: " +
-          error.code +
-          "\n\n";
-
-      }
-
-
-      if (error.details) {
-
-        details +=
-          "details: " +
-          error.details +
-          "\n\n";
-
-      }
-
-
-      if (error.hint) {
-
-        details +=
-          "hint: " +
-          error.hint;
-
-      }
-
-
-      showMessage(
-        "❌ مقاله ثبت نشد. متن خطای زیر را برای من بفرست:",
-        "error",
-        details || "خطای نامشخص"
-      );
-
-    }
-
-
-    saveArticleBtn.disabled =
-      false;
-
-    saveArticleBtn.textContent =
-      "💾 ذخیره مقاله";
-
-  }
-);
-
-
-/* =========================================
-   AUTH STATE
-========================================= */
-
-supabaseClient.auth.onAuthStateChange(
-  function(
-    event,
-    session
-  ) {
-
-    if (
-      session &&
-      session.user
-    ) {
-
-      showAdmin(
-        session.user
-      );
-
-    } else {
-
-      showLogin();
-
-    }
-
-  }
-);
-
-
-/* =========================================
-   START
-========================================= */
+});
 
 checkSession();
 
 
+function openAdmin(user){
+
+    document.getElementById("loginScreen").style.display = "none";
+    document.getElementById("adminPanel").style.display = "block";
+
+    document.getElementById("userEmail").textContent =
+        user.email || "";
+
+    loadArticles();
+}
+
+
+function showLogin(){
+
+    document.getElementById("loginScreen").style.display = "flex";
+    document.getElementById("adminPanel").style.display = "none";
+}
+
+
+/* ---------------- ARTICLES ---------------- */
+
+async function loadArticles(){
+
+    const list = document.getElementById("articlesList");
+
+    list.innerHTML =
+        '<div class="loading">در حال دریافت مقالات...</div>';
+
+    const { data, error } = await db
+        .from("article")
+        .select("*")
+        .order("created_at",{ascending:false});
+
+    if(error){
+
+        console.error(error);
+
+        list.innerHTML =
+            '<div class="message error" style="display:block">' +
+            "خطا در دریافت مقالات: " +
+            escapeHtml(error.message) +
+            "</div>";
+
+        document.getElementById("connectionStatus").textContent = "خطا";
+        return;
+    }
+
+    document.getElementById("connectionStatus").textContent = "متصل";
+
+    const articles = data || [];
+
+    document.getElementById("totalArticles").textContent =
+        articles.length;
+
+    document.getElementById("publishedArticles").textContent =
+        articles.filter(a => a.status === "published").length;
+
+    document.getElementById("draftArticles").textContent =
+        articles.filter(a => a.status === "draft").length;
+
+    if(articles.length === 0){
+
+        list.innerHTML =
+            '<div class="loading">هنوز مقاله‌ای ثبت نشده است.</div>';
+
+        return;
+    }
+
+    list.innerHTML = articles.map(article => {
+
+        const date = article.created_at
+            ? new Date(article.created_at).toLocaleString("fa-IR")
+            : "بدون تاریخ";
+
+        const badge =
+            article.status === "published"
+            ? '<span class="badge badge-published">منتشر شده</span>'
+            : '<span class="badge badge-draft">پیش‌نویس</span>';
+
+        return `
+            <div class="article-row">
+
+                <div class="article-info">
+
+                    <div class="article-title">
+                        ${escapeHtml(article.title || "بدون عنوان")}
+                    </div>
+
+                    <div class="article-meta">
+                        ${escapeHtml(article.category || "بدون دسته‌بندی")}
+                        · ${date}
+                        ${badge}
+                    </div>
+
+                </div>
+
+                <div class="actions">
+
+                    <button class="action edit"
+                        onclick="editArticle(${article.id})">
+                        ویرایش
+                    </button>
+
+                    <button class="action delete"
+                        onclick="deleteArticle(${article.id})">
+                        حذف
+                    </button>
+
+                </div>
+
+            </div>
+        `;
+
+    }).join("");
+}
+
+
+/* ---------------- ADD / EDIT ---------------- */
+
+function showArticleForm(){
+
+    document.getElementById("articleFormCard").style.display = "block";
+
+    document.getElementById("articleFormCard")
+        .scrollIntoView({behavior:"smooth"});
+
+    if(editingId === null){
+
+        document.getElementById("formTitle").textContent =
+            "افزودن مقاله جدید";
+
+        document.getElementById("articleTitle").value = "";
+        document.getElementById("articleCategory").value = "";
+        document.getElementById("articleStatus").value = "published";
+        document.getElementById("articleContent").value = "";
+
+    }
+}
+
+
+function hideArticleForm(){
+
+    document.getElementById("articleFormCard").style.display = "none";
+
+    editingId = null;
+
+    document.getElementById("formMessage").className = "message";
+    document.getElementById("formMessage").textContent = "";
+}
+
+
+/* ---------------- SAVE ---------------- */
+
+async function saveArticle(){
+
+    const title =
+        document.getElementById("articleTitle").value.trim();
+
+    const category =
+        document.getElementById("articleCategory").value.trim();
+
+    const status =
+        document.getElementById("articleStatus").value;
+
+    const content =
+        document.getElementById("articleContent").value.trim();
+
+    if(!title || !content){
+
+        showMessage(
+            "formMessage",
+            "عنوان و متن مقاله الزامی است.",
+            "error"
+        );
+
+        return;
+    }
+
+    const btn = document.getElementById("saveBtn");
+
+    btn.disabled = true;
+    btn.textContent = "در حال ذخیره...";
+
+    let result;
+
+    try{
+
+        if(editingId === null){
+
+            result = await db
+                .from("article")
+                .insert({
+                    title,
+                    content,
+                    category,
+                    status
+                })
+                .select();
+
+        }else{
+
+            result = await db
+                .from("article")
+                .update({
+                    title,
+                    content,
+                    category,
+                    status
+                })
+                .eq("id", editingId)
+                .select();
+
+        }
+
+        if(result.error){
+            throw result.error;
+        }
+
+        showMessage(
+            "formMessage",
+            editingId === null
+                ? "مقاله با موفقیت ذخیره شد ✅"
+                : "مقاله با موفقیت ویرایش شد ✅",
+            "success"
+        );
+
+        editingId = null;
+
+        btn.disabled = false;
+        btn.textContent = "ذخیره مقاله";
+
+        await loadArticles();
+
+        setTimeout(()=>{
+            hideArticleForm();
+        },1000);
+
+    }catch(error){
+
+        console.error(error);
+
+        btn.disabled = false;
+        btn.textContent = "ذخیره مقاله";
+
+        showMessage(
+            "formMessage",
+            "خطا در ذخیره مقاله: " + (error.message || "خطای نامشخص"),
+            "error"
+        );
+    }
+}
+
+
+/* ---------------- EDIT ---------------- */
+
+async function editArticle(id){
+
+    const { data, error } = await db
+        .from("article")
+        .select("*")
+        .eq("id",id)
+        .single();
+
+    if(error){
+
+        showMessage(
+            "formMessage",
+            "خطا در دریافت مقاله: " + error.message,
+            "error"
+        );
+
+        return;
+    }
+
+    editingId = id;
+
+    document.getElementById("formTitle").textContent =
+        "ویرایش مقاله";
+
+    document.getElementById("articleTitle").value =
+        data.title || "";
+
+    document.getElementById("articleCategory").value =
+        data.category || "";
+
+    document.getElementById("articleStatus").value =
+        data.status || "draft";
+
+    document.getElementById("articleContent").value =
+        data.content || "";
+
+    showArticleForm();
+}
+
+
+/* ---------------- DELETE ---------------- */
+
+async function deleteArticle(id){
+
+    const confirmed = confirm(
+        "آیا مطمئنی می‌خواهی این مقاله را حذف کنی؟"
+    );
+
+    if(!confirmed) return;
+
+    const { error } = await db
+        .from("article")
+        .delete()
+        .eq("id",id);
+
+    if(error){
+
+        alert("خطا در حذف مقاله: " + error.message);
+        return;
+    }
+
+    await loadArticles();
+}
+
+
+/* ---------------- LOGOUT ---------------- */
+
+async function logout(){
+
+    await db.auth.signOut();
+    showLogin();
+}
+
+
+/* ---------------- DARK MODE ---------------- */
+
+function toggleDark(){
+
+    document.body.classList.toggle("dark");
+
+    localStorage.setItem(
+        "adminDark",
+        document.body.classList.contains("dark")
+    );
+}
+
+if(localStorage.getItem("adminDark") === "true"){
+    document.body.classList.add("dark");
+}
+
+
+/* ---------------- HELPERS ---------------- */
+
+function showMessage(id,text,type){
+
+    const el = document.getElementById(id);
+
+    el.textContent = text;
+    el.className = "message " + type;
+}
+
+
+function escapeHtml(value){
+
+    return String(value)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+}
 </script>
 
 </body>
