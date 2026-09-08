@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>پنل مدیریت | روان‌شناسی‌نامه</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
+
 @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap');
 
 *{
@@ -23,7 +26,10 @@ body{
   min-height:100vh;
 }
 
-button,input,textarea,select{
+button,
+input,
+textarea,
+select{
   font-family:inherit;
 }
 
@@ -44,9 +50,18 @@ button{
   align-items:center;
   justify-content:center;
   padding:20px;
+
   background:
-    radial-gradient(circle at 10% 20%,rgba(239,180,208,.45),transparent 30%),
-    radial-gradient(circle at 90% 80%,rgba(196,180,235,.45),transparent 30%),
+    radial-gradient(
+      circle at 10% 20%,
+      rgba(239,180,208,.45),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 90% 80%,
+      rgba(196,180,235,.45),
+      transparent 30%
+    ),
     #f8f1ed;
 }
 
@@ -64,12 +79,21 @@ button{
   width:75px;
   height:75px;
   border-radius:24px;
+
   display:flex;
   align-items:center;
   justify-content:center;
+
   margin:0 auto 20px;
+
   font-size:36px;
-  background:linear-gradient(135deg,#e8b3ce,#cbb8e8);
+
+  background:
+    linear-gradient(
+      135deg,
+      #e8b3ce,
+      #cbb8e8
+    );
 }
 
 .login-card h1{
@@ -119,18 +143,29 @@ button{
 .field textarea:focus,
 .field select:focus{
   border-color:#c89abd;
-  box-shadow:0 0 0 4px rgba(200,154,189,.12);
+
+  box-shadow:
+    0 0 0 4px rgba(200,154,189,.12);
 }
 
 .primary-btn{
   width:100%;
   padding:14px;
   border-radius:15px;
-  background:linear-gradient(135deg,#d99fbe,#aa91d0);
+
+  background:
+    linear-gradient(
+      135deg,
+      #d99fbe,
+      #aa91d0
+    );
+
   color:white;
   font-weight:800;
   font-size:15px;
-  box-shadow:0 8px 20px rgba(170,145,208,.22);
+
+  box-shadow:
+    0 8px 20px rgba(170,145,208,.22);
 }
 
 .message{
@@ -163,8 +198,11 @@ button{
   position:sticky;
   top:0;
   z-index:20;
+
   background:rgba(255,255,255,.84);
+
   backdrop-filter:blur(15px);
+
   border-bottom:1px solid #e9dfe5;
 }
 
@@ -172,6 +210,7 @@ button{
   max-width:1200px;
   margin:auto;
   padding:14px 20px;
+
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -189,10 +228,18 @@ button{
   width:44px;
   height:44px;
   border-radius:14px;
-  background:linear-gradient(135deg,#e8b3ce,#cbb8e8);
+
+  background:
+    linear-gradient(
+      135deg,
+      #e8b3ce,
+      #cbb8e8
+    );
+
   display:flex;
   align-items:center;
   justify-content:center;
+
   font-size:23px;
 }
 
@@ -204,8 +251,10 @@ button{
 .small-btn{
   padding:9px 13px;
   border-radius:12px;
+
   background:#f4edf2;
   color:#554b54;
+
   font-size:12px;
   font-weight:700;
 }
@@ -254,7 +303,9 @@ button{
   border:1px solid #eadfe5;
   border-radius:22px;
   padding:22px;
-  box-shadow:0 8px 25px rgba(80,55,70,.05);
+
+  box-shadow:
+    0 8px 25px rgba(80,55,70,.05);
 }
 
 .stat-icon{
@@ -287,7 +338,9 @@ button{
   border:1px solid #eadfe5;
   border-radius:24px;
   padding:23px;
-  box-shadow:0 8px 25px rgba(80,55,70,.05);
+
+  box-shadow:
+    0 8px 25px rgba(80,55,70,.05);
 }
 
 .panel-title{
@@ -312,8 +365,11 @@ button{
   border:2px dashed #dccbd6;
   border-radius:18px;
   padding:18px;
+
   text-align:center;
+
   background:#fcf8fa;
+
   margin-bottom:17px;
 }
 
@@ -323,12 +379,16 @@ button{
 
 .upload-label{
   display:inline-block;
+
   background:#f1e6ed;
   color:#665762;
+
   padding:10px 15px;
   border-radius:12px;
+
   font-size:13px;
   font-weight:700;
+
   cursor:pointer;
 }
 
@@ -340,17 +400,24 @@ button{
 .preview img{
   width:100%;
   max-height:220px;
+
   object-fit:cover;
+
   border-radius:16px;
+
   display:block;
 }
 
 .remove-image{
   margin-top:9px;
+
   background:#fff0f1;
   color:#a84955;
+
   padding:8px 12px;
+
   border-radius:10px;
+
   font-size:12px;
   font-weight:700;
 }
@@ -365,18 +432,36 @@ button{
 
 .save-btn{
   flex:1;
-  background:linear-gradient(135deg,#d99fbe,#aa91d0);
+
+  background:
+    linear-gradient(
+      135deg,
+      #d99fbe,
+      #aa91d0
+    );
+
   color:white;
+
   padding:13px;
+
   border-radius:13px;
+
   font-weight:800;
+}
+
+.save-btn:disabled{
+  opacity:.6;
+  cursor:not-allowed;
 }
 
 .cancel-btn{
   padding:13px 17px;
+
   border-radius:13px;
+
   background:#f2ecef;
   color:#655a63;
+
   font-weight:700;
 }
 
@@ -391,28 +476,38 @@ button{
 .article-item{
   border:1px solid #eee5e9;
   border-radius:18px;
+
   padding:13px;
+
   display:flex;
   align-items:center;
   gap:13px;
+
   transition:.2s;
 }
 
 .article-item:hover{
   transform:translateY(-1px);
-  box-shadow:0 8px 20px rgba(80,55,70,.06);
+
+  box-shadow:
+    0 8px 20px rgba(80,55,70,.06);
 }
 
 .article-thumb{
   width:76px;
   height:76px;
+
   flex:none;
+
   border-radius:14px;
   overflow:hidden;
+
   background:#f4edf1;
+
   display:flex;
   align-items:center;
   justify-content:center;
+
   font-size:26px;
 }
 
@@ -430,6 +525,7 @@ button{
 .article-info h3{
   font-size:14px;
   margin-bottom:5px;
+
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
@@ -438,8 +534,10 @@ button{
 .article-meta{
   display:flex;
   gap:7px;
+
   align-items:center;
   flex-wrap:wrap;
+
   font-size:11px;
   color:#8b8088;
 }
@@ -468,8 +566,11 @@ button{
 .icon-btn{
   width:34px;
   height:34px;
+
   border-radius:10px;
+
   background:#f4eef2;
+
   font-size:15px;
 }
 
@@ -485,6 +586,7 @@ button{
 .empty{
   text-align:center;
   padding:35px 15px;
+
   color:#92868e;
   font-size:13px;
 }
@@ -492,6 +594,7 @@ button{
 .loading{
   text-align:center;
   padding:30px;
+
   color:#887b84;
 }
 
@@ -547,12 +650,15 @@ body.dark .panel-title span{
 /* ================= RESPONSIVE ================= */
 
 @media(max-width:900px){
+
   .dashboard{
     grid-template-columns:1fr;
   }
+
 }
 
 @media(max-width:650px){
+
   .stats{
     grid-template-columns:1fr;
   }
@@ -585,51 +691,79 @@ body.dark .panel-title span{
   .panel{
     padding:17px;
   }
+
 }
+
 </style>
+
 </head>
 
 <body>
 
-<!-- ================= LOGIN ================= -->
+
+<!-- =====================================================
+     LOGIN
+===================================================== -->
 
 <section id="loginPage">
 
   <div class="login-card">
 
-    <div class="logo">🧠</div>
+    <div class="logo">
+      🧠
+    </div>
 
-    <h1>پنل مدیریت</h1>
+    <h1>
+      پنل مدیریت
+    </h1>
 
-    <p>مدیریت محتوای روان‌شناسی‌نامه</p>
+    <p>
+      مدیریت محتوای روان‌شناسی‌نامه
+    </p>
 
     <form id="loginForm">
 
       <div class="field">
-        <label>ایمیل</label>
+
+        <label>
+          ایمیل
+        </label>
+
         <input
           type="email"
           id="email"
           placeholder="ایمیل حساب"
           required
         >
+
       </div>
 
       <div class="field">
-        <label>رمز عبور</label>
+
+        <label>
+          رمز عبور
+        </label>
+
         <input
           type="password"
           id="password"
           placeholder="رمز عبور"
           required
         >
+
       </div>
 
-      <button class="primary-btn" type="submit">
+      <button
+        class="primary-btn"
+        type="submit"
+      >
         ورود به پنل
       </button>
 
-      <div id="loginMessage" class="message"></div>
+      <div
+        id="loginMessage"
+        class="message"
+      ></div>
 
     </form>
 
@@ -638,229 +772,332 @@ body.dark .panel-title span{
 </section>
 
 
-<!-- ================= APP ================= -->
+<!-- =====================================================
+     APP
+===================================================== -->
 
-<section id="app" class="hidden">
+<section
+  id="app"
+  class="hidden"
+>
 
-  <header class="topbar">
+<header class="topbar">
 
-    <div class="topbar-inner">
+  <div class="topbar-inner">
 
-      <div class="brand">
-        <div class="brand-icon">🧠</div>
-        <span>روان‌شناسی‌نامه | مدیریت</span>
+    <div class="brand">
+
+      <div class="brand-icon">
+        🧠
       </div>
 
-      <div class="top-actions">
+      <span>
+        روان‌شناسی‌نامه | مدیریت
+      </span>
 
-        <button
-          class="small-btn"
-          onclick="window.open('index.html','_blank')"
-        >
-          مشاهده سایت
-        </button>
+    </div>
 
-        <button
-          class="small-btn"
-          id="themeBtn"
-        >
-          ◐
-        </button>
+    <div class="top-actions">
 
-        <button
-          class="small-btn logout"
-          id="logoutBtn"
-        >
-          خروج
-        </button>
+      <button
+        class="small-btn"
+        onclick="window.open('index.html','_blank')"
+      >
+        مشاهده سایت
+      </button>
 
+      <button
+        class="small-btn"
+        id="themeBtn"
+        type="button"
+      >
+        ◐
+      </button>
+
+      <button
+        class="small-btn logout"
+        id="logoutBtn"
+        type="button"
+      >
+        خروج
+      </button>
+
+    </div>
+
+  </div>
+
+</header>
+
+
+<main class="container">
+
+  <div class="welcome">
+
+    <h1>
+      سلام 👋
+    </h1>
+
+    <p>
+      اینجا می‌تونی مقالات سایت رو مدیریت کنی.
+    </p>
+
+  </div>
+
+
+  <!-- STATS -->
+
+  <div class="stats">
+
+    <div class="stat">
+
+      <div class="stat-icon">
+        📚
+      </div>
+
+      <div
+        class="stat-number"
+        id="totalCount"
+      >
+        0
+      </div>
+
+      <div class="stat-label">
+        کل مقالات
       </div>
 
     </div>
 
-  </header>
 
+    <div class="stat">
 
-  <main class="container">
-
-    <div class="welcome">
-      <h1>سلام 👋</h1>
-      <p>اینجا می‌تونی مقالات سایت رو مدیریت کنی.</p>
-    </div>
-
-
-    <!-- STATS -->
-
-    <div class="stats">
-
-      <div class="stat">
-        <div class="stat-icon">📚</div>
-        <div class="stat-number" id="totalCount">0</div>
-        <div class="stat-label">کل مقالات</div>
+      <div class="stat-icon">
+        🌸
       </div>
 
-      <div class="stat">
-        <div class="stat-icon">🌸</div>
-        <div class="stat-number" id="publishedCount">0</div>
-        <div class="stat-label">منتشر شده</div>
+      <div
+        class="stat-number"
+        id="publishedCount"
+      >
+        0
       </div>
 
-      <div class="stat">
-        <div class="stat-icon">📝</div>
-        <div class="stat-number" id="draftCount">0</div>
-        <div class="stat-label">پیش‌نویس</div>
+      <div class="stat-label">
+        منتشر شده
       </div>
 
     </div>
 
 
-    <div class="dashboard">
+    <div class="stat">
 
-      <!-- ================= FORM ================= -->
+      <div class="stat-icon">
+        📝
+      </div>
 
-      <div class="panel">
+      <div
+        class="stat-number"
+        id="draftCount"
+      >
+        0
+      </div>
 
-        <div class="panel-title">
-          <h2 id="formTitle">افزودن مقاله</h2>
-          <span id="editStatus"></span>
+      <div class="stat-label">
+        پیش‌نویس
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="dashboard">
+
+
+    <!-- =================================================
+         FORM
+    ================================================= -->
+
+    <div class="panel">
+
+      <div class="panel-title">
+
+        <h2 id="formTitle">
+          افزودن مقاله
+        </h2>
+
+        <span id="editStatus"></span>
+
+      </div>
+
+
+      <form id="articleForm">
+
+
+        <div class="field">
+
+          <label>
+            عنوان مقاله
+          </label>
+
+          <input
+            id="articleTitle"
+            type="text"
+            placeholder="مثلاً روان‌کاوی چیست؟"
+            required
+          >
+
         </div>
 
 
-        <form id="articleForm">
+        <div class="field">
 
-          <div class="field">
-            <label>عنوان مقاله</label>
+          <label>
+            دسته‌بندی
+          </label>
+
+          <input
+            id="articleCategory"
+            type="text"
+            placeholder="مثلاً مکاتب روان‌شناسی"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            وضعیت
+          </label>
+
+          <select id="articleStatus">
+
+            <option value="published">
+              منتشر شود
+            </option>
+
+            <option value="draft">
+              پیش‌نویس
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            متن مقاله
+          </label>
+
+          <textarea
+            id="articleContent"
+            placeholder="متن مقاله را اینجا بنویس..."
+            required
+          ></textarea>
+
+        </div>
+
+
+        <!-- IMAGE -->
+
+        <div class="field">
+
+          <label>
+            تصویر مقاله
+          </label>
+
+          <div class="upload-box">
+
             <input
-              id="articleTitle"
-              type="text"
-              placeholder="مثلاً روان‌کاوی چیست؟"
-              required
+              type="file"
+              id="imageInput"
+              accept="image/jpeg,image/png,image/webp,image/gif"
             >
-          </div>
 
-
-          <div class="field">
-            <label>دسته‌بندی</label>
-
-            <input
-              id="articleCategory"
-              type="text"
-              placeholder="مثلاً مکاتب روان‌شناسی"
+            <label
+              class="upload-label"
+              for="imageInput"
             >
-          </div>
+              📷 انتخاب تصویر
+            </label>
 
-
-          <div class="field">
-            <label>وضعیت</label>
-
-            <select id="articleStatus">
-
-              <option value="published">
-                منتشر شود
-              </option>
-
-              <option value="draft">
-                پیش‌نویس
-              </option>
-
-            </select>
+            <div
+              id="preview"
+              class="preview hidden"
+            ></div>
 
           </div>
 
-
-          <div class="field">
-            <label>متن مقاله</label>
-
-            <textarea
-              id="articleContent"
-              placeholder="متن مقاله را اینجا بنویس..."
-              required
-            ></textarea>
-
-          </div>
+        </div>
 
 
-          <!-- IMAGE -->
+        <div class="form-actions">
 
-          <div class="field">
+          <button
+            type="submit"
+            class="save-btn"
+            id="saveBtn"
+          >
+            ذخیره مقاله
+          </button>
 
-            <label>تصویر مقاله</label>
+          <button
+            type="button"
+            class="cancel-btn hidden"
+            id="cancelBtn"
+          >
+            انصراف
+          </button>
 
-            <div class="upload-box">
-
-              <input
-                type="file"
-                id="imageInput"
-                accept="image/*"
-              >
-
-              <label
-                class="upload-label"
-                for="imageInput"
-              >
-                📷 انتخاب تصویر
-              </label>
-
-              <div
-                id="preview"
-                class="preview hidden"
-              ></div>
-
-            </div>
-
-          </div>
+        </div>
 
 
-          <div class="form-actions">
+        <div
+          id="formMessage"
+          class="message"
+        ></div>
 
-            <button
-              type="submit"
-              class="save-btn"
-              id="saveBtn"
-            >
-              ذخیره مقاله
-            </button>
+      </form>
 
-            <button
-              type="button"
-              class="cancel-btn hidden"
-              id="cancelBtn"
-            >
-              انصراف
-            </button>
+    </div>
 
-          </div>
 
-          <div id="formMessage" class="message"></div>
+    <!-- =================================================
+         ARTICLES
+    ================================================= -->
 
-        </form>
+    <div class="panel">
+
+      <div class="panel-title">
+
+        <h2>
+          مقالات
+        </h2>
+
+        <span id="articleCountText">
+          در حال بارگذاری...
+        </span>
 
       </div>
 
+      <div
+        id="articleList"
+        class="article-list"
+      >
 
-      <!-- ================= ARTICLES ================= -->
-
-      <div class="panel">
-
-        <div class="panel-title">
-          <h2>مقالات</h2>
-
-          <span id="articleCountText">
-            در حال بارگذاری...
-          </span>
-        </div>
-
-        <div id="articleList" class="article-list">
-          <div class="loading">
-            در حال دریافت مقالات...
-          </div>
+        <div class="loading">
+          در حال دریافت مقالات...
         </div>
 
       </div>
 
     </div>
 
-  </main>
+  </div>
+
+</main>
 
 </section>
 
@@ -868,7 +1105,7 @@ body.dark .panel-title span{
 <script>
 
 /* =====================================================
-   SUPABASE
+   SUPABASE CONFIG
 ===================================================== */
 
 const SUPABASE_URL =
@@ -876,6 +1113,14 @@ const SUPABASE_URL =
 
 const SUPABASE_KEY =
   "sb_publishable_uEoXARjUJ3XhVNWneTMZjQ_uTzwYyt8";
+
+
+/*
+  نام دقیق Bucket در Supabase Storage
+*/
+const STORAGE_BUCKET =
+  "article-images";
+
 
 const supabaseClient =
   window.supabase.createClient(
@@ -924,17 +1169,25 @@ const saveBtn =
 const formMessage =
   document.getElementById("formMessage");
 
+
 let editingId = null;
+
 let oldImageUrl = null;
 
 
 /* =====================================================
-   HELPERS
+   MESSAGE
 ===================================================== */
 
-function showMessage(element,text,type){
+function showMessage(
+  element,
+  text,
+  type
+){
 
-  element.textContent = text;
+  element.textContent =
+    text;
+
   element.className =
     "message " + type;
 
@@ -944,274 +1197,9 @@ function showMessage(element,text,type){
 function clearMessage(element){
 
   element.textContent = "";
-  element.className = "message";
 
-}
-
-
-/* =====================================================
-   LOGIN
-===================================================== */
-
-loginForm.addEventListener("submit",async(e)=>{
-
-  e.preventDefault();
-
-  clearMessage(loginMessage);
-
-  const email =
-    document.getElementById("email").value.trim();
-
-  const password =
-    document.getElementById("password").value;
-
-  const {error} =
-    await supabaseClient.auth.signInWithPassword({
-      email,
-      password
-    });
-
-  if(error){
-
-    showMessage(
-      loginMessage,
-      "ایمیل یا رمز عبور صحیح نیست.",
-      "error"
-    );
-
-    return;
-  }
-
-  await startApp();
-
-});
-
-
-/* =====================================================
-   START APP
-===================================================== */
-
-async function startApp(){
-
-  loginPage.classList.add("hidden");
-  app.classList.remove("hidden");
-
-  await loadArticles();
-
-}
-
-
-/* =====================================================
-   CHECK SESSION
-===================================================== */
-
-async function checkSession(){
-
-  const {
-    data:{
-      session
-    }
-  } =
-    await supabaseClient.auth.getSession();
-
-  if(session){
-
-    await startApp();
-
-  }else{
-
-    loginPage.classList.remove("hidden");
-    app.classList.add("hidden");
-
-  }
-
-}
-
-checkSession();
-
-
-/* =====================================================
-   LOGOUT
-===================================================== */
-
-document
-  .getElementById("logoutBtn")
-  .addEventListener("click",async()=>{
-
-    await supabaseClient.auth.signOut();
-
-    location.reload();
-
-  });
-
-
-/* =====================================================
-   LOAD ARTICLES
-===================================================== */
-
-async function loadArticles(){
-
-  articleList.innerHTML =
-    `<div class="loading">
-      در حال دریافت مقالات...
-    </div>`;
-
-  const {
-    data,
-    error
-  } =
-    await supabaseClient
-      .from("article")
-      .select("*")
-      .order("created_at",{ascending:false});
-
-  if(error){
-
-    articleList.innerHTML =
-      `<div class="empty">
-        خطا در دریافت مقالات
-      </div>`;
-
-    console.error(error);
-
-    return;
-  }
-
-  updateStats(data || []);
-
-  renderArticles(data || []);
-
-}
-
-
-/* =====================================================
-   STATS
-===================================================== */
-
-function updateStats(articles){
-
-  const total =
-    articles.length;
-
-  const published =
-    articles.filter(
-      a=>a.status==="published"
-    ).length;
-
-  const drafts =
-    articles.filter(
-      a=>a.status!=="published"
-    ).length;
-
-  document.getElementById("totalCount")
-    .textContent=total;
-
-  document.getElementById("publishedCount")
-    .textContent=published;
-
-  document.getElementById("draftCount")
-    .textContent=drafts;
-
-  document.getElementById("articleCountText")
-    .textContent =
-      `${total} مقاله`;
-
-}
-
-
-/* =====================================================
-   RENDER ARTICLES
-===================================================== */
-
-function renderArticles(articles){
-
-  if(!articles.length){
-
-    articleList.innerHTML =
-      `<div class="empty">
-        هنوز مقاله‌ای اضافه نشده است.
-      </div>`;
-
-    return;
-  }
-
-  articleList.innerHTML =
-    articles.map(article=>{
-
-      const status =
-        article.status==="published"
-          ? "published"
-          : "draft";
-
-      const statusText =
-        status==="published"
-          ? "منتشر شده"
-          : "پیش‌نویس";
-
-      const image =
-        article.image_url
-          ? `<img
-               src="${escapeHtml(article.image_url)}"
-               alt=""
-               onerror="this.parentElement.innerHTML='🧠'"
-             >`
-          : "🧠";
-
-      return `
-
-        <div class="article-item">
-
-          <div class="article-thumb">
-            ${image}
-          </div>
-
-          <div class="article-info">
-
-            <h3>
-              ${escapeHtml(article.title || "بدون عنوان")}
-            </h3>
-
-            <div class="article-meta">
-
-              ${
-                article.category
-                  ? `<span>${escapeHtml(article.category)}</span>`
-                  : ""
-              }
-
-              <span class="status ${status}">
-                ${statusText}
-              </span>
-
-            </div>
-
-          </div>
-
-          <div class="article-actions">
-
-            <button
-              class="icon-btn"
-              title="ویرایش"
-              onclick="editArticle(${article.id})"
-            >
-              ✏️
-            </button>
-
-            <button
-              class="icon-btn delete"
-              title="حذف"
-              onclick="deleteArticle(${article.id})"
-            >
-              🗑️
-            </button>
-
-          </div>
-
-        </div>
-
-      `;
-
-    }).join("");
+  element.className =
+    "message";
 
 }
 
@@ -1233,324 +1221,145 @@ function escapeHtml(value){
 
 
 /* =====================================================
-   IMAGE PREVIEW
+   LOGIN
 ===================================================== */
 
-imageInput.addEventListener("change",()=>{
+loginForm.addEventListener(
+  "submit",
+  async(e)=>{
 
-  const file =
-    imageInput.files[0];
+    e.preventDefault();
 
-  if(!file){
+    clearMessage(loginMessage);
 
-    preview.classList.add("hidden");
-    preview.innerHTML="";
-    return;
-  }
-
-  const url =
-    URL.createObjectURL(file);
-
-  preview.classList.remove("hidden");
-
-  preview.innerHTML = `
-
-    <img
-      src="${url}"
-      alt="پیش‌نمایش"
-    >
-
-    <button
-      type="button"
-      class="remove-image"
-      onclick="removeSelectedImage()"
-    >
-      حذف تصویر انتخاب‌شده
-    </button>
-
-  `;
-
-});
-
-
-/* =====================================================
-   REMOVE SELECTED IMAGE
-===================================================== */
-
-function removeSelectedImage(){
-
-  imageInput.value = "";
-
-  preview.innerHTML = "";
-
-  preview.classList.add("hidden");
-
-}
-
-
-/* =====================================================
-   UPLOAD IMAGE
-===================================================== */
-
-async function uploadImage(file){
-
-  if(!file)
-    return null;
-
-  const extension =
-    file.name.split(".").pop();
-
-  const fileName =
-    `${Date.now()}-${Math.random()
-      .toString(36)
-      .substring(2)}.${extension}`;
-
-  const filePath =
-    `articles/${fileName}`;
-
-
-  const {
-    error
-  } =
-    await supabaseClient
-      .storage
-      .from("article-images")
-      .upload(
-        filePath,
-        file,
-        {
-          cacheControl:"3600",
-          upsert:false
-        }
-      );
-
-
-  if(error)
-    throw error;
-
-
-  const {
-    data
-  } =
-    supabaseClient
-      .storage
-      .from("article-images")
-      .getPublicUrl(filePath);
-
-
-  return data.publicUrl;
-
-}
-
-
-/* =====================================================
-   GET STORAGE PATH
-===================================================== */
-
-function getStoragePath(url){
-
-  if(!url)
-    return null;
-
-  const marker =
-    "/storage/v1/object/public/article-images/";
-
-  const index =
-    url.indexOf(marker);
-
-  if(index === -1)
-    return null;
-
-  return decodeURIComponent(
-    url.substring(
-      index + marker.length
-    )
-  );
-
-}
-
-
-/* =====================================================
-   DELETE STORAGE IMAGE
-===================================================== */
-
-async function deleteStorageImage(url){
-
-  const path =
-    getStoragePath(url);
-
-  if(!path)
-    return;
-
-  const {
-    error
-  } =
-    await supabaseClient
-      .storage
-      .from("article-images")
-      .remove([path]);
-
-  if(error)
-    console.warn(
-      "Storage delete error:",
-      error
-    );
-
-}
-
-
-/* =====================================================
-   SAVE ARTICLE
-===================================================== */
-
-articleForm.addEventListener("submit",async(e)=>{
-
-  e.preventDefault();
-
-  clearMessage(formMessage);
-
-  saveBtn.disabled=true;
-  saveBtn.textContent="در حال ذخیره...";
-
-
-  try{
-
-    const title =
+    const email =
       document
-        .getElementById("articleTitle")
-        .value.trim();
+        .getElementById("email")
+        .value
+        .trim();
 
-    const category =
+    const password =
       document
-        .getElementById("articleCategory")
-        .value.trim();
-
-    const content =
-      document
-        .getElementById("articleContent")
-        .value.trim();
-
-    const status =
-      document
-        .getElementById("articleStatus")
+        .getElementById("password")
         .value;
 
 
-    let imageUrl =
-      oldImageUrl;
+    const {
+      error
+    } =
+      await supabaseClient.auth
+        .signInWithPassword({
+          email,
+          password
+        });
 
 
-    /* NEW IMAGE */
+    if(error){
 
-    const file =
-      imageInput.files[0];
+      console.error(error);
 
-    if(file){
+      showMessage(
+        loginMessage,
+        error.message ||
+        "ورود انجام نشد.",
+        "error"
+      );
 
-      imageUrl =
-        await uploadImage(file);
-
-      /* remove old image */
-
-      if(
-        editingId &&
-        oldImageUrl
-      ){
-
-        await deleteStorageImage(
-          oldImageUrl
-        );
-
-      }
+      return;
 
     }
 
 
-    const articleData = {
-
-      title,
-      content,
-      category,
-      status,
-      image_url:imageUrl
-
-    };
-
-
-    if(editingId){
-
-      const {
-        error
-      } =
-        await supabaseClient
-          .from("article")
-          .update(articleData)
-          .eq("id",editingId);
-
-      if(error)
-        throw error;
-
-      showMessage(
-        formMessage,
-        "مقاله با موفقیت ویرایش شد.",
-        "success"
-      );
-
-    }else{
-
-      const {
-        error
-      } =
-        await supabaseClient
-          .from("article")
-          .insert(articleData);
-
-      if(error)
-        throw error;
-
-      showMessage(
-        formMessage,
-        "مقاله با موفقیت اضافه شد.",
-        "success"
-      );
-
-    }
-
-
-    resetForm();
-
-    await loadArticles();
-
-
-  }catch(error){
-
-    console.error(error);
-
-    showMessage(
-      formMessage,
-      "خطا در ذخیره مقاله: " +
-      (error.message || "خطای نامشخص"),
-      "error"
-    );
-
-  }finally{
-
-    saveBtn.disabled=false;
-    saveBtn.textContent=
-      editingId
-        ? "ذخیره تغییرات"
-        : "ذخیره مقاله";
+    await startApp();
 
   }
-
-});
+);
 
 
 /* =====================================================
-   EDIT ARTICLE
+   START APP
 ===================================================== */
 
-async function editArticle(id){
+async function startApp(){
+
+  loginPage.classList.add("hidden");
+
+  app.classList.remove("hidden");
+
+  await loadArticles();
+
+}
+
+
+/* =====================================================
+   CHECK SESSION
+===================================================== */
+
+async function checkSession(){
+
+  const {
+    data:{
+      session
+    }
+  } =
+    await supabaseClient.auth
+      .getSession();
+
+
+  if(session){
+
+    await startApp();
+
+  }else{
+
+    loginPage.classList.remove(
+      "hidden"
+    );
+
+    app.classList.add(
+      "hidden"
+    );
+
+  }
+
+}
+
+
+checkSession();
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+document
+  .getElementById("logoutBtn")
+  .addEventListener(
+    "click",
+    async()=>{
+
+      await supabaseClient.auth
+        .signOut();
+
+      location.reload();
+
+    }
+  );
+
+
+/* =====================================================
+   LOAD ARTICLES
+===================================================== */
+
+async function loadArticles(){
+
+  articleList.innerHTML =
+    `
+    <div class="loading">
+      در حال دریافت مقالات...
+    </div>
+    `;
+
 
   const {
     data,
@@ -1559,95 +1368,1018 @@ async function editArticle(id){
     await supabaseClient
       .from("article")
       .select("*")
-      .eq("id",id)
-      .single();
+      .order(
+        "created_at",
+        {
+          ascending:false
+        }
+      );
 
 
   if(error){
 
-    alert("خطا در دریافت مقاله");
+    console.error(
+      "LOAD ARTICLES ERROR:",
+      error
+    );
+
+    articleList.innerHTML =
+      `
+      <div class="empty">
+        خطا در دریافت مقالات
+      </div>
+      `;
+
     return;
 
   }
 
 
-  editingId =
-    data.id;
+  updateStats(
+    data || []
+  );
 
-  oldImageUrl =
-    data.image_url || null;
+  renderArticles(
+    data || []
+  );
+
+}
+
+
+/* =====================================================
+   STATS
+===================================================== */
+
+function updateStats(
+  articles
+){
+
+  const total =
+    articles.length;
+
+  const published =
+    articles.filter(
+      a =>
+        a.status === "published"
+    ).length;
+
+  const drafts =
+    articles.filter(
+      a =>
+        a.status !== "published"
+    ).length;
 
 
   document
-    .getElementById("articleTitle")
-    .value =
-      data.title || "";
+    .getElementById("totalCount")
+    .textContent =
+      total;
 
 
   document
-    .getElementById("articleCategory")
-    .value =
-      data.category || "";
+    .getElementById("publishedCount")
+    .textContent =
+      published;
 
 
   document
-    .getElementById("articleContent")
-    .value =
-      data.content || "";
+    .getElementById("draftCount")
+    .textContent =
+      drafts;
 
 
   document
-    .getElementById("articleStatus")
-    .value =
-      data.status || "draft";
+    .getElementById("articleCountText")
+    .textContent =
+      `${total} مقاله`;
+
+}
 
 
-  imageInput.value="";
+/* =====================================================
+   RENDER ARTICLES
+===================================================== */
+
+function renderArticles(
+  articles
+){
+
+  if(!articles.length){
+
+    articleList.innerHTML =
+      `
+      <div class="empty">
+        هنوز مقاله‌ای اضافه نشده است.
+      </div>
+      `;
+
+    return;
+
+  }
 
 
-  if(data.image_url){
+  articleList.innerHTML =
+    articles
+      .map(
+        article => {
 
-    preview.classList.remove("hidden");
+          const status =
+            article.status === "published"
+              ? "published"
+              : "draft";
 
-    preview.innerHTML = `
+
+          const statusText =
+            status === "published"
+              ? "منتشر شده"
+              : "پیش‌نویس";
+
+
+          let imageHtml =
+            "🧠";
+
+
+          if(
+            article.image_url &&
+            String(
+              article.image_url
+            ).trim()
+          ){
+
+            imageHtml =
+              `
+              <img
+                src="${escapeHtml(
+                  article.image_url
+                )}"
+                alt=""
+                loading="lazy"
+                onerror="
+                  this.style.display='none';
+                  this.parentElement.textContent='🧠';
+                "
+              >
+              `;
+
+          }
+
+
+          return `
+
+          <div class="article-item">
+
+            <div class="article-thumb">
+
+              ${imageHtml}
+
+            </div>
+
+
+            <div class="article-info">
+
+              <h3>
+                ${escapeHtml(
+                  article.title ||
+                  "بدون عنوان"
+                )}
+              </h3>
+
+
+              <div class="article-meta">
+
+                ${
+                  article.category
+                    ?
+                    `
+                    <span>
+                      ${escapeHtml(
+                        article.category
+                      )}
+                    </span>
+                    `
+                    :
+                    ""
+                }
+
+
+                <span
+                  class="status ${status}"
+                >
+                  ${statusText}
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <div class="article-actions">
+
+              <button
+                class="icon-btn"
+                title="ویرایش"
+                type="button"
+                onclick='editArticle(${JSON.stringify(article.id)})'
+              >
+                ✏️
+              </button>
+
+
+              <button
+                class="icon-btn delete"
+                title="حذف"
+                type="button"
+                onclick='deleteArticle(${JSON.stringify(article.id)})'
+              >
+                🗑️
+              </button>
+
+            </div>
+
+          </div>
+
+          `;
+
+        }
+      )
+      .join("");
+
+}
+
+
+/* =====================================================
+   IMAGE PREVIEW
+===================================================== */
+
+imageInput.addEventListener(
+  "change",
+  ()=>{
+
+    const file =
+      imageInput.files[0];
+
+
+    if(!file){
+
+      preview.classList.add(
+        "hidden"
+      );
+
+      preview.innerHTML =
+        "";
+
+      return;
+
+    }
+
+
+    if(
+      !file.type.startsWith(
+        "image/"
+      )
+    ){
+
+      alert(
+        "لطفاً یک فایل تصویری انتخاب کن."
+      );
+
+      imageInput.value =
+        "";
+
+      return;
+
+    }
+
+
+    const url =
+      URL.createObjectURL(
+        file
+      );
+
+
+    preview.classList.remove(
+      "hidden"
+    );
+
+
+    preview.innerHTML =
+      `
 
       <img
-        src="${escapeHtml(data.image_url)}"
-        alt=""
-        onerror="this.parentElement.innerHTML='🧠'"
+        src="${url}"
+        alt="پیش‌نمایش"
       >
 
       <button
         type="button"
         class="remove-image"
-        onclick="removeCurrentImage()"
+        onclick="removeSelectedImage()"
       >
-        حذف تصویر
+        حذف تصویر انتخاب‌شده
       </button>
 
-    `;
+      `;
 
-  }else{
+  }
+);
 
-    preview.classList.add("hidden");
-    preview.innerHTML="";
+
+/* =====================================================
+   REMOVE SELECTED IMAGE
+===================================================== */
+
+function removeSelectedImage(){
+
+  imageInput.value =
+    "";
+
+  preview.innerHTML =
+    "";
+
+  preview.classList.add(
+    "hidden"
+  );
+
+}
+
+
+/* =====================================================
+   UPLOAD IMAGE
+===================================================== */
+
+async function uploadImage(
+  file
+){
+
+  if(!file){
+
+    return null;
 
   }
 
 
-  formTitle.textContent=
-    "ویرایش مقاله";
+  /*
+    نام امن و یکتا
+  */
 
-  saveBtn.textContent=
-    "ذخیره تغییرات";
+  const extension =
+    file.name
+      .split(".")
+      .pop()
+      .toLowerCase();
 
-  cancelBtn.classList.remove("hidden");
 
-  document
-    .querySelector(".dashboard")
-    .scrollIntoView({
-      behavior:"smooth"
-    });
+  const safeName =
+    `${Date.now()}-${Math.random()
+      .toString(36)
+      .substring(2,10)}.${extension}`;
+
+
+  const filePath =
+    `articles/${safeName}`;
+
+
+  console.log(
+    "Uploading image:",
+    filePath
+  );
+
+
+  /*
+    آپلود به Storage
+  */
+
+  const {
+    data:uploadData,
+    error:uploadError
+  } =
+    await supabaseClient
+      .storage
+      .from(STORAGE_BUCKET)
+      .upload(
+        filePath,
+        file,
+        {
+          cacheControl:"3600",
+          upsert:false,
+          contentType:file.type
+        }
+      );
+
+
+  if(uploadError){
+
+    console.error(
+      "IMAGE UPLOAD ERROR:",
+      uploadError
+    );
+
+    throw new Error(
+      "آپلود تصویر انجام نشد: " +
+      uploadError.message
+    );
+
+  }
+
+
+  console.log(
+    "Upload successful:",
+    uploadData
+  );
+
+
+  /*
+    ساخت Public URL
+  */
+
+  const {
+    data:urlData
+  } =
+    supabaseClient
+      .storage
+      .from(STORAGE_BUCKET)
+      .getPublicUrl(
+        filePath
+      );
+
+
+  const publicUrl =
+    urlData?.publicUrl;
+
+
+  if(!publicUrl){
+
+    throw new Error(
+      "آدرس عمومی تصویر ساخته نشد."
+    );
+
+  }
+
+
+  console.log(
+    "IMAGE PUBLIC URL:",
+    publicUrl
+  );
+
+
+  /*
+    تست URL در همان لحظه
+  */
+
+  const testImage =
+    new Image();
+
+
+  await new Promise(
+    (resolve,reject)=>{
+
+      testImage.onload =
+        resolve;
+
+      testImage.onerror =
+        ()=>{
+          reject(
+            new Error(
+              "تصویر آپلود شد اما URL عمومی آن قابل دسترسی نیست. Bucket را بررسی کن."
+            )
+          );
+        };
+
+      testImage.src =
+        publicUrl;
+
+    }
+  );
+
+
+  return publicUrl;
+
+}
+
+
+/* =====================================================
+   GET STORAGE PATH
+===================================================== */
+
+function getStoragePath(
+  url
+){
+
+  if(!url)
+    return null;
+
+
+  try{
+
+    const parsed =
+      new URL(url);
+
+
+    const marker =
+      "/storage/v1/object/public/";
+
+
+    const index =
+      parsed.pathname.indexOf(
+        marker
+      );
+
+
+    if(index === -1)
+      return null;
+
+
+    const rest =
+      parsed.pathname.substring(
+        index + marker.length
+      );
+
+
+    const slash =
+      rest.indexOf("/");
+
+
+    if(slash === -1)
+      return null;
+
+
+    const bucket =
+      rest.substring(
+        0,
+        slash
+      );
+
+
+    const path =
+      rest.substring(
+        slash + 1
+      );
+
+
+    if(
+      bucket !==
+      STORAGE_BUCKET
+    ){
+
+      console.warn(
+        "Different storage bucket:",
+        bucket
+      );
+
+    }
+
+
+    return decodeURIComponent(
+      path
+    );
+
+  }catch(error){
+
+    console.error(
+      "Storage path error:",
+      error
+    );
+
+    return null;
+
+  }
+
+}
+
+
+/* =====================================================
+   DELETE STORAGE IMAGE
+===================================================== */
+
+async function deleteStorageImage(
+  url
+){
+
+  const path =
+    getStoragePath(url);
+
+
+  if(!path){
+
+    console.warn(
+      "Storage path not found:",
+      url
+    );
+
+    return;
+
+  }
+
+
+  const {
+    error
+  } =
+    await supabaseClient
+      .storage
+      .from(STORAGE_BUCKET)
+      .remove([
+        path
+      ]);
+
+
+  if(error){
+
+    console.warn(
+      "Storage delete error:",
+      error
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   SAVE ARTICLE
+===================================================== */
+
+articleForm.addEventListener(
+  "submit",
+  async(e)=>{
+
+    e.preventDefault();
+
+    clearMessage(
+      formMessage
+    );
+
+
+    saveBtn.disabled =
+      true;
+
+    saveBtn.textContent =
+      "در حال ذخیره...";
+
+
+    try{
+
+      const title =
+        document
+          .getElementById(
+            "articleTitle"
+          )
+          .value
+          .trim();
+
+
+      const category =
+        document
+          .getElementById(
+            "articleCategory"
+          )
+          .value
+          .trim();
+
+
+      const content =
+        document
+          .getElementById(
+            "articleContent"
+          )
+          .value
+          .trim();
+
+
+      const status =
+        document
+          .getElementById(
+            "articleStatus"
+          )
+          .value;
+
+
+      let imageUrl =
+        oldImageUrl;
+
+
+      /*
+        اگر تصویر جدید انتخاب شده:
+        اول آپلود می‌کنیم.
+      */
+
+      const file =
+        imageInput.files[0];
+
+
+      if(file){
+
+        imageUrl =
+          await uploadImage(
+            file
+          );
+
+
+        /*
+          بعد از موفقیت آپلود،
+          تصویر قبلی حذف می‌شود.
+        */
+
+        if(
+          editingId &&
+          oldImageUrl &&
+          oldImageUrl !== imageUrl
+        ){
+
+          await deleteStorageImage(
+            oldImageUrl
+          );
+
+        }
+
+      }
+
+
+      /*
+        اطلاعات مقاله
+      */
+
+      const articleData = {
+
+        title:title,
+
+        content:content,
+
+        category:category,
+
+        status:status,
+
+        image_url:imageUrl
+
+      };
+
+
+      console.log(
+        "ARTICLE DATA:",
+        articleData
+      );
+
+
+      /*
+        EDIT
+      */
+
+      if(editingId){
+
+        const {
+          error
+        } =
+          await supabaseClient
+            .from("article")
+            .update(
+              articleData
+            )
+            .eq(
+              "id",
+              editingId
+            );
+
+
+        if(error)
+          throw error;
+
+
+        showMessage(
+          formMessage,
+          "مقاله با موفقیت ویرایش شد.",
+          "success"
+        );
+
+      }
+
+
+      /*
+        NEW ARTICLE
+      */
+
+      else{
+
+        const {
+          error
+        } =
+          await supabaseClient
+            .from("article")
+            .insert([
+              articleData
+            ]);
+
+
+        if(error)
+          throw error;
+
+
+        showMessage(
+          formMessage,
+          "مقاله با موفقیت اضافه شد.",
+          "success"
+        );
+
+      }
+
+
+      await loadArticles();
+
+      resetForm();
+
+
+    }catch(error){
+
+      console.error(
+        "SAVE ARTICLE ERROR:",
+        error
+      );
+
+
+      showMessage(
+        formMessage,
+        error.message ||
+        "خطا در ذخیره مقاله.",
+        "error"
+      );
+
+
+    }finally{
+
+      saveBtn.disabled =
+        false;
+
+      saveBtn.textContent =
+        editingId
+          ? "ذخیره تغییرات"
+          : "ذخیره مقاله";
+
+    }
+
+  }
+);
+
+
+/* =====================================================
+   EDIT ARTICLE
+===================================================== */
+
+async function editArticle(
+  id
+){
+
+  try{
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .from("article")
+        .select("*")
+        .eq(
+          "id",
+          id
+        )
+        .single();
+
+
+    if(error)
+      throw error;
+
+
+    editingId =
+      data.id;
+
+
+    oldImageUrl =
+      data.image_url ||
+      null;
+
+
+    document
+      .getElementById(
+        "articleTitle"
+      )
+      .value =
+        data.title || "";
+
+
+    document
+      .getElementById(
+        "articleCategory"
+      )
+      .value =
+        data.category || "";
+
+
+    document
+      .getElementById(
+        "articleContent"
+      )
+      .value =
+        data.content || "";
+
+
+    document
+      .getElementById(
+        "articleStatus"
+      )
+      .value =
+        data.status ||
+        "draft";
+
+
+    imageInput.value =
+      "";
+
+
+    /*
+      نمایش تصویر فعلی
+    */
+
+    if(data.image_url){
+
+      preview.classList.remove(
+        "hidden"
+      );
+
+
+      preview.innerHTML =
+        `
+
+        <img
+          src="${escapeHtml(
+            data.image_url
+          )}"
+          alt="تصویر فعلی"
+          onerror="
+            this.style.display='none';
+            this.parentElement.insertAdjacentHTML(
+              'afterbegin',
+              '<div>⚠️ تصویر قابل نمایش نیست</div>'
+            );
+          "
+        >
+
+        <button
+          type="button"
+          class="remove-image"
+          onclick="removeCurrentImage()"
+        >
+          حذف تصویر
+        </button>
+
+        `;
+
+    }else{
+
+      preview.classList.add(
+        "hidden"
+      );
+
+      preview.innerHTML =
+        "";
+
+    }
+
+
+    formTitle.textContent =
+      "ویرایش مقاله";
+
+
+    saveBtn.textContent =
+      "ذخیره تغییرات";
+
+
+    cancelBtn.classList.remove(
+      "hidden"
+    );
+
+
+    document
+      .querySelector(
+        ".dashboard"
+      )
+      .scrollIntoView({
+        behavior:"smooth"
+      });
+
+
+  }catch(error){
+
+    console.error(
+      "EDIT ERROR:",
+      error
+    );
+
+
+    showMessage(
+      formMessage,
+      "خطا در دریافت مقاله: " +
+      error.message,
+      "error"
+    );
+
+  }
 
 }
 
@@ -1658,13 +2390,19 @@ async function editArticle(id){
 
 async function removeCurrentImage(){
 
+  if(!editingId)
+    return;
+
+
   if(!oldImageUrl)
     return;
+
 
   const confirmed =
     confirm(
       "تصویر این مقاله حذف شود؟"
     );
+
 
   if(!confirmed)
     return;
@@ -1685,18 +2423,27 @@ async function removeCurrentImage(){
         .update({
           image_url:null
         })
-        .eq("id",editingId);
+        .eq(
+          "id",
+          editingId
+        );
 
 
     if(error)
       throw error;
 
 
-    oldImageUrl=null;
+    oldImageUrl =
+      null;
 
-    preview.innerHTML="";
 
-    preview.classList.add("hidden");
+    preview.innerHTML =
+      "";
+
+    preview.classList.add(
+      "hidden"
+    );
+
 
     showMessage(
       formMessage,
@@ -1705,13 +2452,21 @@ async function removeCurrentImage(){
     );
 
 
+    await loadArticles();
+
+
   }catch(error){
 
-    console.error(error);
+    console.error(
+      "REMOVE IMAGE ERROR:",
+      error
+    );
+
 
     showMessage(
       formMessage,
-      "حذف تصویر انجام نشد.",
+      "حذف تصویر انجام نشد: " +
+      error.message,
       "error"
     );
 
@@ -1724,12 +2479,15 @@ async function removeCurrentImage(){
    DELETE ARTICLE
 ===================================================== */
 
-async function deleteArticle(id){
+async function deleteArticle(
+  id
+){
 
   const confirmed =
     confirm(
       "این مقاله و تصویر آن حذف شود؟"
     );
+
 
   if(!confirmed)
     return;
@@ -1737,7 +2495,9 @@ async function deleteArticle(id){
 
   try{
 
-    /* get article */
+    /*
+      دریافت تصویر
+    */
 
     const {
       data:article,
@@ -1746,7 +2506,10 @@ async function deleteArticle(id){
       await supabaseClient
         .from("article")
         .select("image_url")
-        .eq("id",id)
+        .eq(
+          "id",
+          id
+        )
         .single();
 
 
@@ -1754,7 +2517,9 @@ async function deleteArticle(id){
       throw getError;
 
 
-    /* delete DB */
+    /*
+      حذف مقاله
+    */
 
     const {
       error
@@ -1762,16 +2527,24 @@ async function deleteArticle(id){
       await supabaseClient
         .from("article")
         .delete()
-        .eq("id",id);
+        .eq(
+          "id",
+          id
+        );
 
 
     if(error)
       throw error;
 
 
-    /* delete storage image */
+    /*
+      حذف تصویر
+    */
 
-    if(article?.image_url){
+    if(
+      article &&
+      article.image_url
+    ){
 
       await deleteStorageImage(
         article.image_url
@@ -1785,11 +2558,15 @@ async function deleteArticle(id){
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      "DELETE ARTICLE ERROR:",
+      error
+    );
+
 
     alert(
-      "حذف انجام نشد: " +
-      (error.message || "")
+      "حذف انجام نشد:\n" +
+      error.message
     );
 
   }
@@ -1803,24 +2580,39 @@ async function deleteArticle(id){
 
 function resetForm(){
 
-  editingId=null;
-  oldImageUrl=null;
+  editingId =
+    null;
+
+  oldImageUrl =
+    null;
+
 
   articleForm.reset();
 
-  imageInput.value="";
 
-  preview.innerHTML="";
+  imageInput.value =
+    "";
 
-  preview.classList.add("hidden");
 
-  formTitle.textContent=
+  preview.innerHTML =
+    "";
+
+  preview.classList.add(
+    "hidden"
+  );
+
+
+  formTitle.textContent =
     "افزودن مقاله";
 
-  saveBtn.textContent=
+
+  saveBtn.textContent =
     "ذخیره مقاله";
 
-  cancelBtn.classList.add("hidden");
+
+  cancelBtn.classList.add(
+    "hidden"
+  );
 
 }
 
@@ -1832,8 +2624,13 @@ function resetForm(){
 cancelBtn.addEventListener(
   "click",
   ()=>{
+
     resetForm();
-    clearMessage(formMessage);
+
+    clearMessage(
+      formMessage
+    );
+
   }
 );
 
@@ -1843,30 +2640,46 @@ cancelBtn.addEventListener(
 ===================================================== */
 
 const themeBtn =
-  document.getElementById("themeBtn");
+  document.getElementById(
+    "themeBtn"
+  );
+
 
 themeBtn.addEventListener(
   "click",
   ()=>{
-    document.body.classList.toggle("dark");
+
+    document.body.classList.toggle(
+      "dark"
+    );
+
 
     localStorage.setItem(
       "adminDark",
-      document.body.classList.contains("dark")
+      document.body.classList.contains(
+        "dark"
+      )
         ? "1"
         : "0"
     );
+
   }
 );
 
 
 if(
-  localStorage.getItem("adminDark")==="1"
+  localStorage.getItem(
+    "adminDark"
+  ) === "1"
 ){
-  document.body.classList.add("dark");
+
+  document.body.classList.add(
+    "dark"
+  );
+
 }
 
 </script>
 
 </body>
-  </html>
+</html>
