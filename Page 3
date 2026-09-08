@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>روان‌شناسی‌نامه | ظهور مکاتب روان‌شناسی</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Tahoma, Arial, sans-serif;
+            background: #f8f6f3;
+            color: #302b35;
+            line-height: 2;
+        }
+
+        /* HEADER */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255,255,255,.94);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid #e8e2de;
+        }
+
+        nav {
+            max-width: 1100px;
+            margin: auto;
+            padding: 17px 25px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 21px;
+            font-weight: bold;
+            color: #604a78;
+        }
+
+        .logo span {
+            color: #b88761;
+        }
+
+        .home {
+            text-decoration: none;
+            color: #665c68;
+            font-size: 14px;
+        }
+
+        /* HERO */
+
+        .hero {
+            padding: 80px 25px 70px;
+            text-align: center;
+
+            background:
+                radial-gradient(circle at 80% 20%, #e8ddf0, transparent 32%),
+                radial-gradient(circle at 15% 80%, #eadacd, transparent 30%),
+                #f8f6f3;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 6px 17px;
+            border-radius: 30px;
+            background: #eee7f2;
+            color: #735a88;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .hero h1 {
+            margin: 18px 0 15px;
+            font-size: clamp(34px, 6vw, 52px);
+            color: #362d40;
+        }
+
+        .hero p {
+            max-width: 700px;
+            margin: auto;
+            color: #716a72;
+            font-size: 16px;
+        }
+
+        /* MAIN */
+
+        main {
+            max-width: 1000px;
+            margin: auto;
+            padding: 70px 25px;
+        }
+
+        .intro {
+            background: white;
+            border: 1px solid #ebe5df;
+            border-radius: 25px;
+            padding: 38px;
+            margin-bottom: 35px;
+            box-shadow: 0 12px 35px rgba(50,40,60,.055);
+        }
+
+        .intro h2 {
+            color: #4d3d5d;
+            margin-bottom: 15px;
+            font-size: 25px;
+        }
+
+        .intro p {
+            color: #666168;
+            font-size: 15px;
+        }
+
+        /* SCHOOLS */
+
+        .schools {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px;
+        }
+
+        .school {
+            background: white;
+            border: 1px solid #ebe5df;
+            border-radius: 23px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(50,40,60,.05);
+            transition: .3s;
+        }
+
+        .school:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 18px 40px rgba(50,40,60,.10);
+        }
+
+        .school-number {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #eee6f2;
+            color: #684f7d;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .school h3 {
+            color: #493952;
+            font-size: 21px;
+            margin-bottom: 10px;
+        }
+
+        .school .person {
+            color: #b07f59;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .school p {
+            color: #706a71;
+            font-size: 14px;
+        }
+
+        .highlight {
+            margin-top: 17px;
+            padding: 15px 18px;
+            border-radius: 14px;
+            background: #f0ebf3;
+            color: #59496a;
+            font-size: 13px;
+        }
+
+        /* CONCLUSION */
+
+        .conclusion {
+            margin-top: 45px;
+            padding: 35px;
+            text-align: center;
+            background: #eee8f1;
+            border-radius: 25px;
+        }
+
+        .conclusion h2 {
+            color: #46364f;
+            margin-bottom: 10px;
+        }
+
+        .conclusion p {
+            color: #6d6670;
+            font-size: 14px;
+        }
+
+        /* NAVIGATION */
+
+        .navigation {
+            display: flex;
+            gap: 15px;
+            margin-top: 50px;
+        }
+
+        .navigation a {
+            flex: 1;
+            text-align: center;
+            text-decoration: none;
+            padding: 13px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            transition: .3s;
+        }
+
+        .previous {
+            background: white;
+            color: #604a78;
+            border: 1px solid #ded6e2;
+        }
+
+        .next {
+            background: #6e578e;
+            color: white;
+        }
+
+        .navigation a:hover {
+            transform: translateY(-3px);
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #302a35;
+            color: #aaa;
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 12px;
+        }
+
+        footer strong {
+            color: #ddd;
+        }
+
+        /* MOBILE */
+
+        @media(max-width: 700px) {
+
+            .schools {
+                grid-template-columns: 1fr;
+            }
+
+            .intro,
+            .school {
+                padding: 27px;
+            }
+
+            .navigation {
+                flex-direction: column;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <nav>
+
+        <div class="logo">
+            روان‌شناسی<span>‌نامه</span>
+        </div>
+
+        <a href="index.html" class="home">
+            صفحه اصلی
+        </a>
+
+    </nav>
+
+</header>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <span class="tag">
+        THE SCHOOLS OF PSYCHOLOGY
+    </span>
+
+    <h1>
+        وقتی مکاتب روان‌شناسی شکل گرفتند
+    </h1>
+
+    <p>
+        در قرن بیستم، روان‌شناسی دیگر یک دیدگاه واحد نداشت.
+        مکاتب مختلف هرکدام تلاش کردند رفتار و ذهن انسان را از زاویه‌ای متفاوت توضیح دهند.
+    </p>
+
+</section>
+
+
+<main>
+
+
+    <!-- INTRO -->
+
+    <section class="intro">
+
+        <h2>
+            چرا مکاتب مختلف به وجود آمدند؟
+        </h2>
+
+        <p>
+            با گسترش روان‌شناسی علمی، یک سؤال مهم مطرح شد:
+            دقیقاً چه چیزی باید موضوع اصلی روان‌شناسی باشد؟
+            ذهن؟ رفتار؟ تجربه انسان؟ یا فرایندهای ناهشیار؟
+        </p>
+
+        <br>
+
+        <p>
+            پاسخ‌های متفاوت به این سؤال، زمینه شکل‌گیری مکاتب
+            مختلف روان‌شناسی را فراهم کرد.
+        </p>
+
+    </section>
+
+
+    <!-- SCHOOLS -->
+
+    <section class="schools">
+
+
+        <!-- PSYCHOANALYSIS -->
+
+        <article class="school">
+
+            <div class="school-number">
+                ۱
+            </div>
+
+            <h3>
+                روان‌کاوی
+            </h3>
+
+            <div class="person">
+                زیگموند فروید
+            </div>
+
+            <p>
+                روان‌کاوی بر نقش فرایندهای ناهشیار،
+                تعارض‌های روانی و تجربه‌های دوران کودکی
+                در شکل‌گیری رفتار و شخصیت تأکید داشت.
+            </p>
+
+            <div class="highlight">
+
+                ایده کلیدی:
+                بخش مهمی از فرایندهای روانی خارج از آگاهی ما اتفاق می‌افتند.
+
+            </div>
+
+        </article>
+
+
+        <!-- BEHAVIORISM -->
+
+        <article class="school">
+
+            <div class="school-number">
+                ۲
+            </div>
+
+            <h3>
+                رفتارگرایی
+            </h3>
+
+            <div class="person">
+                واتسون و اسکینر
+            </div>
+
+            <p>
+                رفتارگرایی تمرکز روان‌شناسی را به رفتار قابل مشاهده
+                و نقش محیط، یادگیری و پیامدهای رفتار معطوف کرد.
+            </p>
+
+            <div class="highlight">
+
+                ایده کلیدی:
+                رفتار تا حد زیادی از طریق تجربه و محیط آموخته می‌شود.
+
+            </div>
+
+        </article>
+
+
+        <!-- GESTALT -->
+
+        <article class="school">
+
+            <div class="school-number">
+                ۳
+            </div>
+
+            <h3>
+                گشتالت
+            </h3>
+
+            <div class="person">
+                ورتهایمر، کافکا و کهلر
+            </div>
+
+            <p>
+                روان‌شناسی گشتالت بر این باور بود که تجربه روانی
+                را نمی‌توان فقط با بررسی اجزای جداگانه آن فهمید.
+            </p>
+
+            <div class="highlight">
+
+                ایده کلیدی:
+                «کل» می‌تواند ویژگی‌هایی داشته باشد که در اجزای آن وجود ندارند.
+
+            </div>
+
+        </article>
+
+
+        <!-- HUMANISTIC -->
+
+        <article class="school">
+
+            <div class="school-number">
+                ۴
+            </div>
+
+            <h3>
+                انسان‌گرایی
+            </h3>
+
+            <div class="person">
+                مزلو و کارل راجرز
+            </div>
+
+            <p>
+                رویکرد انسان‌گرایانه بر تجربه شخصی،
+                انتخاب، رشد فردی و تلاش انسان برای شکوفایی تأکید کرد.
+            </p>
+
+            <div class="highlight">
+
+                ایده کلیدی:
+                انسان فقط مجموعه‌ای از رفتارهای آموخته‌شده نیست.
+
+            </div>
+
+        </article>
+
+
+        <!-- COGNITIVE -->
+
+        <article class="school">
+
+            <div class="school-number">
+                ۵
+            </div>
+
+            <h3>
+                انقلاب شناختی
+            </h3>
+
+            <div class="person">
+                از دهه ۱۹۵۰ به بعد
+            </div>
+
+            <p>
+                رویکرد شناختی دوباره فرایندهایی مانند
+                حافظه، توجه، حل مسئله و تفکر را به مرکز توجه روان‌شناسی آورد.
+            </p>
+
+            <div class="highlight">
+
+                ایده کلیدی:
+                برای فهم رفتار باید فرایندهای ذهنی پشت آن را نیز بررسی کرد.
+
+            </div>
+
+        </article>
+
+
+        <!-- BIOPSYCHOLOGY -->
+
+        <article class="school">
+
+            <div class="school-number">
+                ۶
+            </div>
+
+            <h3>
+                رویکرد زیستی
+            </h3>
+
+            <div class="person">
+                مغز، بدن و رفتار
+            </div>
+
+            <p>
+                این رویکرد به بررسی نقش مغز، دستگاه عصبی،
+                هورمون‌ها و عوامل زیستی در رفتار و فرایندهای روانی می‌پردازد.
+            </p>
+
+            <div class="highlight">
+
+                ایده کلیدی:
+                رفتار و فرایندهای روانی با سازوکارهای زیستی ارتباط دارند.
+
+            </div>
+
+        </article>
+
+
+    </section>
+
+
+    <!-- CONCLUSION -->
+
+    <section class="conclusion">
+
+        <h2>
+            یک انسان، چند زاویه دید
+        </h2>
+
+        <p>
+            روان‌شناسی امروز معمولاً به یک مکتب واحد محدود نیست.
+            برای فهم بهتر انسان، از دیدگاه‌های مختلف و شواهد پژوهشی استفاده می‌شود.
+        </p>
+
+    </section>
+
+
+    <!-- NAVIGATION -->
+
+    <div class="navigation">
+
+        <a href="page2.html" class="previous">
+            ← صفحه قبل
+        </a>
+
+        <a href="page4.html" class="next">
+            صفحه بعد →
+        </a>
+
+    </div>
+
+
+</main>
+
+
+<footer>
+
+    <strong>
+        روان‌شناسی‌نامه
+    </strong>
+
+    <br>
+
+    تاریخ روان‌شناسی | 2026
+
+</footer>
+
+
+</body>
+
+</html>
