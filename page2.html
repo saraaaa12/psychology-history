@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>تاریخ روان‌شناسی | روان‌شناسی‌نامه</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap');
+
+:root{
+    --bg:#faf9fc;
+    --card:#ffffff;
+    --text:#292633;
+    --muted:#77717f;
+    --primary:#8d6e9f;
+    --primary-dark:#70517f;
+    --soft:#f1eaf5;
+    --border:#e9e3ed;
+    --shadow:0 15px 45px rgba(70,45,80,.08);
+}
+
+body.dark{
+    --bg:#17151b;
+    --card:#211e27;
+    --text:#f4eef7;
+    --muted:#b9b1be;
+    --primary:#c29bd2;
+    --primary-dark:#d5b7df;
+    --soft:#302737;
+    --border:#3b3442;
+    --shadow:0 15px 45px rgba(0,0,0,.25);
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Vazirmatn',sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.9;
+    transition:.3s;
+}
+
+/* Progress */
+.progress{
+    position:fixed;
+    top:0;
+    right:0;
+    width:0%;
+    height:4px;
+    background:var(--primary);
+    z-index:9999;
+}
+
+/* Header */
+header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    backdrop-filter:blur(15px);
+    background:rgba(250,249,252,.82);
+    border-bottom:1px solid var(--border);
+}
+
+body.dark header{
+    background:rgba(23,21,27,.85);
+}
+
+.navbar{
+    max-width:1150px;
+    margin:auto;
+    height:72px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 20px;
+}
+
+.logo{
+    font-size:21px;
+    font-weight:800;
+    color:var(--primary-dark);
+    text-decoration:none;
+}
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:var(--text);
+    padding:9px 15px;
+    border-radius:12px;
+    font-size:14px;
+    transition:.25s;
+}
+
+.nav-links a:hover,
+.nav-links a.active{
+    background:var(--soft);
+    color:var(--primary-dark);
+}
+
+.actions{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.icon-btn{
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--text);
+    width:40px;
+    height:40px;
+    border-radius:12px;
+    cursor:pointer;
+    font-size:17px;
+}
+
+.menu-btn{
+    display:none;
+}
+
+/* Hero */
+.hero{
+    max-width:1150px;
+    margin:45px auto 30px;
+    padding:55px 30px;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+    border-radius:30px;
+    background:
+        radial-gradient(circle at 15% 20%, rgba(196,155,210,.25), transparent 28%),
+        radial-gradient(circle at 85% 75%, rgba(141,110,159,.16), transparent 30%),
+        var(--card);
+    border:1px solid var(--border);
+    box-shadow:var(--shadow);
+}
+
+.eyebrow{
+    display:inline-block;
+    font-size:12px;
+    letter-spacing:2px;
+    font-weight:700;
+    color:var(--primary);
+    margin-bottom:10px;
+}
+
+.hero h1{
+    font-size:clamp(34px,5vw,58px);
+    line-height:1.25;
+    margin-bottom:15px;
+}
+
+.hero h1 span{
+    color:var(--primary);
+}
+
+.hero p{
+    max-width:700px;
+    margin:auto;
+    color:var(--muted);
+    font-size:16px;
+}
+
+.hero-buttons{
+    margin-top:25px;
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    display:inline-block;
+    text-decoration:none;
+    border-radius:13px;
+    padding:11px 20px;
+    font-size:14px;
+    font-weight:600;
+    transition:.25s;
+}
+
+.btn-primary{
+    background:var(--primary);
+    color:white;
+}
+
+.btn-primary:hover{
+    transform:translateY(-2px);
+    background:var(--primary-dark);
+}
+
+.btn-secondary{
+    border:1px solid var(--border);
+    color:var(--text);
+    background:var(--card);
+}
+
+/* Main */
+.container{
+    max-width:1050px;
+    margin:auto;
+    padding:20px;
+}
+
+.section-title{
+    margin:50px 0 25px;
+}
+
+.section-title small{
+    color:var(--primary);
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:1px;
+}
+
+.section-title h2{
+    font-size:28px;
+    margin-top:4px;
+}
+
+.section-title p{
+    color:var(--muted);
+    font-size:14px;
+    margin-top:5px;
+}
+
+/* Intro */
+.intro{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.info-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:22px;
+    padding:25px;
+    box-shadow:var(--shadow);
+}
+
+.info-card h3{
+    margin-bottom:10px;
+    font-size:19px;
+}
+
+.info-card p{
+    color:var(--muted);
+    font-size:14px;
+}
+
+.info-number{
+    font-size:42px;
+    font-weight:800;
+    color:var(--primary);
+    line-height:1;
+    margin-bottom:12px;
+}
+
+/* Search */
+.search-box{
+    margin:25px 0;
+    position:relative;
+}
+
+.search-box input{
+    width:100%;
+    padding:16px 20px;
+    border-radius:16px;
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--text);
+    outline:none;
+    font-family:inherit;
+    font-size:14px;
+}
+
+.search-box input:focus{
+    border-color:var(--primary);
+}
+
+/* Timeline */
+.timeline{
+    position:relative;
+    margin:35px 0;
+}
+
+.timeline::before{
+    content:"";
+    position:absolute;
+    right:28px;
+    top:0;
+    bottom:0;
+    width:2px;
+    background:var(--border);
+}
+
+.timeline-item{
+    position:relative;
+    padding-right:75px;
+    margin-bottom:30px;
+}
+
+.timeline-dot{
+    position:absolute;
+    right:15px;
+    top:25px;
+    width:28px;
+    height:28px;
+    border-radius:50%;
+    background:var(--primary);
+    border:7px solid var(--bg);
+    box-shadow:0 0 0 1px var(--primary);
+    z-index:2;
+}
+
+.period-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:22px;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+    transition:.3s;
+}
+
+.period-card:hover{
+    transform:translateY(-4px);
+}
+
+.period-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    padding:22px 24px 10px;
+}
+
+.period-date{
+    font-size:12px;
+    font-weight:700;
+    color:var(--primary);
+    background:var(--soft);
+    padding:5px 10px;
+    border-radius:20px;
+    white-space:nowrap;
+}
+
+.period-card h3{
+    font-size:20px;
+}
+
+.period-content{
+    padding:0 24px 22px;
+}
+
+.period-content p{
+    color:var(--muted);
+    font-size:14px;
+    margin-bottom:16px;
+}
+
+.period-tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
+    margin-bottom:17px;
+}
+
+.tag{
+    font-size:11px;
+    padding:4px 9px;
+    border-radius:20px;
+    background:var(--soft);
+    color:var(--primary-dark);
+}
+
+.read-more{
+    text-decoration:none;
+    color:var(--primary-dark);
+    font-size:13px;
+    font-weight:700;
+}
+
+.read-more:hover{
+    text-decoration:underline;
+}
+
+/* Highlight */
+.highlight{
+    margin:55px 0;
+    padding:30px;
+    border-radius:25px;
+    background:var(--soft);
+    border:1px solid var(--border);
+}
+
+.highlight h2{
+    font-size:23px;
+    margin-bottom:8px;
+}
+
+.highlight p{
+    color:var(--muted);
+    font-size:14px;
+    max-width:850px;
+}
+
+/* Quote */
+.quote{
+    margin:35px 0;
+    padding:25px 30px;
+    border-right:4px solid var(--primary);
+    background:var(--card);
+    border-radius:18px;
+    border-top:1px solid var(--border);
+    border-left:1px solid var(--border);
+    border-bottom:1px solid var(--border);
+}
+
+.quote p{
+    font-size:17px;
+    font-weight:500;
+}
+
+.quote span{
+    display:block;
+    margin-top:8px;
+    font-size:12px;
+    color:var(--muted);
+}
+
+/* CTA */
+.cta{
+    text-align:center;
+    margin:65px 0 30px;
+    padding:40px 25px;
+    border-radius:25px;
+    background:var(--card);
+    border:1px solid var(--border);
+    box-shadow:var(--shadow);
+}
+
+.cta h2{
+    margin-bottom:8px;
+}
+
+.cta p{
+    color:var(--muted);
+    font-size:14px;
+    margin-bottom:20px;
+}
+
+/* Footer */
+footer{
+    margin-top:60px;
+    padding:30px 20px;
+    border-top:1px solid var(--border);
+    text-align:center;
+    color:var(--muted);
+    font-size:12px;
+}
+
+/* Top */
+.top-btn{
+    position:fixed;
+    bottom:25px;
+    left:25px;
+    width:45px;
+    height:45px;
+    border:0;
+    border-radius:14px;
+    background:var(--primary);
+    color:white;
+    cursor:pointer;
+    font-size:18px;
+    opacity:0;
+    pointer-events:none;
+    transition:.3s;
+    z-index:1000;
+}
+
+.top-btn.show{
+    opacity:1;
+    pointer-events:auto;
+}
+
+/* Animation */
+.fade{
+    animation:fadeUp .7s ease both;
+}
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(15px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* Mobile */
+@media(max-width:760px){
+
+    .navbar{
+        height:65px;
+    }
+
+    .menu-btn{
+        display:block;
+    }
+
+    .nav-links{
+        position:absolute;
+        top:65px;
+        right:15px;
+        left:15px;
+        background:var(--card);
+        border:1px solid var(--border);
+        border-radius:18px;
+        padding:10px;
+        display:none;
+        flex-direction:column;
+        align-items:stretch;
+        box-shadow:var(--shadow);
+    }
+
+    .nav-links.open{
+        display:flex;
+    }
+
+    .nav-links a{
+        text-align:center;
+    }
+
+    .hero{
+        margin:20px 15px;
+        padding:40px 20px;
+        border-radius:24px;
+    }
+
+    .hero p{
+        font-size:14px;
+    }
+
+    .intro{
+        grid-template-columns:1fr;
+    }
+
+    .timeline::before{
+        right:17px;
+    }
+
+    .timeline-item{
+        padding-right:50px;
+    }
+
+    .timeline-dot{
+        right:4px;
+    }
+
+    .period-top{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+
+    .period-card h3{
+        font-size:18px;
+    }
+
+    .section-title h2{
+        font-size:24px;
+    }
+
+    .top-btn{
+        left:15px;
+        bottom:15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="progress" id="progress"></div>
+
+<header>
+    <nav class="navbar">
+
+        <a href="index.html" class="logo">روان‌شناسی‌نامه</a>
+
+        <div class="nav-links" id="navLinks">
+            <a href="index.html">خانه</a>
+            <a href="page2.html" class="active">تاریخ روان‌شناسی</a>
+            <a href="page3.html">مکاتب</a>
+        </div>
+
+        <div class="actions">
+            <button class="icon-btn" id="themeBtn" title="تغییر حالت نمایش">☾</button>
+            <button class="icon-btn menu-btn" id="menuBtn">☰</button>
+        </div>
+
+    </nav>
+</header>
+
+
+<main>
+
+<section class="hero fade">
+
+    <span class="eyebrow">HISTORY OF PSYCHOLOGY</span>
+
+    <h1>
+        داستان شکل‌گیری
+        <span>روان‌شناسی</span>
+    </h1>
+
+    <p>
+        روان‌شناسی امروزی یک‌شبه به وجود نیامد.
+        این علم حاصل قرن‌ها پرسش درباره ذهن، رفتار، آگاهی و ماهیت انسان است.
+        در این مسیر، فلسفه، علوم طبیعی و روش تجربی به تدریج به هم رسیدند.
+    </p>
+
+    <div class="hero-buttons">
+        <a href="#timeline" class="btn btn-primary">
+            شروع سفر تاریخی
+        </a>
+
+        <a href="article1.html" class="btn btn-secondary">
+            از دوران باستان بخوان
+        </a>
+    </div>
+
+</section>
+
+
+<div class="container">
+
+<section>
+
+    <div class="section-title">
+        <small>BEFORE SCIENCE</small>
+        <h2>قبل از اینکه روان‌شناسی علم شود</h2>
+        <p>
+            بسیاری از پرسش‌هایی که امروز روان‌شناسی بررسی می‌کند،
+            قرن‌ها پیش موضوع فلسفه بودند.
+        </p>
+    </div>
+
+    <div class="intro">
+
+        <div class="info-card fade">
+
+            <div class="info-number">01</div>
+
+            <h3>پرسش درباره ذهن</h3>
+
+            <p>
+                انسان از گذشته درباره ماهیت ذهن، روح، ادراک،
+                حافظه، هیجان و رابطه ذهن و بدن پرسش می‌کرد.
+                این پرسش‌ها ابتدا بیشتر در قلمرو فلسفه قرار داشتند.
+            </p>
+
+        </div>
+
+
+        <div class="info-card fade">
+
+            <div class="info-number">02</div>
+
+            <h3>حرکت به سوی آزمایش</h3>
+
+            <p>
+                با گسترش علوم طبیعی و روش‌های تجربی،
+                مطالعه ذهن و رفتار نیز به تدریج به سمت
+                مشاهده، اندازه‌گیری و آزمایش حرکت کرد.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section id="timeline">
+
+    <div class="section-title">
+        <small>THE TIMELINE</small>
+        <h2>خط زمانی تاریخ روان‌شناسی</h2>
+        <p>
+            از اندیشه‌های فلسفی باستان تا رویکردهای روان‌شناسی معاصر
+        </p>
+    </div>
+
+
+    <div class="search-box">
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="🔎  دوره یا موضوع موردنظر را جست‌وجو کن..."
+        >
+
+    </div>
+
+
+    <div class="timeline" id="timelineList">
+
+
+        <!-- 1 -->
+
+        <article class="timeline-item fade" data-search="باستان یونان افلاطون ارسطو روح فلسفه">
+
+            <div class="timeline-dot"></div>
+
+            <div class="period-card">
+
+                <div class="period-top">
+
+                    <h3>دوران باستان</h3>
+
+                    <span class="period-date">
+                        پیش از میلاد
+                    </span>
+
+                </div>
+
+                <div class="period-content">
+
+                    <p>
+                        پیش از شکل‌گیری روان‌شناسی علمی،
+                        فیلسوفان یونانی درباره روح، ذهن،
+                        ادراک و ماهیت زندگی انسان بحث می‌کردند.
+                    </p>
+
+                    <div class="period-tags">
+                        <span class="tag">افلاطون</span>
+                        <span class="tag">ارسطو</span>
+                        <span class="tag">فلسفه</span>
+                    </div>
+
+                    <a href="article1.html" class="read-more">
+                        مطالعه این دوره ←
+                    </a>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <!-- 2 -->
+
+        <article class="timeline-item fade" data-search="ذهن بدن دکارت دوگانه انگاری فلسفه">
+
+            <div class="timeline-dot"></div>
+
+            <div class="period-card">
+
+                <div class="period-top">
+
+                    <h3>ذهن و بدن</h3>
+
+                    <span class="period-date">
+                        قرن ۱۷
+                    </span>
+
+                </div>
+
+                <div class="period-content">
+
+                    <p>
+                        در دوره جدید، مسئله رابطه ذهن و بدن
+                        شکل تازه‌ای پیدا کرد. دیدگاه‌هایی مانند
+                        دوگانه‌انگاری دکارت تأثیر زیادی بر بحث‌های
+                        بعدی درباره ذهن داشتند.
+                    </p>
+
+                    <div class="period-tags">
+                        <span class="tag">دکارت</span>
+                        <span class="tag">ذهن</span>
+                        <span class="tag">بدن</span>
+                    </div>
+
+                    <a href="article2.html" class="read-more">
+                        مطالعه این دوره ←
+                    </a>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <!-- 3 -->
+
+        <article class="timeline-item fade" data-search="روش تجربی فیزیولوژی حس ادراک آزمایش">
+
+            <div class="timeline-dot"></div>
+
+            <div class="period-card">
+
+                <div class="period-top">
+
+                    <h3>حرکت به سوی روش تجربی</h3>
+
+                    <span class="period-date">
+                        قرن ۱۸ و ۱۹
+                    </span>
+
+                </div>
+
+                <div class="period-content">
+
+                    <p>
+                        پیشرفت فیزیولوژی و مطالعه تجربی
+                        حواس و فرایندهای بدن، زمینه‌ای فراهم کرد
+                        تا پرسش‌های مربوط به ذهن نیز بیشتر
+                        با روش‌های آزمایشی بررسی شوند.
+                    </p>
+
+                    <div class="period-tags">
+                        <span class="tag">فیزیولوژی</span>
+                        <span class="tag">آزمایش</span>
+                        <span class="tag">ادراک</span>
+                    </div>
+
+                    <a href="article3.html" class="read-more">
+                        مطالعه این دوره ←
+                    </a>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <!-- 4 -->
+
+        <article class="timeline-item fade" data-search="وونت 1879 لایپزیگ آزمایشگاه روانشناسی علمی">
+
+            <div class="timeline-dot"></div>
+
+            <div class="period-card">
+
+                <div class="period-top">
+
+                    <h3>۱۸۷۹؛ آغاز روان‌شناسی آزمایشگاهی</h3>
+
+                    <span class="period-date">
+                        ۱۸۷۹
+                    </span>
+
+                </div>
+
+                <div class="period-content">
+
+                    <p>
+                        ویلهلم وونت در دانشگاه لایپزیگ
+                        آزمایشگاهی برای پژوهش روان‌شناختی ایجاد کرد.
+                        این رویداد معمولاً یکی از نقاط مهم در
+                        تاریخ شکل‌گیری روان‌شناسی به عنوان یک رشته مستقل
+                        در نظر گرفته می‌شود.
+                    </p>
+
+                    <div class="period-tags">
+                        <span class="tag">وونت</span>
+                        <span class="tag">لایپزیگ</span>
+                        <span class="tag">۱۸۷۹</span>
+                    </div>
+
+                    <a href="article4.html" class="read-more">
+                        مطالعه این دوره ←
+                    </a>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <!-- 5 -->
+
+        <article class="timeline-item fade" data-search="مکاتب روانشناسی روانکاوی رفتارگرایی گشتالت انسانگرایی شناختی">
+
+            <div class="timeline-dot"></div>
+
+            <div class="period-card">
+
+                <div class="period-top">
+
+                    <h3>شکل‌گیری مکاتب روان‌شناسی</h3>
+
+                    <span class="period-date">
+                        قرن ۱۹ و ۲۰
+                    </span>
+
+                </div>
+
+                <div class="period-content">
+
+                    <p>
+                        پس از شکل‌گیری روان‌شناسی علمی،
+                        دیدگاه‌های متفاوتی درباره موضوع مطالعه،
+                        روش و تبیین رفتار انسان شکل گرفتند؛
+                        از روان‌کاوی و رفتارگرایی تا گشتالت و انسان‌گرایی.
+                    </p>
+
+                    <div class="period-tags">
+                        <span class="tag">روان‌کاوی</span>
+                        <span class="tag">رفتارگرایی</span>
+                        <span class="tag">گشتالت</span>
+                        <span class="tag">انسان‌گرایی</span>
+                    </div>
+
+                    <a href="article5.html" class="read-more">
+                        مطالعه این دوره ←
+                    </a>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <!-- 6 -->
+
+        <article class="timeline-item fade" data-search="روانشناسی امروز شناختی زیستی علوم اعصاب مثبت گرا معاصر">
+
+            <div class="timeline-dot"></div>
+
+            <div class="period-card">
+
+                <div class="period-top">
+
+                    <h3>روان‌شناسی معاصر</h3>
+
+                    <span class="period-date">
+                        امروز
+                    </span>
+
+                </div>
+
+                <div class="period-content">
+
+                    <p>
+                        روان‌شناسی امروز مجموعه‌ای از رویکردها و
+                        حوزه‌های تخصصی است و برای مطالعه رفتار و فرایندهای
+                        ذهنی از روش‌های متنوع علمی و میان‌رشته‌ای استفاده می‌کند.
+                    </p>
+
+                    <div class="period-tags">
+                        <span class="tag">شناختی</span>
+                        <span class="tag">زیستی</span>
+                        <span class="tag">علوم اعصاب</span>
+                        <span class="tag">مثبت‌گرا</span>
+                    </div>
+
+                    <a href="article6.html" class="read-more">
+                        مطالعه این دوره ←
+                    </a>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+    </div>
+
+</section>
+
+
+<section class="highlight">
+
+    <h2>یک نکته مهم درباره تاریخ روان‌شناسی</h2>
+
+    <p>
+        تاریخ روان‌شناسی را نباید فقط مجموعه‌ای از نام‌ها و تاریخ‌ها دید.
+        تغییر موضوعات پژوهش، روش‌های علمی و اختلاف میان دیدگاه‌های مختلف،
+        بخش مهمی از داستان شکل‌گیری این علم است.
+        به همین دلیل، شناخت تاریخ به ما کمک می‌کند بفهمیم
+        چرا روان‌شناسی امروز چنین ساختاری دارد.
+    </p>
+
+</section>
+
+
+<div class="quote">
+
+    <p>
+        تاریخ یک علم فقط داستان گذشته آن نیست؛
+        نشان می‌دهد ایده‌های امروزی چگونه شکل گرفته‌اند.
+    </p>
+
+    <span>
+        روان‌شناسی‌نامه
+    </span>
+
+</div>
+
+
+<section class="cta">
+
+    <h2>حالا وقت شناخت مکاتب است</h2>
+
+    <p>
+        بعد از اینکه مسیر تاریخی روان‌شناسی را دیدی،
+        می‌توانی با مهم‌ترین مکاتب و رویکردهای آن آشنا شوی.
+    </p>
+
+    <a href="page3.html" class="btn btn-primary">
+        مشاهده مکاتب روان‌شناسی
+    </a>
+
+</section>
+
+
+</div>
+
+</main>
+
+
+<footer>
+
+    <p>
+        روان‌شناسی‌نامه © 2026
+    </p>
+
+    <p>
+        سفری از فلسفه تا علم
+    </p>
+
+</footer>
+
+
+<button class="top-btn" id="topBtn">↑</button>
+
+
+<script>
+
+/* Dark Mode */
+
+const themeBtn = document.getElementById("themeBtn");
+
+if(localStorage.getItem("theme") === "dark"){
+    document.body.classList.add("dark");
+    themeBtn.textContent = "☀";
+}
+
+themeBtn.addEventListener("click", () => {
+
+    document.body.classList.toggle("dark");
+
+    if(document.body.classList.contains("dark")){
+        localStorage.setItem("theme","dark");
+        themeBtn.textContent = "☀";
+    }else{
+        localStorage.setItem("theme","light");
+        themeBtn.textContent = "☾";
+    }
+
+});
+
+
+/* Mobile Menu */
+
+const menuBtn = document.getElementById("menuBtn");
+const navLinks = document.getElementById("navLinks");
+
+menuBtn.addEventListener("click", () => {
+
+    navLinks.classList.toggle("open");
+
+});
+
+
+/* Search */
+
+const searchInput = document.getElementById("searchInput");
+const items = document.querySelectorAll(".timeline-item");
+
+searchInput.addEventListener("input", () => {
+
+    const value = searchInput.value.trim().toLowerCase();
+
+    items.forEach(item => {
+
+        const text = item.dataset.search.toLowerCase();
+
+        if(text.includes(value)){
+            item.style.display = "";
+        }else{
+            item.style.display = "none";
+        }
+
+    });
+
+});
+
+
+/* Reading Progress */
+
+window.addEventListener("scroll", () => {
+
+    const scrollTop = window.scrollY;
+
+    const documentHeight =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+
+    const progress =
+        (scrollTop / documentHeight) * 100;
+
+    document.getElementById("progress").style.width =
+        progress + "%";
+
+
+    /* Back To Top */
+
+    const topBtn = document.getElementById("topBtn");
+
+    if(scrollTop > 400){
+        topBtn.classList.add("show");
+    }else{
+        topBtn.classList.remove("show");
+    }
+
+});
+
+
+/* Back To Top */
+
+document.getElementById("topBtn").addEventListener("click", () => {
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+});
+
+
+/* Close mobile menu after click */
+
+document.querySelectorAll(".nav-links a").forEach(link => {
+
+    link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+    });
+
+});
+
+</script>
+
+</body>
+</html>
