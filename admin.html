@@ -1,0 +1,1880 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>پنل مدیریت | روان‌شناسی‌نامه</title>
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap');
+
+:root{
+    --bg:#f7f5f8;
+    --sidebar:#ffffff;
+    --card:#ffffff;
+    --text:#29252e;
+    --muted:#817a86;
+    --primary:#8d6e9f;
+    --primary-dark:#725480;
+    --soft:#f0e8f3;
+    --border:#e7e1e9;
+    --success:#4f8a68;
+    --warning:#bd8a42;
+    --danger:#b85c68;
+    --shadow:0 10px 35px rgba(70,45,80,.07);
+}
+
+body.dark{
+    --bg:#151319;
+    --sidebar:#1d1a21;
+    --card:#211e26;
+    --text:#f3edf5;
+    --muted:#b7afbb;
+    --primary:#c39ad2;
+    --primary-dark:#d5b7df;
+    --soft:#302638;
+    --border:#38323d;
+    --success:#79b38e;
+    --warning:#d5aa67;
+    --danger:#d77b87;
+    --shadow:0 10px 35px rgba(0,0,0,.25);
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:'Vazirmatn',sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+    transition:.3s;
+}
+
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar{
+
+    position:fixed;
+    right:0;
+    top:0;
+    bottom:0;
+
+    width:250px;
+
+    background:var(--sidebar);
+
+    border-left:1px solid var(--border);
+
+    padding:25px 16px;
+
+    z-index:1000;
+
+    transition:.3s;
+}
+
+.logo{
+
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    padding:8px 12px 28px;
+
+    border-bottom:1px solid var(--border);
+
+    margin-bottom:22px;
+}
+
+.logo-icon{
+
+    width:40px;
+    height:40px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:13px;
+
+    background:var(--soft);
+
+    font-size:21px;
+}
+
+.logo-text strong{
+    display:block;
+    font-size:16px;
+}
+
+.logo-text span{
+    color:var(--muted);
+    font-size:10px;
+}
+
+
+/* Menu */
+
+.menu-title{
+
+    color:var(--muted);
+
+    font-size:10px;
+
+    margin:15px 12px 8px;
+
+    letter-spacing:.5px;
+}
+
+.menu a{
+
+    display:flex;
+    align-items:center;
+
+    gap:12px;
+
+    padding:12px 13px;
+
+    margin-bottom:5px;
+
+    border-radius:13px;
+
+    text-decoration:none;
+
+    color:var(--text);
+
+    font-size:13px;
+
+    transition:.2s;
+}
+
+.menu a:hover{
+
+    background:var(--soft);
+
+    color:var(--primary-dark);
+}
+
+.menu a.active{
+
+    background:var(--soft);
+
+    color:var(--primary-dark);
+
+    font-weight:700;
+}
+
+.menu-icon{
+    width:23px;
+    text-align:center;
+    font-size:17px;
+}
+
+
+/* Sidebar bottom */
+
+.sidebar-bottom{
+
+    position:absolute;
+
+    bottom:22px;
+
+    right:16px;
+    left:16px;
+}
+
+.site-link{
+
+    display:block;
+
+    padding:11px;
+
+    text-align:center;
+
+    border:1px solid var(--border);
+
+    border-radius:12px;
+
+    text-decoration:none;
+
+    color:var(--text);
+
+    font-size:12px;
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+.main{
+
+    margin-right:250px;
+
+    min-height:100vh;
+
+    padding:25px 35px;
+
+}
+
+
+/* Header */
+
+.topbar{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:30px;
+
+}
+
+.page-title h1{
+
+    font-size:26px;
+
+    margin-bottom:3px;
+}
+
+.page-title p{
+
+    color:var(--muted);
+
+    font-size:12px;
+}
+
+
+.top-actions{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:9px;
+}
+
+.icon-btn{
+
+    width:42px;
+    height:42px;
+
+    border:1px solid var(--border);
+
+    background:var(--card);
+
+    color:var(--text);
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    font-size:17px;
+}
+
+
+/* User */
+
+.user{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding-right:8px;
+}
+
+.avatar{
+
+    width:39px;
+    height:39px;
+
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:var(--soft);
+
+    font-size:17px;
+}
+
+.user-info strong{
+
+    display:block;
+
+    font-size:12px;
+}
+
+.user-info span{
+
+    color:var(--muted);
+
+    font-size:10px;
+}
+
+
+/* =========================
+   STATISTICS
+========================= */
+
+.stats{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(4,1fr);
+
+    gap:18px;
+
+    margin-bottom:25px;
+}
+
+.stat{
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:18px;
+
+    padding:20px;
+
+    box-shadow:var(--shadow);
+}
+
+.stat-top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:18px;
+}
+
+.stat-icon{
+
+    width:42px;
+    height:42px;
+
+    border-radius:13px;
+
+    background:var(--soft);
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-size:19px;
+}
+
+.stat small{
+
+    color:var(--muted);
+
+    font-size:11px;
+}
+
+.stat h2{
+
+    font-size:28px;
+
+    margin-top:2px;
+}
+
+.stat-change{
+
+    font-size:10px;
+
+    margin-top:5px;
+
+    color:var(--success);
+}
+
+
+/* =========================
+   CONTENT GRID
+========================= */
+
+.content-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    1.7fr 1fr;
+
+    gap:20px;
+}
+
+
+/* Cards */
+
+.panel{
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:20px;
+
+    box-shadow:var(--shadow);
+
+    overflow:hidden;
+}
+
+.panel-header{
+
+    padding:20px 22px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    border-bottom:1px solid var(--border);
+}
+
+.panel-header h3{
+
+    font-size:15px;
+}
+
+.panel-header span{
+
+    color:var(--muted);
+
+    font-size:10px;
+}
+
+
+/* =========================
+   ARTICLES
+========================= */
+
+.article-list{
+
+    padding:5px 20px;
+}
+
+.article{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:13px;
+
+    padding:16px 2px;
+
+    border-bottom:1px solid var(--border);
+}
+
+.article:last-child{
+    border-bottom:0;
+}
+
+.article-number{
+
+    width:38px;
+    height:38px;
+
+    border-radius:11px;
+
+    background:var(--soft);
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-size:13px;
+
+    color:var(--primary-dark);
+
+    flex-shrink:0;
+}
+
+.article-info{
+
+    flex:1;
+}
+
+.article-info h4{
+
+    font-size:13px;
+
+    margin-bottom:3px;
+}
+
+.article-info p{
+
+    color:var(--muted);
+
+    font-size:10px;
+}
+
+.status{
+
+    padding:5px 9px;
+
+    border-radius:20px;
+
+    font-size:9px;
+
+    white-space:nowrap;
+}
+
+.published{
+
+    background:#e8f3eb;
+
+    color:var(--success);
+}
+
+.draft{
+
+    background:#f8efdf;
+
+    color:var(--warning);
+}
+
+
+/* =========================
+   QUICK ACTIONS
+========================= */
+
+.quick{
+
+    padding:20px;
+}
+
+.quick-btn{
+
+    width:100%;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:14px;
+
+    border:1px solid var(--border);
+
+    background:var(--card);
+
+    color:var(--text);
+
+    border-radius:13px;
+
+    cursor:pointer;
+
+    margin-bottom:10px;
+
+    text-align:right;
+
+    font-family:inherit;
+
+    transition:.2s;
+}
+
+.quick-btn:hover{
+
+    background:var(--soft);
+
+    border-color:var(--primary);
+}
+
+.quick-icon{
+
+    width:37px;
+    height:37px;
+
+    border-radius:11px;
+
+    background:var(--soft);
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-size:17px;
+}
+
+.quick-text strong{
+
+    display:block;
+
+    font-size:12px;
+}
+
+.quick-text span{
+
+    color:var(--muted);
+
+    font-size:9px;
+}
+
+
+/* =========================
+   ACTIVITY
+========================= */
+
+.activity{
+
+    margin-top:20px;
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:20px;
+
+    box-shadow:var(--shadow);
+
+}
+
+.activity-item{
+
+    display:flex;
+
+    gap:13px;
+
+    padding:15px 22px;
+
+    border-bottom:1px solid var(--border);
+
+}
+
+.activity-item:last-child{
+    border-bottom:0;
+}
+
+.activity-dot{
+
+    width:9px;
+    height:9px;
+
+    background:var(--primary);
+
+    border-radius:50%;
+
+    margin-top:8px;
+
+    flex-shrink:0;
+}
+
+.activity-text{
+
+    font-size:11px;
+}
+
+.activity-text span{
+
+    display:block;
+
+    color:var(--muted);
+
+    font-size:9px;
+
+    margin-top:2px;
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+.primary-btn{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:7px;
+
+    border:0;
+
+    background:var(--primary);
+
+    color:white;
+
+    padding:9px 15px;
+
+    border-radius:10px;
+
+    font-family:inherit;
+
+    font-size:11px;
+
+    cursor:pointer;
+
+    text-decoration:none;
+
+}
+
+.primary-btn:hover{
+
+    background:var(--primary-dark);
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+.mobile-menu{
+
+    display:none;
+}
+
+@media(max-width:950px){
+
+    .stats{
+
+        grid-template-columns:
+        repeat(2,1fr);
+
+    }
+
+    .content-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+
+@media(max-width:700px){
+
+    .sidebar{
+
+        transform:translateX(100%);
+
+    }
+
+    .sidebar.open{
+
+        transform:translateX(0);
+
+    }
+
+    .main{
+
+        margin-right:0;
+
+        padding:20px 15px;
+
+    }
+
+    .mobile-menu{
+
+        display:block;
+    }
+
+    .topbar{
+
+        align-items:flex-start;
+    }
+
+    .user-info{
+
+        display:none;
+    }
+
+    .stats{
+
+        grid-template-columns:1fr 1fr;
+
+        gap:10px;
+    }
+
+    .stat{
+
+        padding:15px;
+    }
+
+    .stat h2{
+
+        font-size:23px;
+    }
+
+}
+
+
+/* =========================
+   MODAL
+========================= */
+
+.modal{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(20,15,25,.55);
+
+    backdrop-filter:blur(5px);
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    z-index:2000;
+
+    padding:20px;
+}
+
+.modal.show{
+
+    display:flex;
+}
+
+.modal-box{
+
+    width:100%;
+
+    max-width:650px;
+
+    background:var(--card);
+
+    border-radius:22px;
+
+    border:1px solid var(--border);
+
+    box-shadow:0 25px 80px rgba(0,0,0,.25);
+
+    overflow:hidden;
+}
+
+.modal-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:20px;
+
+    border-bottom:1px solid var(--border);
+}
+
+.modal-header h2{
+
+    font-size:17px;
+}
+
+.close{
+
+    border:0;
+
+    background:var(--soft);
+
+    color:var(--text);
+
+    width:34px;
+
+    height:34px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+}
+
+.form{
+
+    padding:22px;
+}
+
+.form-group{
+
+    margin-bottom:16px;
+}
+
+.form-group label{
+
+    display:block;
+
+    font-size:11px;
+
+    margin-bottom:7px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+
+    width:100%;
+
+    border:1px solid var(--border);
+
+    background:var(--bg);
+
+    color:var(--text);
+
+    border-radius:11px;
+
+    padding:11px;
+
+    font-family:inherit;
+
+    outline:none;
+
+    font-size:12px;
+}
+
+.form-group textarea{
+
+    min-height:150px;
+
+    resize:vertical;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+
+    border-color:var(--primary);
+}
+
+.form-actions{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:8px;
+
+    margin-top:20px;
+}
+
+.secondary-btn{
+
+    border:1px solid var(--border);
+
+    background:var(--card);
+
+    color:var(--text);
+
+    padding:9px 15px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-family:inherit;
+
+    font-size:11px;
+}
+
+
+/* Toast */
+
+.toast{
+
+    position:fixed;
+
+    bottom:25px;
+
+    right:25px;
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    box-shadow:var(--shadow);
+
+    padding:13px 18px;
+
+    border-radius:12px;
+
+    font-size:11px;
+
+    transform:translateY(100px);
+
+    opacity:0;
+
+    transition:.3s;
+
+    z-index:3000;
+}
+
+.toast.show{
+
+    transform:translateY(0);
+
+    opacity:1;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar" id="sidebar">
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            🧠
+        </div>
+
+        <div class="logo-text">
+
+            <strong>روان‌شناسی‌نامه</strong>
+
+            <span>پنل مدیریت</span>
+
+        </div>
+
+    </div>
+
+
+    <div class="menu-title">
+        مدیریت
+    </div>
+
+    <nav class="menu">
+
+        <a href="#" class="active">
+            <span class="menu-icon">📊</span>
+            داشبورد
+        </a>
+
+        <a href="#">
+            <span class="menu-icon">📝</span>
+            مقالات
+        </a>
+
+        <a href="#" onclick="openModal()">
+            <span class="menu-icon">➕</span>
+            افزودن مقاله
+        </a>
+
+        <a href="#">
+            <span class="menu-icon">🗂️</span>
+            دسته‌بندی‌ها
+        </a>
+
+    </nav>
+
+
+    <div class="menu-title">
+        سایت
+    </div>
+
+    <nav class="menu">
+
+        <a href="#">
+            <span class="menu-icon">👥</span>
+            کاربران
+        </a>
+
+        <a href="#">
+            <span class="menu-icon">💬</span>
+            نظرات
+        </a>
+
+        <a href="#">
+            <span class="menu-icon">⚙️</span>
+            تنظیمات
+        </a>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <a href="index.html" class="site-link">
+            ← مشاهده سایت
+        </a>
+
+    </div>
+
+</aside>
+
+
+<!-- MAIN -->
+
+<main class="main">
+
+
+    <!-- TOPBAR -->
+
+    <header class="topbar">
+
+        <div class="page-title">
+
+            <h1>سلام، سارا 👋</h1>
+
+            <p>
+                به پنل مدیریت روان‌شناسی‌نامه خوش آمدی.
+            </p>
+
+        </div>
+
+
+        <div class="top-actions">
+
+            <button
+                class="icon-btn mobile-menu"
+                id="menuBtn">
+                ☰
+            </button>
+
+            <button
+                class="icon-btn"
+                id="themeBtn">
+                ☾
+            </button>
+
+
+            <div class="user">
+
+                <div class="avatar">
+                    👩🏻‍💻
+                </div>
+
+                <div class="user-info">
+
+                    <strong>مدیر سایت</strong>
+
+                    <span>Administrator</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- STATS -->
+
+    <section class="stats">
+
+
+        <div class="stat">
+
+            <div class="stat-top">
+
+                <small>کل مقالات</small>
+
+                <div class="stat-icon">
+                    📚
+                </div>
+
+            </div>
+
+            <h2>6</h2>
+
+            <div class="stat-change">
+                مقالات تاریخی
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-top">
+
+                <small>منتشر شده</small>
+
+                <div class="stat-icon">
+                    🚀
+                </div>
+
+            </div>
+
+            <h2>4</h2>
+
+            <div class="stat-change">
+                آماده نمایش
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-top">
+
+                <small>پیش‌نویس</small>
+
+                <div class="stat-icon">
+                    ✏️
+                </div>
+
+            </div>
+
+            <h2>2</h2>
+
+            <div class="stat-change">
+                در حال آماده‌سازی
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-top">
+
+                <small>کاربران</small>
+
+                <div class="stat-icon">
+                    👥
+                </div>
+
+            </div>
+
+            <h2>0</h2>
+
+            <div class="stat-change">
+                هنوز کاربری ثبت نشده
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+    <!-- CONTENT -->
+
+    <section class="content-grid">
+
+
+        <!-- ARTICLES -->
+
+        <div class="panel">
+
+            <div class="panel-header">
+
+                <h3>
+                    آخرین مقالات
+                </h3>
+
+                <span>
+                    مشاهده همه
+                </span>
+
+            </div>
+
+
+            <div class="article-list">
+
+
+                <div class="article">
+
+                    <div class="article-number">
+                        01
+                    </div>
+
+                    <div class="article-info">
+
+                        <h4>
+                            دوران باستان
+                        </h4>
+
+                        <p>
+                            آخرین ویرایش: امروز
+                        </p>
+
+                    </div>
+
+                    <span class="status published">
+                        منتشر شده
+                    </span>
+
+                </div>
+
+
+                <div class="article">
+
+                    <div class="article-number">
+                        02
+                    </div>
+
+                    <div class="article-info">
+
+                        <h4>
+                            ذهن و بدن
+                        </h4>
+
+                        <p>
+                            آخرین ویرایش: دیروز
+                        </p>
+
+                    </div>
+
+                    <span class="status published">
+                        منتشر شده
+                    </span>
+
+                </div>
+
+
+                <div class="article">
+
+                    <div class="article-number">
+                        03
+                    </div>
+
+                    <div class="article-info">
+
+                        <h4>
+                            شکل‌گیری روش تجربی
+                        </h4>
+
+                        <p>
+                            آخرین ویرایش: ۲ روز پیش
+                        </p>
+
+                    </div>
+
+                    <span class="status draft">
+                        پیش‌نویس
+                    </span>
+
+                </div>
+
+
+                <div class="article">
+
+                    <div class="article-number">
+                        04
+                    </div>
+
+                    <div class="article-info">
+
+                        <h4>
+                            وونت و سال ۱۸۷۹
+                        </h4>
+
+                        <p>
+                            آخرین ویرایش: ۳ روز پیش
+                        </p>
+
+                    </div>
+
+                    <span class="status published">
+                        منتشر شده
+                    </span>
+
+                </div>
+
+
+                <div class="article">
+
+                    <div class="article-number">
+                        05
+                    </div>
+
+                    <div class="article-info">
+
+                        <h4>
+                            مکاتب روان‌شناسی
+                        </h4>
+
+                        <p>
+                            آخرین ویرایش: ۴ روز پیش
+                        </p>
+
+                    </div>
+
+                    <span class="status draft">
+                        پیش‌نویس
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <!-- QUICK ACTIONS -->
+
+        <div class="panel">
+
+            <div class="panel-header">
+
+                <h3>
+                    دسترسی سریع
+                </h3>
+
+            </div>
+
+
+            <div class="quick">
+
+
+                <button
+                    class="quick-btn"
+                    onclick="openModal()">
+
+                    <div class="quick-icon">
+                        ✍️
+                    </div>
+
+                    <div class="quick-text">
+
+                        <strong>
+                            نوشتن مقاله جدید
+                        </strong>
+
+                        <span>
+                            ایجاد و انتشار یک مقاله
+                        </span>
+
+                    </div>
+
+                </button>
+
+
+                <button class="quick-btn">
+
+                    <div class="quick-icon">
+                        📚
+                    </div>
+
+                    <div class="quick-text">
+
+                        <strong>
+                            مدیریت مقالات
+                        </strong>
+
+                        <span>
+                            ویرایش یا حذف مقاله‌ها
+                        </span>
+
+                    </div>
+
+                </button>
+
+
+                <button class="quick-btn">
+
+                    <div class="quick-icon">
+                        🖼️
+                    </div>
+
+                    <div class="quick-text">
+
+                        <strong>
+                            مدیریت تصاویر
+                        </strong>
+
+                        <span>
+                            تصاویر مقالات و سایت
+                        </span>
+
+                    </div>
+
+                </button>
+
+
+                <button class="quick-btn">
+
+                    <div class="quick-icon">
+                        ⚙️
+                    </div>
+
+                    <div class="quick-text">
+
+                        <strong>
+                            تنظیمات سایت
+                        </strong>
+
+                        <span>
+                            تنظیمات عمومی
+                        </span>
+
+                    </div>
+
+                </button>
+
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+    <!-- ACTIVITY -->
+
+    <section class="activity">
+
+        <div class="panel-header">
+
+            <h3>
+                فعالیت‌های اخیر
+            </h3>
+
+            <span>
+                آخرین فعالیت‌ها
+            </span>
+
+        </div>
+
+
+        <div class="activity-item">
+
+            <div class="activity-dot"></div>
+
+            <div class="activity-text">
+
+                مقاله «دوران باستان» منتشر شد.
+
+                <span>
+                    امروز
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="activity-item">
+
+            <div class="activity-dot"></div>
+
+            <div class="activity-text">
+
+                مقاله «شکل‌گیری روش تجربی» به عنوان پیش‌نویس ذخیره شد.
+
+                <span>
+                    دیروز
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="activity-item">
+
+            <div class="activity-dot"></div>
+
+            <div class="activity-text">
+
+                طراحی جدید پنل مدیریت فعال شد.
+
+                <span>
+                    ۲ روز پیش
+                </span>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+<!-- ARTICLE MODAL -->
+
+<div class="modal" id="articleModal">
+
+    <div class="modal-box">
+
+
+        <div class="modal-header">
+
+            <h2>
+                ایجاد مقاله جدید
+            </h2>
+
+            <button
+                class="close"
+                onclick="closeModal()">
+                ×
+            </button>
+
+        </div>
+
+
+        <form
+            class="form"
+            onsubmit="saveArticle(event)">
+
+
+            <div class="form-group">
+
+                <label>
+                    عنوان مقاله
+                </label>
+
+                <input
+                    type="text"
+                    placeholder="مثلاً: ویلهلم وونت و آغاز روان‌شناسی علمی"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    دسته‌بندی
+                </label>
+
+                <select>
+
+                    <option>
+                        تاریخ روان‌شناسی
+                    </option>
+
+                    <option>
+                        مکاتب روان‌شناسی
+                    </option>
+
+                    <option>
+                        شخصیت‌ها
+                    </option>
+
+                    <option>
+                        مفاهیم روان‌شناسی
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    متن مقاله
+                </label>
+
+                <textarea
+                    placeholder="متن مقاله را اینجا بنویس..."></textarea>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    وضعیت انتشار
+                </label>
+
+                <select>
+
+                    <option>
+                        پیش‌نویس
+                    </option>
+
+                    <option>
+                        منتشر شود
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-actions">
+
+                <button
+                    type="button"
+                    class="secondary-btn"
+                    onclick="closeModal()">
+
+                    انصراف
+
+                </button>
+
+                <button
+                    type="submit"
+                    class="primary-btn">
+
+                    💾 ذخیره مقاله
+
+                </button>
+
+            </div>
+
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<div class="toast" id="toast">
+    مقاله با موفقیت ذخیره شد.
+</div>
+
+
+<script>
+
+
+/* =====================
+   DARK MODE
+===================== */
+
+const themeBtn =
+document.getElementById("themeBtn");
+
+
+if(localStorage.getItem("admin-theme")==="dark"){
+
+    document.body.classList.add("dark");
+
+    themeBtn.textContent="☀";
+
+}
+
+
+themeBtn.addEventListener("click",()=>{
+
+    document.body.classList.toggle("dark");
+
+
+    if(document.body.classList.contains("dark")){
+
+        localStorage.setItem("admin-theme","dark");
+
+        themeBtn.textContent="☀";
+
+    }else{
+
+        localStorage.setItem("admin-theme","light");
+
+        themeBtn.textContent="☾";
+
+    }
+
+});
+
+
+/* =====================
+   MOBILE SIDEBAR
+===================== */
+
+const menuBtn =
+document.getElementById("menuBtn");
+
+const sidebar =
+document.getElementById("sidebar");
+
+
+menuBtn.addEventListener("click",()=>{
+
+    sidebar.classList.toggle("open");
+
+});
+
+
+/* =====================
+   MODAL
+===================== */
+
+const modal =
+document.getElementById("articleModal");
+
+
+function openModal(){
+
+    modal.classList.add("show");
+
+}
+
+
+function closeModal(){
+
+    modal.classList.remove("show");
+
+}
+
+
+modal.addEventListener("click",(event)=>{
+
+    if(event.target===modal){
+
+        closeModal();
+
+    }
+
+});
+
+
+/* =====================
+   SAVE DEMO
+===================== */
+
+function saveArticle(event){
+
+    event.preventDefault();
+
+    closeModal();
+
+    showToast();
+
+}
+
+
+function showToast(){
+
+    const toast =
+    document.getElementById("toast");
+
+    toast.classList.add("show");
+
+    setTimeout(()=>{
+
+        toast.classList.remove("show");
+
+    },3000);
+
+}
+
+</script>
+
+
+</body>
+
+  </html>
