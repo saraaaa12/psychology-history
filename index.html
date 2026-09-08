@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>روان‌شناسی‌نامه | تاریخ روان‌شناسی</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Tahoma, Arial, sans-serif;
+            background: #f8f6f3;
+            color: #302b35;
+            line-height: 1.9;
+        }
+
+        /* HEADER */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255,255,255,.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid #e9e3df;
+        }
+
+        nav {
+            max-width: 1100px;
+            margin: auto;
+            padding: 17px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 21px;
+            font-weight: bold;
+            color: #604a78;
+        }
+
+        .logo span {
+            color: #b88761;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #665c68;
+            font-size: 14px;
+            transition: .3s;
+        }
+
+        .nav-link:hover {
+            color: #604a78;
+        }
+
+        /* HERO */
+
+        .hero {
+            min-height: 650px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 80px 25px;
+            position: relative;
+            overflow: hidden;
+
+            background:
+                radial-gradient(circle at 80% 20%, #e8ddf0 0, transparent 32%),
+                radial-gradient(circle at 15% 80%, #eadacd 0, transparent 30%),
+                #f8f6f3;
+        }
+
+        .hero-content {
+            max-width: 820px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            padding: 7px 18px;
+            border-radius: 30px;
+            background: #eee7f2;
+            color: #735a88;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(38px, 7vw, 68px);
+            line-height: 1.35;
+            color: #332b3d;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: #76558c;
+        }
+
+        .hero p {
+            max-width: 680px;
+            margin: auto;
+            color: #706a71;
+            font-size: 17px;
+        }
+
+        .buttons {
+            margin-top: 35px;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 13px 28px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: .3s;
+        }
+
+        .btn-primary {
+            background: #6e578e;
+            color: white;
+            box-shadow: 0 10px 25px rgba(91,67,113,.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            background: #594475;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #604a78;
+            border: 1px solid #ded6e2;
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            border-color: #bca9c9;
+        }
+
+        /* INTRO */
+
+        main {
+            max-width: 1100px;
+            margin: auto;
+            padding: 80px 25px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-title small {
+            color: #b07f59;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .section-title h2 {
+            margin-top: 8px;
+            font-size: 31px;
+            color: #403548;
+        }
+
+        .section-title p {
+            max-width: 650px;
+            margin: 10px auto 0;
+            color: #777078;
+            font-size: 14px;
+        }
+
+        .intro {
+            background: white;
+            border: 1px solid #ebe5df;
+            border-radius: 28px;
+            padding: 40px;
+            box-shadow: 0 15px 45px rgba(50,40,60,.06);
+            margin-bottom: 70px;
+        }
+
+        .intro h3 {
+            color: #624c77;
+            font-size: 23px;
+            margin-bottom: 15px;
+        }
+
+        .intro p {
+            color: #666168;
+            font-size: 15px;
+        }
+
+        /* TIMELINE */
+
+        .timeline {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #ebe5df;
+            border-radius: 22px;
+            padding: 28px;
+            box-shadow: 0 10px 30px rgba(50,40,60,.05);
+            transition: .3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 4px;
+            background: #8a6ba5;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 40px rgba(50,40,60,.10);
+        }
+
+        .number {
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #eee6f2;
+            color: #684f7d;
+            font-weight: bold;
+            margin-bottom: 18px;
+        }
+
+        .card .year {
+            color: #b07f59;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .card h3 {
+            color: #463852;
+            margin: 8px 0 12px;
+            font-size: 19px;
+        }
+
+        .card p {
+            color: #716b72;
+            font-size: 14px;
+        }
+
+        /* CTA */
+
+        .cta {
+            margin-top: 80px;
+            text-align: center;
+            padding: 55px 25px;
+            border-radius: 30px;
+            background:
+                radial-gradient(circle at 20% 30%, #eadff0, transparent 35%),
+                #eee8f1;
+        }
+
+        .cta h2 {
+            color: #44354f;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .cta p {
+            color: #716873;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #302a35;
+            color: #aaa;
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 12px;
+        }
+
+        footer strong {
+            color: #ddd;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 800px) {
+
+            .timeline {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                min-height: 570px;
+            }
+
+            .intro {
+                padding: 28px;
+            }
+
+            main {
+                padding: 60px 20px;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            nav {
+                padding: 15px 18px;
+            }
+
+            .logo {
+                font-size: 18px;
+            }
+
+            .nav-link {
+                font-size: 12px;
+            }
+
+            .hero {
+                padding: 65px 20px;
+            }
+
+            .hero p {
+                font-size: 15px;
+            }
+
+            .section-title h2 {
+                font-size: 26px;
+            }
+
+            .card {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <nav>
+
+        <div class="logo">
+            روان‌شناسی<span>‌نامه</span>
+        </div>
+
+        <a href="#history" class="nav-link">
+            مسیر تاریخ روان‌شناسی
+        </a>
+
+    </nav>
+</header>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="eyebrow">
+            HISTORY OF PSYCHOLOGY
+        </div>
+
+        <h1>
+            سفری در <span>تاریخ ذهن انسان</span>
+        </h1>
+
+        <p>
+            روان‌شناسی یک‌شبه به وجود نیامد.
+            این علم حاصل قرن‌ها پرسش، مشاهده، فلسفه،
+            آزمایش و تلاش برای فهم انسان است.
+        </p>
+
+        <div class="buttons">
+
+            <a href="page2.html" class="btn btn-primary">
+                شروع مطالعه ←
+            </a>
+
+            <a href="#history" class="btn btn-secondary">
+                مشاهده مسیر تاریخ
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<main>
+
+    <!-- INTRO -->
+
+    <section>
+
+        <div class="section-title">
+
+            <small>WHERE IT ALL BEGAN</small>
+
+            <h2>
+                روان‌شناسی از کجا شروع شد؟
+            </h2>
+
+            <p>
+                برای فهم روان‌شناسی امروز، باید مسیر شکل‌گیری آن را بشناسیم.
+            </p>
+
+        </div>
+
+
+        <div class="intro">
+
+            <h3>
+                از فلسفه تا آزمایشگاه
+            </h3>
+
+            <p>
+                مدت‌ها پیش از آنکه روان‌شناسی به عنوان یک علم مستقل
+                شناخته شود، انسان درباره ذهن، آگاهی، حافظه،
+                هیجان و رفتار خود سؤال می‌پرسید.
+                بسیاری از این پرسش‌ها ابتدا در قلمرو فلسفه مطرح شدند.
+            </p>
+
+            <br>
+
+            <p>
+                با پیشرفت علوم طبیعی، فیزیولوژی و روش‌های تجربی،
+                مطالعه ذهن و رفتار نیز به تدریج از بحث‌های صرفاً فلسفی
+                فاصله گرفت و به سمت یک رشته علمی حرکت کرد.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- HISTORY -->
+
+    <section id="history">
+
+        <div class="section-title">
+
+            <small>THE JOURNEY</small>
+
+            <h2>
+                مسیر شکل‌گیری روان‌شناسی
+            </h2>
+
+            <p>
+                چند نقطه عطف مهم در مسیری که روان‌شناسی را به علم امروز تبدیل کرد.
+            </p>
+
+        </div>
+
+
+        <div class="timeline">
+
+
+            <article class="card">
+
+                <div class="number">۱</div>
+
+                <span class="year">
+                    دوران باستان
+                </span>
+
+                <h3>
+                    فلسفه و ذهن انسان
+                </h3>
+
+                <p>
+                    فیلسوفانی مانند افلاطون و ارسطو درباره ذهن،
+                    ادراک، حافظه، هیجان و رابطه ذهن و بدن
+                    نظریه‌پردازی کردند.
+                </p>
+
+            </article>
+
+
+            <article class="card">
+
+                <div class="number">۲</div>
+
+                <span class="year">
+                    قرن هفدهم
+                </span>
+
+                <h3>
+                    مسئله ذهن و بدن
+                </h3>
+
+                <p>
+                    با ظهور فلسفه جدید، مسئله رابطه ذهن و بدن
+                    اهمیت بیشتری پیدا کرد و دیدگاه‌هایی مانند
+                    دوگانه‌انگاری دکارت مطرح شدند.
+                </p>
+
+            </article>
+
+
+            <article class="card">
+
+                <div class="number">۳</div>
+
+                <span class="year">
+                    قرن هجدهم و نوزدهم
+                </span>
+
+                <h3>
+                    حرکت به سوی تجربه
+                </h3>
+
+                <p>
+                    رشد فیزیولوژی و علوم اعصاب امکان مطالعه تجربی
+                    احساس، ادراک و فرایندهای عصبی را فراهم کرد.
+                </p>
+
+            </article>
+
+
+            <article class="card">
+
+                <div class="number">۴</div>
+
+                <span class="year">
+                    ۱۸۷۹
+                </span>
+
+                <h3>
+                    آزمایشگاه وونت
+                </h3>
+
+                <p>
+                    تأسیس آزمایشگاه ویلهلم وونت در لایپزیگ
+                    یکی از مهم‌ترین نقاط عطف در شکل‌گیری
+                    روان‌شناسی علمی مدرن بود.
+                </p>
+
+            </article>
+
+
+            <article class="card">
+
+                <div class="number">۵</div>
+
+                <span class="year">
+                    قرن بیستم
+                </span>
+
+                <h3>
+                    ظهور مکاتب
+                </h3>
+
+                <p>
+                    روان‌کاوی، رفتارگرایی، گشتالت، انسان‌گرایی
+                    و رویکرد شناختی، هرکدام نگاه متفاوتی
+                    به ذهن و رفتار انسان ارائه کردند.
+                </p>
+
+            </article>
+
+
+            <article class="card">
+
+                <div class="number">۶</div>
+
+                <span class="year">
+                    روان‌شناسی امروز
+                </span>
+
+                <h3>
+                    علمی چندرشته‌ای
+                </h3>
+
+                <p>
+                    روان‌شناسی امروز از روش‌های تجربی و یافته‌های
+                    علوم اعصاب، شناخت، رفتار و علوم اجتماعی
+                    برای مطالعه انسان استفاده می‌کند.
+                </p>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- CTA -->
+
+    <section class="cta">
+
+        <h2>
+            آماده‌ای وارد تاریخ روان‌شناسی بشی؟
+        </h2>
+
+        <p>
+            از نخستین پرسش‌های فلسفی تا شکل‌گیری روان‌شناسی علمی.
+        </p>
+
+        <a href="page2.html" class="btn btn-primary">
+            ورود به صفحه بعد ←
+        </a>
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    <strong>روان‌شناسی‌نامه</strong>
+
+    <br>
+
+    تاریخ روان‌شناسی | 2026
+
+</footer>
+
+
+</body>
+                  </html>
