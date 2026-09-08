@@ -28,6 +28,12 @@ body{
   line-height:2;
 }
 
+/* ================= IMPORTANT ================= */
+
+.hidden{
+  display:none !important;
+}
+
 /* ================= TOPBAR ================= */
 
 .topbar{
@@ -570,13 +576,11 @@ body.dark .back-button{
 </style>
 </head>
 
-
 <body>
 
 <div class="progress" id="progress"></div>
 
-
-<!-- ================= HEADER ================= -->
+<!-- HEADER -->
 
 <header class="topbar">
 
@@ -594,7 +598,6 @@ body.dark .back-button{
 
     </a>
 
-
     <nav class="nav">
 
       <a href="index.html">
@@ -609,7 +612,7 @@ body.dark .back-button{
         مکاتب
       </a>
 
-      <button id="themeBtn">
+      <button id="themeBtn" type="button">
         ◐
       </button>
 
@@ -619,8 +622,7 @@ body.dark .back-button{
 
 </header>
 
-
-<!-- ================= LOADING ================= -->
+<!-- LOADING -->
 
 <div id="loading" class="loading">
 
@@ -638,8 +640,7 @@ body.dark .back-button{
 
 </div>
 
-
-<!-- ================= ARTICLE ================= -->
+<!-- ARTICLE -->
 
 <main id="articlePage" class="hidden">
 
@@ -648,19 +649,13 @@ body.dark .back-button{
     <div class="hero-decoration"></div>
     <div class="hero-decoration two"></div>
 
-
-    <div
-      id="category"
-      class="category"
-    >
+    <div id="category" class="category">
       🧠 روان‌شناسی
     </div>
-
 
     <h1 id="title">
       عنوان مقاله
     </h1>
-
 
     <div class="article-meta">
 
@@ -680,13 +675,9 @@ body.dark .back-button{
 
   </section>
 
-
   <!-- COVER -->
 
-  <div
-    id="cover"
-    class="cover hidden"
-  >
+  <div id="cover" class="cover hidden">
 
     <img
       id="coverImage"
@@ -696,18 +687,14 @@ body.dark .back-button{
 
   </div>
 
-
   <!-- CONTENT -->
 
   <div class="article-layout">
 
-
     <article
       id="content"
       class="article-content"
-    >
-    </article>
-
+    ></article>
 
     <aside class="sidebar">
 
@@ -726,7 +713,6 @@ body.dark .back-button{
 
       </div>
 
-
       <div class="side-card">
 
         <h3>
@@ -742,7 +728,6 @@ body.dark .back-button{
 
       </div>
 
-
       <div class="side-card">
 
         <a
@@ -756,13 +741,11 @@ body.dark .back-button{
 
     </aside>
 
-
   </div>
 
 </main>
 
-
-<!-- ================= ERROR ================= -->
+<!-- ERROR -->
 
 <section
   id="errorPage"
@@ -792,7 +775,6 @@ body.dark .back-button{
 
 </section>
 
-
 <footer>
 
   روان‌شناسی‌نامه
@@ -802,7 +784,6 @@ body.dark .back-button{
   </span>
 
 </footer>
-
 
 <script>
 
@@ -885,44 +866,45 @@ function escapeHtml(value){
 
 
 /* =====================================================
-   CONTENT FORMATTER
+   FORMAT CONTENT
 ===================================================== */
 
 function formatContent(text){
 
-  if(!text)
-    return "";
+  if(!text){
+    return "<p>محتوایی برای این مقاله ثبت نشده است.</p>";
+  }
+
+  text = String(text);
 
   /*
-    اگر ادمین متن را با HTML وارد کرده باشد،
-    آن را به صورت HTML نمایش می‌دهیم.
-
-    اگر متن معمولی باشد،
-    خط‌های آن تبدیل به پاراگراف می‌شوند.
+    اگر محتوای ادمین HTML باشد،
+    همان ساختار HTML نمایش داده می‌شود.
   */
 
   const looksLikeHtml =
-    /<\s*(p|h2|h3|h4|ul|ol|li|blockquote|strong|em|br)\b/i
+    /<\s*(p|h1|h2|h3|h4|ul|ol|li|blockquote|strong|em|br|div)\b/i
       .test(text);
 
   if(looksLikeHtml){
-
     return text;
-
   }
 
+  /*
+    متن ساده:
+    هر فاصله بین پاراگراف‌ها تبدیل به پاراگراف می‌شود.
+  */
 
   return text
+    .trim()
     .split(/\n\s*\n/)
-    .map(paragraph=>{
+    .filter(Boolean)
+    .map(paragraph => {
 
       const clean =
         escapeHtml(
           paragraph.trim()
         );
-
-      if(!clean)
-        return "";
 
       return `<p>${clean.replace(/\n/g,"<br>")}</p>`;
 
@@ -933,105 +915,14 @@ function formatContent(text){
 
 
 /* =====================================================
-   LOAD ARTICLE
+   SHOW ARTICLE
 ===================================================== */
 
-async function loadArticle(){
-
-  if(!articleId){
-
-    showError();
-    return;
-
-  }
-
-
-  const {
-    data,
-    error
-  } =
-    await supabaseClient
-      .from("article")
-      .select("*")
-      .eq("id",articleId)
-      .eq("status","published")
-      .single();
-
-
-  if(error || !data){
-
-    console.error(error);
-
-    showError();
-
-    return;
-
-  }
-
-
-  /* TITLE */
-
-  titleElement.textContent =
-    data.title || "بدون عنوان";
-
-
-  document.title =
-    (data.title || "مقاله") +
-    " | روان‌شناسی‌نامه";
-
-
-  /* CATEGORY */
-
-  categoryElement.textContent =
-    "🧠 " +
-    (data.category || "روان‌شناسی");
-
-
-  /* DATE */
-
-  if(data.created_at){
-
-    const date =
-      new Date(data.created_at);
-
-    dateElement.textContent =
-      "📅 " +
-      date.toLocaleDateString(
-        "fa-IR",
-        {
-          year:"numeric",
-          month:"long",
-          day:"numeric"
-        }
-      );
-
-  }
-
-
-  /* IMAGE */
-
-  if(data.image_url){
-
-    coverImage.src =
-      data.image_url;
-
-    coverImage.alt =
-      data.title || "تصویر مقاله";
-
-    cover.classList.remove("hidden");
-
-  }
-
-
-  /* CONTENT */
-
-  contentElement.innerHTML =
-    formatContent(data.content);
-
-
-  /* SHOW */
+function showArticle(){
 
   loading.classList.add("hidden");
+
+  errorPage.classList.add("hidden");
 
   articlePage.classList.remove("hidden");
 
@@ -1039,10 +930,12 @@ async function loadArticle(){
 
 
 /* =====================================================
-   ERROR
+   SHOW ERROR
 ===================================================== */
 
-function showError(){
+function showError(message = ""){
+
+  console.error(message);
 
   loading.classList.add("hidden");
 
@@ -1054,24 +947,222 @@ function showError(){
 
 
 /* =====================================================
+   LOAD ARTICLE
+===================================================== */
+
+async function loadArticle(){
+
+  try{
+
+    /* اگر ID در URL وجود نداشته باشد */
+
+    if(!articleId){
+
+      showError("Article ID not found in URL.");
+
+      return;
+
+    }
+
+
+    console.log(
+      "Loading article:",
+      articleId
+    );
+
+
+    /*
+      دریافت مقاله از Supabase
+    */
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .from("article")
+        .select("*")
+        .eq("id", articleId)
+        .eq("status", "published")
+        .maybeSingle();
+
+
+    /*
+      خطای Supabase
+    */
+
+    if(error){
+
+      console.error(
+        "Supabase error:",
+        error
+      );
+
+      showError(error.message);
+
+      return;
+
+    }
+
+
+    /*
+      مقاله پیدا نشده
+    */
+
+    if(!data){
+
+      showError(
+        "Article not found or not published."
+      );
+
+      return;
+
+    }
+
+
+    console.log(
+      "Article loaded:",
+      data
+    );
+
+
+    /* =================================================
+       TITLE
+    ================================================= */
+
+    titleElement.textContent =
+      data.title || "بدون عنوان";
+
+    document.title =
+      (data.title || "مقاله") +
+      " | روان‌شناسی‌نامه";
+
+
+    /* =================================================
+       CATEGORY
+    ================================================= */
+
+    categoryElement.textContent =
+      "🧠 " +
+      (data.category || "روان‌شناسی");
+
+
+    /* =================================================
+       DATE
+    ================================================= */
+
+    if(data.created_at){
+
+      const date =
+        new Date(data.created_at);
+
+      if(!isNaN(date.getTime())){
+
+        dateElement.textContent =
+          "📅 " +
+          date.toLocaleDateString(
+            "fa-IR",
+            {
+              year:"numeric",
+              month:"long",
+              day:"numeric"
+            }
+          );
+
+      }
+
+    }
+
+
+    /* =================================================
+       IMAGE
+    ================================================= */
+
+    if(
+      data.image_url &&
+      String(data.image_url).trim() !== ""
+    ){
+
+      coverImage.src =
+        String(data.image_url).trim();
+
+      coverImage.alt =
+        data.title || "تصویر مقاله";
+
+      coverImage.onerror = function(){
+
+        console.error(
+          "Article image could not be loaded."
+        );
+
+        cover.classList.add("hidden");
+
+      };
+
+      cover.classList.remove("hidden");
+
+    }else{
+
+      cover.classList.add("hidden");
+
+    }
+
+
+    /* =================================================
+       CONTENT
+    ================================================= */
+
+    contentElement.innerHTML =
+      formatContent(data.content);
+
+
+    /* =================================================
+       SHOW
+    ================================================= */
+
+    showArticle();
+
+
+  }catch(error){
+
+    console.error(
+      "Unexpected error:",
+      error
+    );
+
+    showError(
+      error.message || "Unknown error"
+    );
+
+  }
+
+}
+
+
+/* =====================================================
    READING PROGRESS
 ===================================================== */
 
 window.addEventListener(
   "scroll",
-  ()=>{
+  () => {
 
     const scrollTop =
       window.scrollY;
 
     const height =
-      document.documentElement
-        .scrollHeight -
+      document.documentElement.scrollHeight -
       window.innerHeight;
 
     const progress =
       height > 0
-        ? (scrollTop / height) * 100
+        ? Math.min(
+            100,
+            Math.max(
+              0,
+              (scrollTop / height) * 100
+            )
+          )
         : 0;
 
     document.getElementById(
@@ -1092,7 +1183,7 @@ const themeBtn =
 
 themeBtn.addEventListener(
   "click",
-  ()=>{
+  () => {
 
     document.body.classList.toggle("dark");
 
@@ -1108,7 +1199,7 @@ themeBtn.addEventListener(
 
 
 if(
-  localStorage.getItem("articleDark")==="1"
+  localStorage.getItem("articleDark") === "1"
 ){
 
   document.body.classList.add("dark");
