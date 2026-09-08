@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>تاریخ روان‌شناسی | صفحه دوم</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Tahoma, Arial, sans-serif;
+            background: #f8f6f3;
+            color: #302b35;
+            line-height: 2;
+        }
+
+
+        /* HEADER */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255,255,255,.94);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid #e8e2de;
+        }
+
+        nav {
+            max-width: 1100px;
+            margin: auto;
+            padding: 17px 25px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 21px;
+            font-weight: bold;
+            color: #604a78;
+        }
+
+        .logo span {
+            color: #b88761;
+        }
+
+        .home {
+            text-decoration: none;
+            color: #665c68;
+            font-size: 14px;
+            transition: .3s;
+        }
+
+        .home:hover {
+            color: #604a78;
+        }
+
+
+        /* HERO */
+
+        .hero {
+            padding: 80px 25px 70px;
+            text-align: center;
+
+            background:
+                radial-gradient(circle at 80% 20%, #e8ddf0, transparent 32%),
+                radial-gradient(circle at 15% 80%, #eadacd, transparent 30%),
+                #f8f6f3;
+        }
+
+        .tag {
+            display: inline-block;
+
+            padding: 6px 17px;
+
+            border-radius: 30px;
+
+            background: #eee7f2;
+
+            color: #735a88;
+
+            font-size: 12px;
+
+            font-weight: bold;
+        }
+
+        .hero h1 {
+            margin: 18px 0 15px;
+
+            font-size: clamp(34px, 6vw, 52px);
+
+            color: #362d40;
+        }
+
+        .hero p {
+            max-width: 680px;
+
+            margin: auto;
+
+            color: #716a72;
+
+            font-size: 16px;
+        }
+
+
+        /* MAIN */
+
+        main {
+            max-width: 950px;
+
+            margin: auto;
+
+            padding: 70px 25px;
+        }
+
+
+        /* ARTICLE */
+
+        .article {
+            background: white;
+
+            border: 1px solid #ebe5df;
+
+            border-radius: 25px;
+
+            padding: 40px;
+
+            margin-bottom: 30px;
+
+            box-shadow:
+                0 12px 35px rgba(50,40,60,.055);
+        }
+
+        .article-number {
+            color: #b07f59;
+
+            font-size: 12px;
+
+            font-weight: bold;
+        }
+
+        .article h2 {
+            color: #4d3d5d;
+
+            font-size: 27px;
+
+            margin: 7px 0 18px;
+        }
+
+        .article p {
+            color: #666168;
+
+            font-size: 15px;
+
+            margin-bottom: 16px;
+        }
+
+
+        /* HIGHLIGHT */
+
+        .highlight {
+            margin-top: 25px;
+
+            padding: 20px 23px;
+
+            border-radius: 17px;
+
+            background: #f0ebf3;
+
+            color: #59496a;
+
+            font-size: 14px;
+        }
+
+        .highlight strong {
+            color: #624c77;
+        }
+
+
+        /* QUOTE */
+
+        .quote {
+            margin: 45px 0;
+
+            padding: 35px;
+
+            text-align: center;
+
+            border-radius: 25px;
+
+            background: #eee8f1;
+
+            color: #51435b;
+
+            font-size: 18px;
+
+            font-weight: bold;
+        }
+
+
+        /* NEXT PAGE */
+
+        .navigation {
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            margin-top: 50px;
+        }
+
+        .navigation a {
+            flex: 1;
+
+            text-align: center;
+
+            text-decoration: none;
+
+            padding: 13px 20px;
+
+            border-radius: 30px;
+
+            font-size: 14px;
+
+            transition: .3s;
+        }
+
+        .previous {
+            background: white;
+
+            color: #604a78;
+
+            border: 1px solid #ded6e2;
+        }
+
+        .next {
+            background: #6e578e;
+
+            color: white;
+        }
+
+        .navigation a:hover {
+            transform: translateY(-3px);
+        }
+
+
+        /* FOOTER */
+
+        footer {
+            background: #302a35;
+
+            color: #aaa;
+
+            text-align: center;
+
+            padding: 30px 20px;
+
+            font-size: 12px;
+        }
+
+        footer strong {
+            color: #ddd;
+        }
+
+
+        /* MOBILE */
+
+        @media(max-width: 650px) {
+
+            .article {
+                padding: 27px;
+            }
+
+            .article h2 {
+                font-size: 23px;
+            }
+
+            .navigation {
+                flex-direction: column;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- HEADER -->
+
+<header>
+
+    <nav>
+
+        <div class="logo">
+            روان‌شناسی<span>‌نامه</span>
+        </div>
+
+        <a href="index.html" class="home">
+            صفحه اصلی
+        </a>
+
+    </nav>
+
+</header>
+
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <span class="tag">
+        HISTORY OF PSYCHOLOGY
+    </span>
+
+    <h1>
+        از فلسفه تا روان‌شناسی علمی
+    </h1>
+
+    <p>
+        برای رسیدن به روان‌شناسی امروز، انسان مسیر طولانی‌ای را
+        از اندیشه‌های فلسفی تا آزمایش‌های علمی طی کرده است.
+    </p>
+
+</section>
+
+
+
+<main>
+
+
+    <!-- ARTICLE 1 -->
+
+    <article class="article">
+
+        <span class="article-number">
+            فصل اول
+        </span>
+
+        <h2>
+            فلسفه؛ نقطه آغاز پرسش‌های روان‌شناختی
+        </h2>
+
+        <p>
+            بسیاری از پرسش‌هایی که امروزه در روان‌شناسی بررسی می‌شوند،
+            ریشه‌هایی بسیار قدیمی دارند.
+        </p>
+
+        <p>
+            فیلسوفان یونان باستان درباره ماهیت ذهن،
+            شناخت، حافظه، هیجان و رابطه ذهن و بدن
+            بحث می‌کردند.
+        </p>
+
+        <div class="highlight">
+
+            <strong>نکته:</strong>
+
+            در این دوره هنوز چیزی به نام «روان‌شناسی علمی»
+            وجود نداشت و مطالعه ذهن بیشتر بخشی از فلسفه بود.
+
+        </div>
+
+    </article>
+
+
+
+    <!-- ARTICLE 2 -->
+
+    <article class="article">
+
+        <span class="article-number">
+            فصل دوم
+        </span>
+
+        <h2>
+            دکارت و مسئله ذهن ـ بدن
+        </h2>
+
+        <p>
+            در قرن هفدهم، رنه دکارت یکی از مهم‌ترین بحث‌های فلسفه
+            ذهن را مطرح کرد: رابطه میان ذهن و بدن.
+        </p>
+
+        <p>
+            دیدگاه دوگانه‌انگارانه او ذهن و بدن را دو جنبه متفاوت
+            در نظر می‌گرفت و همین مسئله بعدها تأثیر زیادی بر
+            بحث‌های مربوط به ماهیت ذهن گذاشت.
+        </p>
+
+        <div class="highlight">
+
+            <strong>ایده کلیدی:</strong>
+
+            مسئله ذهن و بدن یکی از پرسش‌های بنیادی در تاریخ
+            اندیشه روان‌شناختی است.
+
+        </div>
+
+    </article>
+
+
+
+    <!-- ARTICLE 3 -->
+
+    <article class="article">
+
+        <span class="article-number">
+            فصل سوم
+        </span>
+
+        <h2>
+            فیزیولوژی و ورود روش تجربی
+        </h2>
+
+        <p>
+            در قرن‌های هجدهم و نوزدهم، پیشرفت فیزیولوژی
+            امکان بررسی علمی‌تر فرایندهای حسی و عصبی را فراهم کرد.
+        </p>
+
+        <p>
+            پژوهشگران شروع کردند به اندازه‌گیری پدیده‌هایی مانند
+            احساس، ادراک و زمان واکنش.
+        </p>
+
+        <div class="highlight">
+
+            <strong>نقطه تحول:</strong>
+
+            مطالعه ذهن به تدریج از استدلال صرفاً فلسفی
+            به سمت مشاهده و آزمایش حرکت کرد.
+
+        </div>
+
+    </article>
+
+
+
+    <!-- QUOTE -->
+
+    <div class="quote">
+
+        «روان‌شناسی امروز نتیجه یک کشف ناگهانی نیست؛
+        نتیجه قرن‌ها پرسش درباره انسان است.»
+
+    </div>
+
+
+
+    <!-- ARTICLE 4 -->
+
+    <article class="article">
+
+        <span class="article-number">
+            فصل چهارم
+        </span>
+
+        <h2>
+            ۱۸۷۹؛ وونت و تولد روان‌شناسی آزمایشگاهی
+        </h2>
+
+        <p>
+            ویلهلم وونت در سال ۱۸۷۹ در شهر لایپزیگ آلمان
+            آزمایشگاهی برای مطالعه فرایندهای روانی تأسیس کرد.
+        </p>
+
+        <p>
+            این اتفاق معمولاً یکی از مهم‌ترین نقاط عطف در
+            تاریخ روان‌شناسی علمی محسوب می‌شود.
+        </p>
+
+        <div class="highlight">
+
+            <strong>۱۸۷۹:</strong>
+
+            روان‌شناسی بیش از گذشته به عنوان یک رشته دانشگاهی
+            و تجربی مستقل مطرح شد.
+
+        </div>
+
+    </article>
+
+
+
+    <!-- ARTICLE 5 -->
+
+    <article class="article">
+
+        <span class="article-number">
+            فصل پنجم
+        </span>
+
+        <h2>
+            قرن بیستم؛ رقابت دیدگاه‌ها
+        </h2>
+
+        <p>
+            قرن بیستم دوره شکل‌گیری و گسترش مکاتب مختلف روان‌شناسی بود.
+        </p>
+
+        <p>
+            روان‌کاوی بر فرایندهای ناهشیار تأکید کرد،
+            رفتارگرایی رفتار قابل مشاهده را در مرکز توجه قرار داد،
+            گشتالت بر سازمان‌یافتگی ادراک تمرکز کرد و
+            انسان‌گرایی بر تجربه و رشد انسان تأکید داشت.
+        </p>
+
+        <div class="highlight">
+
+            <strong>نتیجه:</strong>
+
+            هیچ مکتبی به تنهایی تمام پیچیدگی رفتار و ذهن انسان
+            را توضیح نمی‌داد و همین مسئله به رشد دیدگاه‌های جدید کمک کرد.
+
+        </div>
+
+    </article>
+
+
+
+    <!-- NAVIGATION -->
+
+    <div class="navigation">
+
+        <a href="index.html" class="previous">
+            ← صفحه قبل
+        </a>
+
+        <a href="page3.html" class="next">
+            صفحه بعد →
+        </a>
+
+    </div>
+
+
+</main>
+
+
+
+<footer>
+
+    <strong>
+        روان‌شناسی‌نامه
+    </strong>
+
+    <br>
+
+    تاریخ روان‌شناسی | 2026
+
+</footer>
+
+
+</body>
+
+          </html>
