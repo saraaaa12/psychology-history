@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>مقاله | روان‌شناسی‌نامه</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Tahoma, Arial, sans-serif;
+      background: #f8f7fb;
+      color: #292633;
+      line-height: 2;
+      transition: 0.3s;
+    }
+
+    body.dark {
+      background: #15141a;
+      color: #eee;
+    }
+
+    /* نوار پیشرفت */
+    .progress {
+      position: fixed;
+      top: 0;
+      right: 0;
+      height: 4px;
+      width: 0%;
+      background: #8b6fb0;
+      z-index: 9999;
+    }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(15px);
+      background: rgba(255,255,255,0.85);
+      border-bottom: 1px solid #eee;
+    }
+
+    body.dark header {
+      background: rgba(25,24,30,0.9);
+      border-color: #333;
+    }
+
+    .nav {
+      max-width: 1100px;
+      margin: auto;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+      color: #76558f;
+      text-decoration: none;
+    }
+
+    .links {
+      display: flex;
+      gap: 25px;
+      align-items: center;
+    }
+
+    .links a {
+      text-decoration: none;
+      color: inherit;
+      font-size: 14px;
+    }
+
+    .links a:hover {
+      color: #76558f;
+    }
+
+    .dark-btn,
+    .menu-btn {
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-size: 20px;
+      color: inherit;
+    }
+
+    .menu-btn {
+      display: none;
+    }
+
+    /* Article */
+    .container {
+      max-width: 850px;
+      margin: 70px auto;
+      padding: 0 22px;
+    }
+
+    .article-card {
+      background: white;
+      border-radius: 28px;
+      padding: 50px;
+      box-shadow: 0 15px 45px rgba(0,0,0,0.06);
+    }
+
+    body.dark .article-card {
+      background: #211f28;
+      box-shadow: none;
+    }
+
+    .category {
+      display: inline-block;
+      background: #eee5f7;
+      color: #76558f;
+      padding: 5px 14px;
+      border-radius: 30px;
+      font-size: 13px;
+      margin-bottom: 18px;
+    }
+
+    body.dark .category {
+      background: #352b40;
+      color: #d5bdf0;
+    }
+
+    h1 {
+      font-size: 38px;
+      line-height: 1.5;
+      margin-bottom: 15px;
+      color: #33283d;
+    }
+
+    body.dark h1 {
+      color: #fff;
+    }
+
+    .date {
+      color: #888;
+      font-size: 13px;
+      margin-bottom: 35px;
+    }
+
+    .content {
+      font-size: 17px;
+      line-height: 2.3;
+    }
+
+    .content p {
+      margin-bottom: 22px;
+    }
+
+    .content h2 {
+      font-size: 25px;
+      margin: 38px 0 15px;
+      color: #76558f;
+    }
+
+    .content h3 {
+      font-size: 21px;
+      margin: 30px 0 12px;
+      color: #76558f;
+    }
+
+    .content ul,
+    .content ol {
+      padding-right: 25px;
+      margin-bottom: 25px;
+    }
+
+    .content li {
+      margin-bottom: 8px;
+    }
+
+    .back {
+      display: inline-block;
+      margin-top: 35px;
+      padding: 11px 20px;
+      border-radius: 14px;
+      background: #76558f;
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .back:hover {
+      opacity: 0.9;
+    }
+
+    /* Loading / Error */
+    .message {
+      text-align: center;
+      padding: 70px 20px;
+      color: #777;
+    }
+
+    .error {
+      color: #b94a48;
+    }
+
+    /* Back to top */
+    #topBtn {
+      position: fixed;
+      bottom: 25px;
+      left: 25px;
+      width: 45px;
+      height: 45px;
+      border: none;
+      border-radius: 50%;
+      background: #76558f;
+      color: white;
+      cursor: pointer;
+      display: none;
+      font-size: 18px;
+    }
+
+    /* Mobile */
+    @media (max-width: 700px) {
+
+      .links {
+        display: none;
+        position: absolute;
+        top: 65px;
+        right: 15px;
+        left: 15px;
+        background: white;
+        padding: 20px;
+        border-radius: 18px;
+        flex-direction: column;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      }
+
+      body.dark .links {
+        background: #211f28;
+      }
+
+      .links.show {
+        display: flex;
+      }
+
+      .menu-btn {
+        display: block;
+      }
+
+      .article-card {
+        padding: 28px 22px;
+        border-radius: 20px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      .content {
+        font-size: 16px;
+      }
+
+      .container {
+        margin: 35px auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="progress" id="progress"></div>
+
+<header>
+  <div class="nav">
+
+    <a href="index.html" class="logo">
+      روان‌شناسی‌نامه
+    </a>
+
+    <button class="menu-btn" id="menuBtn">☰</button>
+
+    <nav class="links" id="navLinks">
+      <a href="index.html">خانه</a>
+      <a href="page2.html">تاریخ روان‌شناسی</a>
+      <a href="page3.html">مکاتب روان‌شناسی</a>
+
+      <button class="dark-btn" id="darkBtn">
+        🌙
+      </button>
+    </nav>
+
+  </div>
+</header>
+
+
+<main class="container">
+
+  <div id="loading" class="message">
+    در حال بارگذاری مقاله...
+  </div>
+
+  <article class="article-card" id="articleBox" style="display:none;">
+
+    <span class="category" id="category"></span>
+
+    <h1 id="title"></h1>
+
+    <div class="date" id="date"></div>
+
+    <div class="content" id="content"></div>
+
+    <a href="index.html" class="back">
+      ← بازگشت به صفحه اصلی
+    </a>
+
+  </article>
+
+</main>
+
+
+<button id="topBtn">↑</button>
+
+
+<script>
+
+  /* =========================
+     Supabase
+  ========================= */
+
+  const SUPABASE_URL =
+    "https://wwzgywcezzzrgiqprdeg.supabase.co";
+
+  const SUPABASE_KEY =
+    "sb_publishable_uEoXARjUJ3XhVNWneTMZjQ_uTzwYyt8";
+
+  const { createClient } = supabase;
+
+  const db = createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
+
+
+  /* =========================
+     گرفتن ID مقاله از URL
+  ========================= */
+
+  const params = new URLSearchParams(
+    window.location.search
+  );
+
+  const articleId = params.get("id");
+
+
+  /* =========================
+     نمایش مقاله
+  ========================= */
+
+  async function loadArticle() {
+
+    if (!articleId) {
+
+      document.getElementById("loading").innerHTML =
+        '<div class="error">شناسه مقاله مشخص نشده است.</div>';
+
+      return;
+    }
+
+
+    const { data, error } = await db
+      .from("article")
+      .select("*")
+      .eq("id", articleId)
+      .eq("status", "published")
+      .single();
+
+
+    if (error || !data) {
+
+      document.getElementById("loading").innerHTML =
+        '<div class="error">مقاله پیدا نشد یا منتشر نشده است.</div>';
+
+      return;
+    }
+
+
+    /* عنوان صفحه */
+
+    document.title =
+      data.title + " | روان‌شناسی‌نامه";
+
+
+    /* اطلاعات مقاله */
+
+    document.getElementById("title").textContent =
+      data.title;
+
+    document.getElementById("category").textContent =
+      data.category || "روان‌شناسی";
+
+
+    /* تاریخ */
+
+    if (data.created_at) {
+
+      const date = new Date(data.created_at);
+
+      document.getElementById("date").textContent =
+        "تاریخ انتشار: " +
+        date.toLocaleDateString("fa-IR");
+    }
+
+
+    /*
+      محتوا
+
+      اگر داخل دیتابیس متن ساده باشد،
+      هر خط تبدیل به یک پاراگراف می‌شود.
+    */
+
+    const contentBox =
+      document.getElementById("content");
+
+    const paragraphs =
+      data.content
+        .split(/\n+/)
+        .filter(text => text.trim() !== "");
+
+    contentBox.innerHTML = "";
+
+    paragraphs.forEach(text => {
+
+      const p = document.createElement("p");
+
+      p.textContent = text;
+
+      contentBox.appendChild(p);
+
+    });
+
+
+    /* نمایش مقاله */
+
+    document.getElementById("loading").style.display =
+      "none";
+
+    document.getElementById("articleBox").style.display =
+      "block";
+  }
+
+
+  loadArticle();
+
+
+  /* =========================
+     Dark Mode
+  ========================= */
+
+  const darkBtn =
+    document.getElementById("darkBtn");
+
+  if (localStorage.getItem("darkMode") === "true") {
+
+    document.body.classList.add("dark");
+
+    darkBtn.textContent = "☀️";
+  }
+
+
+  darkBtn.addEventListener("click", () => {
+
+    document.body.classList.toggle("dark");
+
+    const isDark =
+      document.body.classList.contains("dark");
+
+    localStorage.setItem(
+      "darkMode",
+      isDark
+    );
+
+    darkBtn.textContent =
+      isDark ? "☀️" : "🌙";
+
+  });
+
+
+  /* =========================
+     Mobile Menu
+  ========================= */
+
+  document
+    .getElementById("menuBtn")
+    .addEventListener("click", () => {
+
+      document
+        .getElementById("navLinks")
+        .classList.toggle("show");
+
+    });
+
+
+  /* =========================
+     Reading Progress
+  ========================= */
+
+  window.addEventListener("scroll", () => {
+
+    const scrollTop =
+      window.scrollY;
+
+    const documentHeight =
+      document.documentElement.scrollHeight -
+      window.innerHeight;
+
+    const percent =
+      documentHeight > 0
+        ? (scrollTop / documentHeight) * 100
+        : 0;
+
+    document.getElementById("progress").style.width =
+      percent + "%";
+
+
+    /* Back to top */
+
+    const topBtn =
+      document.getElementById("topBtn");
+
+    if (scrollTop > 400) {
+
+      topBtn.style.display = "block";
+
+    } else {
+
+      topBtn.style.display = "none";
+
+    }
+
+  });
+
+
+  /* =========================
+     Back to top
+  ========================= */
+
+  document
+    .getElementById("topBtn")
+    .addEventListener("click", () => {
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    });
+
+</script>
+
+</body>
+</html>
