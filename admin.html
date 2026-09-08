@@ -45,7 +45,7 @@
     .login-box {
       width: 100%;
       max-width: 430px;
-      background: rgba(255,255,255,.92);
+      background: rgba(255,255,255,.95);
       border-radius: 28px;
       padding: 42px 35px;
       box-shadow: 0 25px 70px rgba(0,0,0,.12);
@@ -125,20 +125,12 @@
       font-size: 15px;
       font-weight: bold;
       cursor: pointer;
-      transition: .2s;
-    }
-
-    .login-btn:hover,
-    .primary-btn:hover {
-      transform: translateY(-2px);
-      background: #5d4967;
     }
 
     .login-btn:disabled,
     .primary-btn:disabled {
       opacity: .6;
       cursor: not-allowed;
-      transform: none;
     }
 
     #loginError {
@@ -188,16 +180,13 @@
     }
 
     .menu a {
-      display: flex;
-      align-items: center;
-      gap: 12px;
+      display: block;
       padding: 13px 14px;
       border-radius: 12px;
       color: #d8d2d9;
       text-decoration: none;
       margin-bottom: 6px;
       font-size: 14px;
-      transition: .2s;
     }
 
     .menu a:hover,
@@ -257,36 +246,6 @@
       font-weight: bold;
     }
 
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-      margin-bottom: 25px;
-    }
-
-    .stat {
-      background: white;
-      border-radius: 18px;
-      padding: 22px;
-      box-shadow: 0 8px 25px rgba(0,0,0,.05);
-    }
-
-    .stat small {
-      color: #888;
-      display: block;
-      margin-bottom: 10px;
-    }
-
-    .stat strong {
-      font-size: 28px;
-    }
-
-    .content-grid {
-      display: grid;
-      grid-template-columns: 1fr 1.4fr;
-      gap: 20px;
-    }
-
     .card {
       background: white;
       border-radius: 20px;
@@ -300,108 +259,45 @@
       margin-bottom: 20px;
     }
 
-    .article-item {
-      padding: 16px 0;
-      border-bottom: 1px solid #eee;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-    }
-
-    .article-item:last-child {
-      border-bottom: none;
-    }
-
-    .article-item h3 {
-      font-size: 14px;
-      margin-bottom: 6px;
-    }
-
-    .article-item small {
-      color: #999;
-    }
-
-    .article-actions {
-      display: flex;
-      gap: 7px;
-    }
-
-    .delete-btn {
-      border: none;
-      background: #fff0f0;
-      color: #b33b3b;
-      padding: 7px 10px;
-      border-radius: 9px;
-      cursor: pointer;
-      font-size: 11px;
-    }
-
-    .status {
-      padding: 6px 10px;
-      border-radius: 20px;
-      font-size: 11px;
-      white-space: nowrap;
-    }
-
-    .published {
-      background: #e7f4eb;
-      color: #39814d;
-    }
-
-    .draft {
-      background: #fff3df;
-      color: #a66a16;
-    }
-
-    .empty {
-      text-align: center;
-      color: #999;
-      padding: 30px 10px;
-      line-height: 2;
-    }
-
     .message {
       display: none;
-      padding: 12px;
+      padding: 14px;
       border-radius: 12px;
-      margin-bottom: 15px;
+      margin-bottom: 18px;
       font-size: 13px;
-      line-height: 1.7;
+      line-height: 1.9;
+      word-break: break-word;
     }
 
     .success {
+      display: block;
       background: #eaf7ed;
       color: #347447;
     }
 
     .error {
+      display: block;
       background: #fff0f0;
       color: #b33b3b;
     }
 
-    .loading {
-      text-align: center;
-      padding: 25px;
-      color: #888;
-    }
-
-    @media (max-width: 900px) {
-      .sidebar {
-        width: 220px;
-      }
-
-      .main {
-        margin-right: 220px;
-        padding: 22px;
-      }
-
-      .content-grid {
-        grid-template-columns: 1fr;
-      }
+    .debug-box {
+      margin-top: 15px;
+      background: #29252a;
+      color: #f4f4f4;
+      padding: 14px;
+      border-radius: 12px;
+      font-family: monospace;
+      direction: ltr;
+      text-align: left;
+      font-size: 12px;
+      line-height: 1.7;
+      overflow-x: auto;
+      display: none;
     }
 
     @media (max-width: 650px) {
+
       .sidebar {
         position: static;
         width: 100%;
@@ -416,6 +312,7 @@
 
       .main {
         margin-right: 0;
+        padding: 20px;
       }
 
       .topbar {
@@ -424,17 +321,8 @@
         flex-direction: column;
       }
 
-      .stats {
-        grid-template-columns: 1fr;
-      }
-
       .login-box {
         padding: 32px 22px;
-      }
-
-      .article-item {
-        align-items: flex-start;
-        flex-direction: column;
       }
     }
   </style>
@@ -442,395 +330,427 @@
 
 <body>
 
-  <!-- ================= LOGIN ================= -->
 
-  <section id="loginPage">
+<!-- ================= LOGIN ================= -->
 
-    <div class="login-box">
+<section id="loginPage">
 
-      <div class="login-logo">🧠</div>
+  <div class="login-box">
 
-      <h1>ورود مدیر</h1>
+    <div class="login-logo">
+      🧠
+    </div>
 
-      <p class="login-subtitle">
-        برای ورود به پنل مدیریت روان‌شناسی‌نامه،
-        ایمیل و رمز عبور خود را وارد کنید.
-      </p>
+    <h1>
+      ورود مدیر
+    </h1>
 
-      <div id="loginError"></div>
+    <p class="login-subtitle">
+      برای ورود به پنل مدیریت روان‌شناسی‌نامه،
+      ایمیل و رمز عبور خود را وارد کنید.
+    </p>
 
-      <form id="loginForm">
+    <div id="loginError"></div>
 
-        <div class="input-group">
-          <label for="email">ایمیل</label>
-          <input
-            type="email"
-            id="email"
-            placeholder="ایمیل مدیر"
-            required
-            autocomplete="email"
-          >
+    <form id="loginForm">
+
+      <div class="input-group">
+
+        <label>
+          ایمیل
+        </label>
+
+        <input
+          type="email"
+          id="email"
+          placeholder="ایمیل مدیر"
+          required
+        >
+
+      </div>
+
+      <div class="input-group">
+
+        <label>
+          رمز عبور
+        </label>
+
+        <input
+          type="password"
+          id="password"
+          placeholder="رمز عبور"
+          required
+        >
+
+      </div>
+
+      <button
+        class="login-btn"
+        id="loginBtn"
+        type="submit"
+      >
+        ورود به پنل
+      </button>
+
+    </form>
+
+  </div>
+
+</section>
+
+
+<!-- ================= ADMIN ================= -->
+
+<section id="adminPage">
+
+  <aside class="sidebar">
+
+    <div class="brand">
+
+      <h2>
+        روان‌شناسی‌نامه
+      </h2>
+
+      <span>
+        پنل مدیریت
+      </span>
+
+    </div>
+
+    <nav class="menu">
+
+      <a
+        href="#addArticle"
+        class="active"
+      >
+        ✏️ افزودن مقاله
+      </a>
+
+    </nav>
+
+    <button
+      class="logout-btn"
+      id="logoutBtn"
+    >
+      خروج از حساب
+    </button>
+
+  </aside>
+
+
+  <main class="main">
+
+    <div class="topbar">
+
+      <div>
+
+        <h1>
+          افزودن مقاله
+        </h1>
+
+        <p style="color:#888;margin-top:7px;">
+          مقاله جدیدت را از اینجا به سایت اضافه کن.
+        </p>
+
+      </div>
+
+      <div class="user-info">
+
+        <div class="avatar">
+          س
         </div>
 
+        <strong id="userEmail">
+          مدیر
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <h2>
+        مقاله جدید ✍️
+      </h2>
+
+
+      <div
+        id="articleMessage"
+        class="message"
+      ></div>
+
+
+      <div
+        id="debugBox"
+        class="debug-box"
+      ></div>
+
+
+      <form id="articleForm">
+
         <div class="input-group">
-          <label for="password">رمز عبور</label>
+
+          <label>
+            عنوان مقاله
+          </label>
+
           <input
-            type="password"
-            id="password"
-            placeholder="رمز عبور"
+            type="text"
+            id="articleTitle"
+            placeholder="مثلاً روان‌شناسی در دوران باستان"
             required
-            autocomplete="current-password"
           >
+
         </div>
 
-        <button class="login-btn" id="loginBtn" type="submit">
-          ورود به پنل
+
+        <div class="input-group">
+
+          <label>
+            دسته‌بندی
+          </label>
+
+          <input
+            type="text"
+            id="articleCategory"
+            placeholder="مثلاً تاریخ روان‌شناسی"
+          >
+
+        </div>
+
+
+        <div class="input-group">
+
+          <label>
+            وضعیت مقاله
+          </label>
+
+          <select id="articleStatus">
+
+            <option value="published">
+              منتشر شده
+            </option>
+
+            <option value="draft">
+              پیش‌نویس
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="input-group">
+
+          <label>
+            متن مقاله
+          </label>
+
+          <textarea
+            id="articleContent"
+            placeholder="متن مقاله را اینجا بنویس..."
+            required
+          ></textarea>
+
+        </div>
+
+
+        <button
+          class="primary-btn"
+          id="saveArticleBtn"
+          type="submit"
+        >
+          💾 ذخیره مقاله
         </button>
 
       </form>
 
     </div>
 
-  </section>
+  </main>
 
+</section>
 
-  <!-- ================= ADMIN PANEL ================= -->
 
-  <section id="adminPage">
+<script>
 
-    <aside class="sidebar">
 
-      <div class="brand">
-        <h2>روان‌شناسی‌نامه</h2>
-        <span>پنل مدیریت</span>
-      </div>
+/* =========================================
+   SUPABASE CONFIG
+========================================= */
 
-      <nav class="menu">
+const SUPABASE_URL =
+  "https://wwzgywcezzzrgiqprdeg.supabase.co";
 
-        <a href="#" class="active">
-          📊 <span>داشبورد</span>
-        </a>
+const SUPABASE_KEY =
+  "sb_publishable_uEoXARjUJ3XhVNWneTMZjQ_uTzwYyt8";
 
-        <a href="#addArticle">
-          ✏️ <span>افزودن مقاله</span>
-        </a>
 
-        <a href="#articles">
-          📚 <span>مقالات</span>
-        </a>
+const supabaseClient =
+  supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
 
-      </nav>
 
-      <button class="logout-btn" id="logoutBtn">
-        خروج از حساب ←
-      </button>
+/* =========================================
+   ELEMENTS
+========================================= */
 
-    </aside>
+const loginPage =
+  document.getElementById("loginPage");
 
+const adminPage =
+  document.getElementById("adminPage");
 
-    <main class="main">
+const loginForm =
+  document.getElementById("loginForm");
 
-      <div class="topbar">
+const loginBtn =
+  document.getElementById("loginBtn");
 
-        <div>
-          <h1>داشبورد</h1>
-          <p style="color:#888;margin-top:7px;">
-            مدیریت محتوای روان‌شناسی‌نامه
-          </p>
-        </div>
+const loginError =
+  document.getElementById("loginError");
 
-        <div class="user-info">
+const logoutBtn =
+  document.getElementById("logoutBtn");
 
-          <div class="avatar">س</div>
+const userEmail =
+  document.getElementById("userEmail");
 
-          <div>
-            <strong id="userEmail">مدیر</strong>
-          </div>
+const articleForm =
+  document.getElementById("articleForm");
 
-        </div>
+const saveArticleBtn =
+  document.getElementById("saveArticleBtn");
 
-      </div>
+const articleMessage =
+  document.getElementById("articleMessage");
 
+const debugBox =
+  document.getElementById("debugBox");
 
-      <!-- STATS -->
 
-      <div class="stats">
+/* =========================================
+   SHOW LOGIN
+========================================= */
 
-        <div class="stat">
-          <small>کل مقالات</small>
-          <strong id="totalArticles">0</strong>
-        </div>
+function showLogin() {
 
-        <div class="stat">
-          <small>منتشر شده</small>
-          <strong id="publishedArticles">0</strong>
-        </div>
+  adminPage.style.display = "none";
 
-        <div class="stat">
-          <small>پیش‌نویس</small>
-          <strong id="draftArticles">0</strong>
-        </div>
+  loginPage.style.display = "flex";
 
-      </div>
+}
 
 
-      <div class="content-grid">
+/* =========================================
+   SHOW ADMIN
+========================================= */
 
+function showAdmin(user) {
 
-        <!-- ================= ADD ARTICLE ================= -->
+  loginPage.style.display = "none";
 
-        <div class="card" id="addArticle">
+  adminPage.style.display = "block";
 
-          <h2>افزودن مقاله جدید ✍️</h2>
+  if (user && user.email) {
 
-          <div id="articleMessage" class="message"></div>
+    userEmail.textContent =
+      user.email;
 
-          <form id="articleForm">
+  }
 
-            <div class="input-group">
+}
 
-              <label for="articleTitle">
-                عنوان مقاله
-              </label>
 
-              <input
-                type="text"
-                id="articleTitle"
-                placeholder="مثلاً روان‌شناسی در دوران باستان"
-                required
-              >
+/* =========================================
+   CHECK SESSION
+========================================= */
 
-            </div>
+async function checkSession() {
 
+  try {
 
-            <div class="input-group">
+    const {
+      data: {
+        session
+      }
+    } =
+    await supabaseClient.auth.getSession();
 
-              <label for="articleCategory">
-                دسته‌بندی
-              </label>
 
-              <input
-                type="text"
-                id="articleCategory"
-                placeholder="مثلاً تاریخ روان‌شناسی"
-              >
+    if (
+      session &&
+      session.user
+    ) {
 
-            </div>
-
-
-            <div class="input-group">
-
-              <label for="articleStatus">
-                وضعیت
-              </label>
-
-              <select id="articleStatus">
-
-                <option value="published">
-                  منتشر شده
-                </option>
-
-                <option value="draft">
-                  پیش‌نویس
-                </option>
-
-              </select>
-
-            </div>
-
-
-            <div class="input-group">
-
-              <label for="articleContent">
-                متن مقاله
-              </label>
-
-              <textarea
-                id="articleContent"
-                placeholder="متن مقاله را اینجا بنویس..."
-                required
-              ></textarea>
-
-            </div>
-
-
-            <button
-              class="primary-btn"
-              id="saveArticleBtn"
-              type="submit"
-            >
-              💾 ذخیره مقاله
-            </button>
-
-          </form>
-
-        </div>
-
-
-        <!-- ================= ARTICLES ================= -->
-
-        <div class="card" id="articles">
-
-          <h2>مقالات من</h2>
-
-          <div id="articlesList">
-
-            <div class="loading">
-              در حال دریافت مقالات...
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </main>
-
-  </section>
-
-
-  <script>
-
-    /* =====================================
-       SUPABASE
-    ===================================== */
-
-    const SUPABASE_URL =
-      "https://wwzgywcezzzrgiqprdeg.supabase.co";
-
-    const SUPABASE_KEY =
-      "sb_publishable_uEoXARjUJ3XhVNWneTMZjQ_uTzwYyt8";
-
-    const supabaseClient =
-      supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY
+      showAdmin(
+        session.user
       );
 
+    } else {
 
-    /* =====================================
-       ELEMENTS
-    ===================================== */
-
-    const loginPage =
-      document.getElementById("loginPage");
-
-    const adminPage =
-      document.getElementById("adminPage");
-
-    const loginForm =
-      document.getElementById("loginForm");
-
-    const loginBtn =
-      document.getElementById("loginBtn");
-
-    const loginError =
-      document.getElementById("loginError");
-
-    const logoutBtn =
-      document.getElementById("logoutBtn");
-
-    const userEmail =
-      document.getElementById("userEmail");
-
-    const articleForm =
-      document.getElementById("articleForm");
-
-    const saveArticleBtn =
-      document.getElementById("saveArticleBtn");
-
-    const articlesList =
-      document.getElementById("articlesList");
-
-    const articleMessage =
-      document.getElementById("articleMessage");
-
-
-    /* =====================================
-       LOGIN PAGE
-    ===================================== */
-
-    function showLogin() {
-
-      adminPage.style.display = "none";
-
-      loginPage.style.display = "flex";
+      showLogin();
 
     }
 
+  } catch (error) {
 
-    /* =====================================
-       ADMIN PAGE
-    ===================================== */
+    console.error(error);
 
-    function showAdmin(user) {
+    showLogin();
 
-      loginPage.style.display = "none";
+  }
 
-      adminPage.style.display = "block";
-
-      if (user && user.email) {
-        userEmail.textContent = user.email;
-      }
-
-      loadArticles();
-
-    }
+}
 
 
-    /* =====================================
-       CHECK SESSION
-    ===================================== */
+/* =========================================
+   LOGIN
+========================================= */
 
-    async function checkSession() {
+loginForm.addEventListener(
+  "submit",
+  async function(event) {
+
+    event.preventDefault();
+
+
+    loginError.style.display =
+      "none";
+
+
+    const email =
+      document
+        .getElementById("email")
+        .value
+        .trim();
+
+
+    const password =
+      document
+        .getElementById("password")
+        .value;
+
+
+    loginBtn.disabled =
+      true;
+
+    loginBtn.textContent =
+      "در حال ورود...";
+
+
+    try {
 
       const {
-        data: { session }
-      } = await supabaseClient.auth.getSession();
-
-      if (session && session.user) {
-
-        showAdmin(session.user);
-
-      } else {
-
-        showLogin();
-
-      }
-
-    }
-
-
-    /* =====================================
-       LOGIN
-    ===================================== */
-
-    loginForm.addEventListener(
-      "submit",
-      async function(event) {
-
-        event.preventDefault();
-
-        loginError.style.display = "none";
-
-        const email =
-          document.getElementById("email").value.trim();
-
-        const password =
-          document.getElementById("password").value;
-
-
-        loginBtn.disabled = true;
-
-        loginBtn.textContent = "در حال ورود...";
-
-
-        const {
-          data,
-          error
-        } =
-        await supabaseClient.auth.signInWithPassword({
+        data,
+        error
+      } =
+      await supabaseClient.auth
+        .signInWithPassword({
 
           email: email,
 
@@ -839,217 +759,187 @@
         });
 
 
-        if (error) {
+      if (error) {
 
-          loginError.textContent =
-            "ایمیل یا رمز عبور صحیح نیست.";
-
-          loginError.style.display = "block";
-
-          loginBtn.disabled = false;
-
-          loginBtn.textContent = "ورود به پنل";
-
-          return;
-
-        }
-
-
-        if (data.user) {
-
-          showAdmin(data.user);
-
-        }
-
-
-        loginBtn.disabled = false;
-
-        loginBtn.textContent = "ورود به پنل";
+        throw error;
 
       }
-    );
 
 
-    /* =====================================
-       LOGOUT
-    ===================================== */
-
-    logoutBtn.addEventListener(
-      "click",
-      async function() {
-
-        await supabaseClient.auth.signOut();
-
-        showLogin();
-
-      }
-    );
-
-
-    /* =====================================
-       MESSAGE
-    ===================================== */
-
-    function showArticleMessage(
-      text,
-      type
-    ) {
-
-      articleMessage.textContent = text;
-
-      articleMessage.className =
-        "message " + type;
-
-      articleMessage.style.display =
-        "block";
-
-      setTimeout(
-        function() {
-
-          articleMessage.style.display =
-            "none";
-
-        },
-        3500
+      showAdmin(
+        data.user
       );
+
+
+    } catch (error) {
+
+      loginError.textContent =
+        "خطا: " +
+        error.message;
+
+      loginError.style.display =
+        "block";
 
     }
 
 
-    /* =====================================
-       ADD ARTICLE
-    ===================================== */
+    loginBtn.disabled =
+      false;
 
-    articleForm.addEventListener(
-      "submit",
-      async function(event) {
+    loginBtn.textContent =
+      "ورود به پنل";
 
-        event.preventDefault();
-
-
-        const title =
-          document
-            .getElementById("articleTitle")
-            .value
-            .trim();
-
-        const category =
-          document
-            .getElementById("articleCategory")
-            .value
-            .trim();
-
-        const content =
-          document
-            .getElementById("articleContent")
-            .value
-            .trim();
-
-        const status =
-          document
-            .getElementById("articleStatus")
-            .value;
+  }
+);
 
 
-        if (!title || !content) {
+/* =========================================
+   LOGOUT
+========================================= */
 
-          showArticleMessage(
-            "عنوان و متن مقاله را وارد کن.",
-            "error"
-          );
+logoutBtn.addEventListener(
+  "click",
+  async function() {
 
-          return;
+    await supabaseClient.auth.signOut();
 
+    showLogin();
+
+  }
+);
+
+
+/* =========================================
+   SHOW MESSAGE
+========================================= */
+
+function showMessage(
+  text,
+  type,
+  details = ""
+) {
+
+  articleMessage.textContent =
+    text;
+
+  articleMessage.className =
+    "message " + type;
+
+  articleMessage.style.display =
+    "block";
+
+
+  if (details) {
+
+    debugBox.textContent =
+      details;
+
+    debugBox.style.display =
+      "block";
+
+  } else {
+
+    debugBox.style.display =
+      "none";
+
+  }
+
+}
+
+
+/* =========================================
+   SAVE ARTICLE
+========================================= */
+
+articleForm.addEventListener(
+  "submit",
+  async function(event) {
+
+    event.preventDefault();
+
+
+    debugBox.style.display =
+      "none";
+
+    articleMessage.style.display =
+      "none";
+
+
+    const title =
+      document
+        .getElementById("articleTitle")
+        .value
+        .trim();
+
+
+    const category =
+      document
+        .getElementById("articleCategory")
+        .value
+        .trim();
+
+
+    const content =
+      document
+        .getElementById("articleContent")
+        .value
+        .trim();
+
+
+    const status =
+      document
+        .getElementById("articleStatus")
+        .value;
+
+
+    if (
+      !title ||
+      !content
+    ) {
+
+      showMessage(
+        "عنوان و متن مقاله را وارد کن.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    saveArticleBtn.disabled =
+      true;
+
+    saveArticleBtn.textContent =
+      "در حال ذخیره...";
+
+
+    try {
+
+      /* -----------------------------
+         بررسی ورود کاربر
+      ----------------------------- */
+
+      const {
+        data: {
+          user
         }
+      } =
+      await supabaseClient.auth.getUser();
 
 
-        saveArticleBtn.disabled = true;
+      if (!user) {
 
-        saveArticleBtn.textContent =
-          "در حال ذخیره...";
-
-
-        const {
-          data: {
-            user
-          }
-        } =
-        await supabaseClient.auth.getUser();
-
-
-        if (!user) {
-
-          showArticleMessage(
-            "جلسه ورود شما منقضی شده است. دوباره وارد شوید.",
-            "error"
-          );
-
-          showLogin();
-
-          return;
-
-        }
-
-
-        const {
-          error
-        } =
-        await supabaseClient
-          .from("article")
-          .insert([{
-
-            title: title,
-
-            content: content,
-
-            category: category,
-
-            status: status
-
-          }]);
-
-
-        if (error) {
-
-          console.error(error);
-
-          showArticleMessage(
-            "ذخیره مقاله انجام نشد. تنظیمات جدول و Policy را بررسی کن.",
-            "error"
-          );
-
-        } else {
-
-          showArticleMessage(
-            "مقاله با موفقیت ذخیره شد! 🎉",
-            "success"
-          );
-
-          articleForm.reset();
-
-          loadArticles();
-
-        }
-
-
-        saveArticleBtn.disabled = false;
-
-        saveArticleBtn.textContent =
-          "💾 ذخیره مقاله";
+        throw new Error(
+          "کاربر وارد حساب نشده است."
+        );
 
       }
-    );
 
 
-    /* =====================================
-       LOAD ARTICLES
-    ===================================== */
-
-    async function loadArticles() {
-
-      articlesList.innerHTML =
-        '<div class="loading">در حال دریافت مقالات...</div>';
-
+      /* -----------------------------
+         ارسال مقاله به جدول article
+      ----------------------------- */
 
       const {
         data,
@@ -1057,256 +947,157 @@
       } =
       await supabaseClient
         .from("article")
-        .select("*")
-        .order(
-          "created_at",
-          { ascending: false }
-        );
+        .insert({
 
+          title: title,
+
+          content: content,
+
+          category: category,
+
+          status: status
+
+        })
+        .select();
+
+
+      /* -----------------------------
+         بررسی خطا
+      ----------------------------- */
 
       if (error) {
 
-        console.error(error);
-
-        articlesList.innerHTML =
-          '<div class="empty">دریافت مقالات انجام نشد.</div>';
-
-        return;
+        throw error;
 
       }
 
 
-      updateStats(data || []);
+      /* -----------------------------
+         موفقیت
+      ----------------------------- */
 
-      renderArticles(data || []);
-
-    }
-
-
-    /* =====================================
-       STATS
-    ===================================== */
-
-    function updateStats(
-      articles
-    ) {
-
-      const total =
-        articles.length;
-
-      const published =
-        articles.filter(
-          article =>
-            article.status === "published"
-        ).length;
-
-      const drafts =
-        articles.filter(
-          article =>
-            article.status === "draft"
-        ).length;
+      showMessage(
+        "✅ مقاله با موفقیت ثبت شد!",
+        "success"
+      );
 
 
-      document.getElementById(
-        "totalArticles"
-      ).textContent = total;
+      articleForm.reset();
 
 
-      document.getElementById(
-        "publishedArticles"
-      ).textContent = published;
+      console.log(
+        "Article inserted:",
+        data
+      );
 
 
-      document.getElementById(
-        "draftArticles"
-      ).textContent = drafts;
+    } catch (error) {
 
-    }
-
-
-    /* =====================================
-       RENDER ARTICLES
-    ===================================== */
-
-    function renderArticles(
-      articles
-    ) {
-
-      if (!articles.length) {
-
-        articlesList.innerHTML =
-          `
-          <div class="empty">
-            هنوز مقاله‌ای اضافه نکرده‌ای.
-            <br>
-            اولین مقاله‌ات را از فرم کناری اضافه کن ✨
-          </div>
-          `;
-
-        return;
-
-      }
-
-
-      articlesList.innerHTML =
-        articles
-          .map(
-            article => {
-
-              const statusClass =
-                article.status === "published"
-                  ? "published"
-                  : "draft";
-
-              const statusText =
-                article.status === "published"
-                  ? "منتشر شده"
-                  : "پیش‌نویس";
-
-
-              return `
-                <div class="article-item">
-
-                  <div>
-
-                    <h3>
-                      ${escapeHtml(article.title)}
-                    </h3>
-
-                    <small>
-                      ${escapeHtml(article.category || "بدون دسته‌بندی")}
-                    </small>
-
-                  </div>
-
-                  <div class="article-actions">
-
-                    <span class="status ${statusClass}">
-                      ${statusText}
-                    </span>
-
-                    <button
-                      class="delete-btn"
-                      onclick="deleteArticle('${article.id}')"
-                    >
-                      حذف
-                    </button>
-
-                  </div>
-
-                </div>
-              `;
-
-            }
-          )
-          .join("");
-
-    }
-
-
-    /* =====================================
-       DELETE ARTICLE
-    ===================================== */
-
-    async function deleteArticle(
-      id
-    ) {
-
-      const confirmDelete =
-        confirm(
-          "آیا مطمئنی می‌خواهی این مقاله حذف شود؟"
-        );
-
-
-      if (!confirmDelete) {
-        return;
-      }
-
-
-      const {
+      console.error(
+        "SUPABASE ERROR:",
         error
-      } =
-      await supabaseClient
-        .from("article")
-        .delete()
-        .eq(
-          "id",
-          id
-        );
+      );
 
 
-      if (error) {
+      let details =
+        "";
 
-        alert(
-          "حذف مقاله انجام نشد."
-        );
 
-        console.error(error);
+      if (error.message) {
 
-        return;
+        details +=
+          "message: " +
+          error.message +
+          "\n\n";
 
       }
 
 
-      loadArticles();
+      if (error.code) {
+
+        details +=
+          "code: " +
+          error.code +
+          "\n\n";
+
+      }
+
+
+      if (error.details) {
+
+        details +=
+          "details: " +
+          error.details +
+          "\n\n";
+
+      }
+
+
+      if (error.hint) {
+
+        details +=
+          "hint: " +
+          error.hint;
+
+      }
+
+
+      showMessage(
+        "❌ مقاله ثبت نشد. متن خطای زیر را برای من بفرست:",
+        "error",
+        details || "خطای نامشخص"
+      );
 
     }
 
 
-    /* =====================================
-       ESCAPE HTML
-    ===================================== */
+    saveArticleBtn.disabled =
+      false;
 
-    function escapeHtml(
-      value
+    saveArticleBtn.textContent =
+      "💾 ذخیره مقاله";
+
+  }
+);
+
+
+/* =========================================
+   AUTH STATE
+========================================= */
+
+supabaseClient.auth.onAuthStateChange(
+  function(
+    event,
+    session
+  ) {
+
+    if (
+      session &&
+      session.user
     ) {
 
-      return String(value)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
+      showAdmin(
+        session.user
+      );
+
+    } else {
+
+      showLogin();
 
     }
 
-
-    /* =====================================
-       AUTH STATE
-    ===================================== */
-
-    supabaseClient.auth.onAuthStateChange(
-      function(
-        event,
-        session
-      ) {
-
-        if (
-          session &&
-          session.user
-        ) {
-
-          showAdmin(
-            session.user
-          );
-
-        } else {
-
-          showLogin();
-
-        }
-
-      }
-    );
+  }
+);
 
 
-    /* =====================================
-       START
-    ===================================== */
+/* =========================================
+   START
+========================================= */
 
-    checkSession();
+checkSession();
 
-  </script>
+
+</script>
 
 </body>
 </html>
