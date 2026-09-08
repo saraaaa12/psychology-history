@@ -41,6 +41,10 @@
       font: inherit;
     }
 
+    button {
+      cursor: pointer;
+    }
+
     .hidden {
       display: none !important;
     }
@@ -141,10 +145,14 @@
 
     button {
       border: 0;
-      cursor: pointer;
       border-radius: 11px;
       padding: 11px 17px;
       transition: .2s;
+    }
+
+    button:disabled {
+      opacity: .6;
+      cursor: not-allowed;
     }
 
     .btn-primary {
@@ -154,7 +162,7 @@
       font-weight: bold;
     }
 
-    .btn-primary:hover {
+    .btn-primary:hover:not(:disabled) {
       background: var(--primary-dark);
     }
 
@@ -302,13 +310,38 @@
       background: transparent;
     }
 
-    .preview {
-      max-width: 100%;
-      max-height: 220px;
-      border-radius: 12px;
+    .preview-box {
+      position: relative;
       margin-top: 12px;
       display: none;
+    }
+
+    .preview {
+      width: 100%;
+      max-height: 220px;
+      border-radius: 12px;
       object-fit: cover;
+      display: block;
+    }
+
+    .remove-image {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      width: 32px;
+      height: 32px;
+      padding: 0;
+      border-radius: 50%;
+      background: rgba(255,255,255,.95);
+      color: var(--danger);
+      font-size: 18px;
+      box-shadow: 0 3px 10px rgba(0,0,0,.1);
+    }
+
+    .image-help {
+      color: var(--muted);
+      font-size: 11px;
+      margin-top: 8px;
     }
 
     /* ARTICLES */
@@ -375,6 +408,7 @@
       margin-bottom: 15px;
       font-size: 13px;
       display: none;
+      line-height: 1.7;
     }
 
     .success {
@@ -444,8 +478,6 @@
 
 <body>
 
-<!-- LOGIN -->
-
 <section id="loginPage" class="login-page">
 
   <div class="login-card">
@@ -477,8 +509,6 @@
 </section>
 
 
-<!-- ADMIN -->
-
 <section id="adminPage" class="admin hidden">
 
   <header class="topbar">
@@ -489,6 +519,7 @@
     </div>
 
     <div class="top-actions">
+
       <button class="btn-secondary btn-small" onclick="toggleDark()">
         حالت شب
       </button>
@@ -496,6 +527,7 @@
       <button class="btn-danger btn-small" onclick="logout()">
         خروج
       </button>
+
     </div>
 
   </header>
@@ -508,8 +540,6 @@
       <p>مقالات سایتت را از اینجا مدیریت کن.</p>
     </div>
 
-
-    <!-- STATS -->
 
     <div class="stats">
 
@@ -533,6 +563,7 @@
 
     <div class="grid">
 
+
       <!-- FORM -->
 
       <div class="card">
@@ -543,22 +574,49 @@
 
         <input type="hidden" id="editId">
 
+        <input type="hidden" id="oldImageUrl">
+
+
         <div class="field">
+
           <label>عنوان مقاله</label>
-          <input id="title" type="text" placeholder="عنوان مقاله را وارد کن">
+
+          <input
+            id="title"
+            type="text"
+            placeholder="عنوان مقاله را وارد کن"
+          >
+
         </div>
 
+
         <div class="field">
+
           <label>دسته‌بندی</label>
-          <input id="category" type="text" placeholder="مثلاً تاریخ روان‌شناسی">
+
+          <input
+            id="category"
+            type="text"
+            placeholder="مثلاً تاریخ روان‌شناسی"
+          >
+
         </div>
 
+
         <div class="field">
+
           <label>متن مقاله</label>
-          <textarea id="content" placeholder="متن مقاله را اینجا بنویس..."></textarea>
+
+          <textarea
+            id="content"
+            placeholder="متن مقاله را اینجا بنویس..."
+          ></textarea>
+
         </div>
 
+
         <div class="field">
+
           <label>تصویر مقاله</label>
 
           <div class="image-upload">
@@ -566,29 +624,65 @@
             <input
               id="imageInput"
               type="file"
-              accept="image/*"
+              accept="image/jpeg,image/png,image/webp,image/gif"
               onchange="previewImage(event)"
             >
 
-            <img id="imagePreview" class="preview">
+            <div id="previewBox" class="preview-box">
+
+              <img
+                id="imagePreview"
+                class="preview"
+                alt="پیش‌نمایش تصویر"
+              >
+
+              <button
+                type="button"
+                class="remove-image"
+                onclick="removeSelectedImage()"
+                title="حذف تصویر"
+              >
+                ×
+              </button>
+
+            </div>
+
+            <div class="image-help">
+              فرمت‌های JPG، PNG، WEBP و GIF
+            </div>
 
           </div>
 
         </div>
 
+
         <div class="field">
+
           <label>وضعیت</label>
 
           <select id="status">
-            <option value="published">منتشر شده</option>
-            <option value="draft">پیش‌نویس</option>
+
+            <option value="published">
+              منتشر شده
+            </option>
+
+            <option value="draft">
+              پیش‌نویس
+            </option>
+
           </select>
 
         </div>
 
-        <button class="btn-primary" onclick="saveArticle()">
+
+        <button
+          id="saveButton"
+          class="btn-primary"
+          onclick="saveArticle()"
+        >
           ذخیره مقاله
         </button>
+
 
         <button
           id="cancelEdit"
@@ -609,7 +703,11 @@
         <h2>مقالات</h2>
 
         <div id="articleList" class="article-list">
-          <div class="loading">در حال دریافت مقالات...</div>
+
+          <div class="loading">
+            در حال دریافت مقالات...
+          </div>
+
         </div>
 
       </div>
@@ -623,7 +721,9 @@
 
 <script>
 
-  /* SUPABASE */
+  /* =========================
+     SUPABASE
+  ========================= */
 
   const SUPABASE_URL =
     "https://wwzgywcezzzrgiqprdeg.supabase.co";
@@ -631,51 +731,71 @@
   const SUPABASE_KEY =
     "sb_publishable_uEoXARjUJ3XhVNWneTMZjQ_uTzwYyt8";
 
-  const db = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-  );
+  const db =
+    window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
 
 
-  /* ELEMENTS */
+  const loginPage =
+    document.getElementById("loginPage");
 
-  const loginPage = document.getElementById("loginPage");
-  const adminPage = document.getElementById("adminPage");
+  const adminPage =
+    document.getElementById("adminPage");
 
 
-  /* MESSAGE */
+  /* =========================
+     MESSAGES
+  ========================= */
 
-  function showMessage(elementId, text, type) {
+  function showMessage(
+    elementId,
+    text,
+    type
+  ) {
 
-    const el = document.getElementById(elementId);
+    const el =
+      document.getElementById(elementId);
 
     el.textContent = text;
-    el.className = "message " + type;
-    el.style.display = "block";
+
+    el.className =
+      "message " + type;
+
+    el.style.display =
+      "block";
 
   }
 
 
   function hideMessage(elementId) {
 
-    const el = document.getElementById(elementId);
+    const el =
+      document.getElementById(elementId);
 
-    el.style.display = "none";
+    el.style.display =
+      "none";
 
   }
 
 
-  /* LOGIN */
+  /* =========================
+     LOGIN
+  ========================= */
 
   async function login() {
 
     hideMessage("loginMessage");
 
     const email =
-      document.getElementById("email").value.trim();
+      document.getElementById("email")
+        .value.trim();
 
     const password =
-      document.getElementById("password").value;
+      document.getElementById("password")
+        .value;
+
 
     if (!email || !password) {
 
@@ -688,49 +808,65 @@
       return;
     }
 
-    const { error } =
+
+    const {
+      error
+    } =
       await db.auth.signInWithPassword({
         email,
         password
       });
 
+
     if (error) {
 
       showMessage(
         "loginMessage",
-        "ورود ناموفق بود: " + error.message,
+        "ورود ناموفق بود: " +
+        error.message,
         "error"
       );
 
       return;
     }
 
+
     showAdmin();
 
   }
 
 
-  /* LOGOUT */
+  /* =========================
+     LOGOUT
+  ========================= */
 
   async function logout() {
 
     await db.auth.signOut();
 
     adminPage.classList.add("hidden");
+
     loginPage.classList.remove("hidden");
 
   }
 
 
-  /* SESSION */
+  /* =========================
+     SESSION
+  ========================= */
 
   async function checkSession() {
 
-    const { data } =
+    const {
+      data
+    } =
       await db.auth.getSession();
 
+
     if (data.session) {
+
       showAdmin();
+
     }
 
   }
@@ -740,7 +876,9 @@
     function(event, session) {
 
       if (session) {
+
         showAdmin();
+
       }
 
     }
@@ -750,6 +888,7 @@
   function showAdmin() {
 
     loginPage.classList.add("hidden");
+
     adminPage.classList.remove("hidden");
 
     loadArticles();
@@ -757,23 +896,34 @@
   }
 
 
-  /* LOAD ARTICLES */
+  /* =========================
+     LOAD ARTICLES
+  ========================= */
 
   async function loadArticles() {
 
     const list =
       document.getElementById("articleList");
 
+
     list.innerHTML =
       '<div class="loading">در حال دریافت مقالات...</div>';
 
-    const { data, error } =
+
+    const {
+      data,
+      error
+    } =
       await db
         .from("article")
         .select("*")
-        .order("created_at", {
-          ascending: false
-        });
+        .order(
+          "created_at",
+          {
+            ascending: false
+          }
+        );
+
 
     if (error) {
 
@@ -783,7 +933,9 @@
       return;
     }
 
+
     updateStats(data || []);
+
 
     if (!data || data.length === 0) {
 
@@ -793,53 +945,69 @@
       return;
     }
 
+
     list.innerHTML = "";
+
 
     data.forEach(article => {
 
       const item =
         document.createElement("div");
 
-      item.className = "article-item";
+      item.className =
+        "article-item";
+
 
       const info =
         document.createElement("div");
 
-      info.className = "article-info";
+      info.className =
+        "article-info";
+
 
       const title =
         document.createElement("h3");
 
       title.textContent =
-        article.title || "بدون عنوان";
+        article.title ||
+        "بدون عنوان";
+
 
       const meta =
         document.createElement("div");
 
-      meta.className = "article-meta";
+      meta.className =
+        "article-meta";
 
       meta.textContent =
-        article.category || "بدون دسته‌بندی";
+        article.category ||
+        "بدون دسته‌بندی";
+
 
       const badge =
         document.createElement("span");
 
-      badge.className = "badge";
+      badge.className =
+        "badge";
 
       badge.textContent =
         article.status === "published"
           ? "منتشر شده"
           : "پیش‌نویس";
 
+
       info.appendChild(title);
+
       info.appendChild(meta);
+
       info.appendChild(badge);
 
 
       const actions =
         document.createElement("div");
 
-      actions.className = "article-actions";
+      actions.className =
+        "article-actions";
 
 
       const edit =
@@ -848,7 +1016,8 @@
       edit.className =
         "btn-secondary btn-small";
 
-      edit.textContent = "ویرایش";
+      edit.textContent =
+        "ویرایش";
 
       edit.onclick =
         () => editArticle(article);
@@ -860,17 +1029,22 @@
       del.className =
         "btn-danger btn-small";
 
-      del.textContent = "حذف";
+      del.textContent =
+        "حذف";
 
       del.onclick =
-        () => deleteArticle(article.id);
+        () => deleteArticle(article);
 
 
       actions.appendChild(edit);
+
       actions.appendChild(del);
 
+
       item.appendChild(info);
+
       item.appendChild(actions);
+
 
       list.appendChild(item);
 
@@ -879,28 +1053,37 @@
   }
 
 
-  /* STATS */
+  /* =========================
+     STATS
+  ========================= */
 
   function updateStats(articles) {
 
     const total =
       articles.length;
 
+
     const published =
       articles.filter(
-        a => a.status === "published"
+        article =>
+          article.status === "published"
       ).length;
+
 
     const draft =
       articles.filter(
-        a => a.status === "draft"
+        article =>
+          article.status === "draft"
       ).length;
+
 
     document.getElementById("totalCount")
       .textContent = total;
 
+
     document.getElementById("publishedCount")
       .textContent = published;
+
 
     document.getElementById("draftCount")
       .textContent = draft;
@@ -908,29 +1091,32 @@
   }
 
 
-  /* IMAGE PREVIEW */
+  /* =========================
+     IMAGE PREVIEW
+  ========================= */
 
   function previewImage(event) {
+
+    hideMessage("formMessage");
+
 
     const file =
       event.target.files[0];
 
-    const preview =
-      document.getElementById("imagePreview");
 
     if (!file) {
 
-      preview.style.display = "none";
-      preview.src = "";
+      removeSelectedImage();
 
       return;
     }
+
 
     if (!file.type.startsWith("image/")) {
 
       showMessage(
         "formMessage",
-        "لطفاً یک فایل تصویری انتخاب کن.",
+        "این فایل تصویر نیست.",
         "error"
       );
 
@@ -939,15 +1125,99 @@
       return;
     }
 
-    preview.src =
+
+    /* محدودیت 10MB */
+
+    if (file.size > 10 * 1024 * 1024) {
+
+      showMessage(
+        "formMessage",
+        "حجم تصویر نباید بیشتر از ۱۰ مگابایت باشد.",
+        "error"
+      );
+
+      event.target.value = "";
+
+      return;
+    }
+
+
+    const preview =
+      document.getElementById("imagePreview");
+
+    const box =
+      document.getElementById("previewBox");
+
+
+    if (
+      preview.dataset.objectUrl
+    ) {
+
+      URL.revokeObjectURL(
+        preview.dataset.objectUrl
+      );
+
+    }
+
+
+    const objectUrl =
       URL.createObjectURL(file);
 
-    preview.style.display = "block";
+
+    preview.src =
+      objectUrl;
+
+    preview.dataset.objectUrl =
+      objectUrl;
+
+    box.style.display =
+      "block";
 
   }
 
 
-  /* UPLOAD IMAGE */
+  /* =========================
+     REMOVE SELECTED IMAGE
+  ========================= */
+
+  function removeSelectedImage() {
+
+    const input =
+      document.getElementById("imageInput");
+
+    const preview =
+      document.getElementById("imagePreview");
+
+    const box =
+      document.getElementById("previewBox");
+
+
+    if (
+      preview.dataset.objectUrl
+    ) {
+
+      URL.revokeObjectURL(
+        preview.dataset.objectUrl
+      );
+
+      delete preview.dataset.objectUrl;
+
+    }
+
+
+    input.value = "";
+
+    preview.src = "";
+
+    box.style.display =
+      "none";
+
+  }
+
+
+  /* =========================
+     UPLOAD IMAGE
+  ========================= */
 
   async function uploadImage(file) {
 
@@ -955,8 +1225,39 @@
       return null;
     }
 
+
+    const allowedTypes = [
+      "image/jpeg",
+      "image/png",
+      "image/webp",
+      "image/gif"
+    ];
+
+
+    if (!allowedTypes.includes(file.type)) {
+
+      throw new Error(
+        "فرمت تصویر پشتیبانی نمی‌شود."
+      );
+
+    }
+
+
+    if (file.size > 10 * 1024 * 1024) {
+
+      throw new Error(
+        "حجم تصویر بیشتر از ۱۰ مگابایت است."
+      );
+
+    }
+
+
     const extension =
-      file.name.split(".").pop().toLowerCase();
+      file.name
+        .split(".")
+        .pop()
+        .toLowerCase();
+
 
     const filePath =
       "articles/" +
@@ -969,70 +1270,124 @@
       extension;
 
 
-    const { error: uploadError } =
-      await db.storage
-        .from("article-images")
-        .upload(
-          filePath,
-          file,
-          {
-            cacheControl: "3600",
-            upsert: false,
-            contentType: file.type
-          }
+    try {
+
+      const result =
+        await db.storage
+          .from("article-images")
+          .upload(
+            filePath,
+            file,
+            {
+              cacheControl: "3600",
+              upsert: false,
+              contentType: file.type
+            }
+          );
+
+
+      if (result.error) {
+
+        throw result.error;
+
+      }
+
+
+      const publicResult =
+        db.storage
+          .from("article-images")
+          .getPublicUrl(
+            filePath
+          );
+
+
+      if (
+        !publicResult ||
+        !publicResult.data ||
+        !publicResult.data.publicUrl
+      ) {
+
+        throw new Error(
+          "تصویر آپلود شد اما URL آن دریافت نشد."
         );
 
+      }
 
-    if (uploadError) {
+
+      return {
+        url:
+          publicResult.data.publicUrl,
+
+        path:
+          filePath
+
+      };
+
+    }
+
+    catch (error) {
+
+      console.error(
+        "IMAGE UPLOAD ERROR:",
+        error
+      );
+
 
       throw new Error(
-        "آپلود تصویر ناموفق بود: " +
-        uploadError.message
+        "آپلود تصویر انجام نشد. " +
+        (
+          error.message ||
+          "اتصال به Storage برقرار نشد."
+        )
       );
 
     }
 
-
-    const { data } =
-      db.storage
-        .from("article-images")
-        .getPublicUrl(filePath);
-
-
-    return data.publicUrl;
-
   }
 
 
-  /* SAVE ARTICLE */
+  /* =========================
+     SAVE ARTICLE
+  ========================= */
 
   async function saveArticle() {
 
     hideMessage("formMessage");
 
+
     const title =
       document.getElementById("title")
         .value.trim();
+
 
     const category =
       document.getElementById("category")
         .value.trim();
 
+
     const content =
       document.getElementById("content")
         .value.trim();
+
 
     const status =
       document.getElementById("status")
         .value;
 
+
     const editId =
       document.getElementById("editId")
         .value;
 
+
     const imageFile =
       document.getElementById("imageInput")
         .files[0];
+
+
+    const oldImageUrl =
+      document.getElementById("oldImageUrl")
+        .value;
 
 
     if (!title || !content) {
@@ -1048,25 +1403,41 @@
 
 
     const button =
-      document.querySelector(
-        ".card .btn-primary"
-      );
+      document.getElementById("saveButton");
+
 
     button.disabled = true;
-    button.textContent = "در حال ذخیره...";
+
+    button.textContent =
+      "در حال ذخیره...";
 
 
     try {
 
-      let imageUrl = null;
+      let imageUrl =
+        oldImageUrl || null;
 
 
-      /* IMAGE */
+      /*
+        اگر عکس جدید انتخاب شده باشد،
+        ابتدا آن را آپلود می‌کنیم.
+      */
 
       if (imageFile) {
 
-        imageUrl =
+        showMessage(
+          "formMessage",
+          "در حال آپلود تصویر...",
+          "success"
+        );
+
+
+        const uploaded =
           await uploadImage(imageFile);
+
+
+        imageUrl =
+          uploaded.url;
 
       }
 
@@ -1076,29 +1447,32 @@
         title,
         content,
         category,
-        status
+        status,
+        image_url:
+          imageUrl
 
       };
-
-
-      if (imageUrl) {
-        articleData.image_url = imageUrl;
-      }
 
 
       /* UPDATE */
 
       if (editId) {
 
-        const { error } =
+        const {
+          error
+        } =
           await db
             .from("article")
             .update(articleData)
             .eq("id", editId);
 
+
         if (error) {
+
           throw error;
+
         }
+
 
         showMessage(
           "formMessage",
@@ -1113,18 +1487,24 @@
 
       else {
 
-        const { error } =
+        const {
+          error
+        } =
           await db
             .from("article")
             .insert(articleData);
 
+
         if (error) {
+
           throw error;
+
         }
+
 
         showMessage(
           "formMessage",
-          "مقاله با موفقیت منتشر شد.",
+          "مقاله با موفقیت ذخیره شد.",
           "success"
         );
 
@@ -1132,6 +1512,7 @@
 
 
       clearForm();
+
       await loadArticles();
 
     }
@@ -1139,7 +1520,11 @@
 
     catch (error) {
 
-      console.error(error);
+      console.error(
+        "SAVE ERROR:",
+        error
+      );
+
 
       showMessage(
         "formMessage",
@@ -1153,36 +1538,58 @@
 
     finally {
 
-      button.disabled = false;
-      button.textContent = "ذخیره مقاله";
+      button.disabled =
+        false;
+
+      button.textContent =
+        "ذخیره مقاله";
 
     }
 
   }
 
 
-  /* EDIT */
+  /* =========================
+     EDIT ARTICLE
+  ========================= */
 
   function editArticle(article) {
 
     document.getElementById("editId")
-      .value = article.id;
+      .value =
+        article.id;
+
+
+    document.getElementById("oldImageUrl")
+      .value =
+        article.image_url || "";
+
 
     document.getElementById("title")
-      .value = article.title || "";
+      .value =
+        article.title || "";
+
 
     document.getElementById("category")
-      .value = article.category || "";
+      .value =
+        article.category || "";
+
 
     document.getElementById("content")
-      .value = article.content || "";
+      .value =
+        article.content || "";
+
 
     document.getElementById("status")
-      .value = article.status || "draft";
+      .value =
+        article.status || "draft";
 
 
     const preview =
       document.getElementById("imagePreview");
+
+    const box =
+      document.getElementById("previewBox");
 
 
     if (article.image_url) {
@@ -1190,22 +1597,31 @@
       preview.src =
         article.image_url;
 
-      preview.style.display =
+      delete preview.dataset.objectUrl;
+
+      box.style.display =
         "block";
 
-    } else {
+    }
 
-      preview.style.display =
+    else {
+
+      box.style.display =
         "none";
+
+      preview.src = "";
 
     }
 
 
     document.getElementById("formTitle")
-      .textContent = "ویرایش مقاله";
+      .textContent =
+        "ویرایش مقاله";
+
 
     document.getElementById("cancelEdit")
       .classList.remove("hidden");
+
 
     window.scrollTo({
       top: 0,
@@ -1215,7 +1631,9 @@
   }
 
 
-  /* CANCEL EDIT */
+  /* =========================
+     CANCEL EDIT
+  ========================= */
 
   function cancelEdit() {
 
@@ -1224,36 +1642,44 @@
   }
 
 
-  /* CLEAR FORM */
+  /* =========================
+     CLEAR FORM
+  ========================= */
 
   function clearForm() {
 
     document.getElementById("editId")
       .value = "";
 
+
+    document.getElementById("oldImageUrl")
+      .value = "";
+
+
     document.getElementById("title")
       .value = "";
+
 
     document.getElementById("category")
       .value = "";
 
+
     document.getElementById("content")
       .value = "";
 
+
     document.getElementById("status")
-      .value = "published";
+      .value =
+        "published";
 
-    document.getElementById("imageInput")
-      .value = "";
 
-    const preview =
-      document.getElementById("imagePreview");
+    removeSelectedImage();
 
-    preview.src = "";
-    preview.style.display = "none";
 
     document.getElementById("formTitle")
-      .textContent = "افزودن مقاله جدید";
+      .textContent =
+        "افزودن مقاله جدید";
+
 
     document.getElementById("cancelEdit")
       .classList.add("hidden");
@@ -1261,26 +1687,107 @@
   }
 
 
-  /* DELETE */
+  /* =========================
+     DELETE ARTICLE
+  ========================= */
 
-  async function deleteArticle(id) {
+  async function deleteArticle(article) {
 
     const ok =
       confirm(
         "آیا از حذف این مقاله مطمئنی؟"
       );
 
+
     if (!ok) return;
 
 
-    const { error } =
-      await db
-        .from("article")
-        .delete()
-        .eq("id", id);
+    try {
+
+      /*
+        اول مقاله را حذف می‌کنیم.
+      */
+
+      const {
+        error
+      } =
+        await db
+          .from("article")
+          .delete()
+          .eq("id", article.id);
 
 
-    if (error) {
+      if (error) {
+
+        throw error;
+
+      }
+
+
+      /*
+        اگر تصویر داشت،
+        مسیر آن را پیدا کرده و
+        برای حذف از Storage تلاش می‌کنیم.
+      */
+
+      if (article.image_url) {
+
+        try {
+
+          const marker =
+            "/article-images/";
+
+          const index =
+            article.image_url.indexOf(
+              marker
+            );
+
+
+          if (index !== -1) {
+
+            const filePath =
+              decodeURIComponent(
+                article.image_url.substring(
+                  index + marker.length
+                )
+              );
+
+
+            await db.storage
+              .from("article-images")
+              .remove([
+                filePath
+              ]);
+
+          }
+
+        }
+
+        catch (imageError) {
+
+          console.warn(
+            "Image delete warning:",
+            imageError
+          );
+
+        }
+
+      }
+
+
+      showMessage(
+        "formMessage",
+        "مقاله حذف شد.",
+        "success"
+      );
+
+
+      await loadArticles();
+
+    }
+
+
+    catch (error) {
 
       showMessage(
         "formMessage",
@@ -1289,28 +1796,20 @@
         "error"
       );
 
-      return;
     }
-
-
-    showMessage(
-      "formMessage",
-      "مقاله حذف شد.",
-      "success"
-    );
-
-
-    loadArticles();
 
   }
 
 
-  /* DARK MODE */
+  /* =========================
+     DARK MODE
+  ========================= */
 
   function toggleDark() {
 
     const root =
       document.documentElement;
+
 
     const dark =
       root.dataset.theme === "dark";
@@ -1326,9 +1825,12 @@
       document.body.style.color =
         "#29252b";
 
-    } else {
+    }
 
-      root.dataset.theme = "dark";
+    else {
+
+      root.dataset.theme =
+        "dark";
 
       document.body.style.background =
         "#211d22";
@@ -1341,7 +1843,9 @@
   }
 
 
-  /* START */
+  /* =========================
+     START
+  ========================= */
 
   checkSession();
 
