@@ -1,1153 +1,849 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>روان‌شناسی‌نامه | تاریخ روان‌شناسی</title>
-
-    <style>
-
-        :root {
-            --bg: #faf8fb;
-            --card: #ffffff;
-            --text: #302b35;
-            --muted: #716977;
-            --primary: #604a78;
-            --primary-light: #eee8f3;
-            --border: #e9e3eb;
-            --header: rgba(255,255,255,.90);
-            --shadow: 0 15px 45px rgba(50,40,60,.08);
-        }
-
-        body.dark {
-            --bg: #17151a;
-            --card: #211e25;
-            --text: #f4f0f5;
-            --muted: #b7afb9;
-            --primary: #c8aee0;
-            --primary-light: #302638;
-            --border: #39333d;
-            --header: rgba(25,22,29,.94);
-            --shadow: 0 15px 45px rgba(0,0,0,.30);
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: Tahoma, Arial, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 2;
-            transition: background .3s, color .3s;
-        }
-
-
-        /* =========================
-           PROGRESS BAR
-        ========================= */
-
-        #progress {
-            position: fixed;
-            top: 0;
-            right: 0;
-            height: 4px;
-            width: 0;
-            background: var(--primary);
-            z-index: 9999;
-        }
-
-
-        /* =========================
-           HEADER
-        ========================= */
-
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: var(--header);
-            backdrop-filter: blur(14px);
-            border-bottom: 1px solid var(--border);
-        }
-
-        nav {
-            max-width: 1150px;
-            min-height: 70px;
-            margin: auto;
-            padding: 0 20px;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .logo {
-            font-size: 21px;
-            font-weight: bold;
-            color: var(--primary);
-            white-space: nowrap;
-        }
-
-        .logo span {
-            color: var(--text);
-        }
-
-        .nav-menu {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .nav-menu a {
-            text-decoration: none;
-            color: var(--muted);
-            padding: 8px 13px;
-            border-radius: 10px;
-            font-size: 14px;
-            transition: .25s;
-        }
-
-        .nav-menu a:hover {
-            background: var(--primary-light);
-            color: var(--primary);
-        }
-
-        .nav-actions {
-            display: flex;
-            align-items: center;
-            gap: 7px;
-        }
-
-        .icon-btn,
-        .menu-btn {
-            width: 42px;
-            height: 42px;
-
-            border: 1px solid var(--border);
-            border-radius: 12px;
-
-            background: var(--card);
-            color: var(--text);
-
-            cursor: pointer;
-            font-size: 19px;
-
-            transition: .25s;
-        }
-
-        .icon-btn:hover,
-        .menu-btn:hover {
-            transform: translateY(-2px);
-            border-color: var(--primary);
-        }
-
-        .menu-btn {
-            display: none;
-        }
-
-
-        /* =========================
-           HERO
-        ========================= */
-
-        .hero {
-            max-width: 1150px;
-            margin: auto;
-            padding: 105px 20px 90px;
-            text-align: center;
-            position: relative;
-        }
-
-        .hero::before {
-            content: "";
-
-            position: absolute;
-
-            width: 360px;
-            height: 360px;
-
-            background: #ded0e9;
-            opacity: .35;
-
-            filter: blur(80px);
-
-            border-radius: 50%;
-
-            top: 30px;
-            right: 10%;
-
-            z-index: -1;
-        }
-
-        .eyebrow {
-            color: var(--primary);
-            font-size: 12px;
-            letter-spacing: 3px;
-            font-weight: bold;
-        }
-
-        h1 {
-            font-size: clamp(38px, 6vw, 68px);
-            line-height: 1.35;
-            margin: 20px 0;
-        }
-
-        .hero p {
-            max-width: 650px;
-            margin: auto;
-
-            color: var(--muted);
-
-            font-size: 17px;
-        }
-
-        .buttons {
-            margin-top: 35px;
-
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            display: inline-block;
-
-            text-decoration: none;
-
-            padding: 12px 22px;
-
-            border-radius: 14px;
-
-            font-size: 14px;
-
-            transition: .25s;
-        }
-
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-        }
-
-        .btn-secondary {
-            border: 1px solid var(--border);
-            color: var(--text);
-            background: var(--card);
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-        }
-
-
-        /* =========================
-           SECTIONS
-        ========================= */
-
-        section {
-            max-width: 1150px;
-            margin: auto;
-            padding: 70px 20px;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 35px;
-        }
-
-        .section-title h2 {
-            font-size: 30px;
-            margin-bottom: 8px;
-        }
-
-        .section-title p {
-            color: var(--muted);
-        }
-
-
-        /* =========================
-           SEARCH
-        ========================= */
-
-        .search-box {
-            max-width: 600px;
-            margin: 0 auto 40px;
-        }
-
-        .search-box input {
-            width: 100%;
-
-            padding: 16px 20px;
-
-            border-radius: 16px;
-
-            border: 1px solid var(--border);
-
-            background: var(--card);
-            color: var(--text);
-
-            outline: none;
-
-            font-family: inherit;
-            font-size: 14px;
-
-            transition: .25s;
-        }
-
-        .search-box input:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px var(--primary-light);
-        }
-
-
-        /* =========================
-           CARDS
-        ========================= */
-
-        .timeline {
-            display: grid;
-
-            grid-template-columns: repeat(3, 1fr);
-
-            gap: 20px;
-        }
-
-        .card {
-            background: var(--card);
-
-            border: 1px solid var(--border);
-
-            border-radius: 22px;
-
-            padding: 27px;
-
-            box-shadow: var(--shadow);
-
-            transition: .3s;
-
-            position: relative;
-        }
-
-        .card:hover {
-            transform: translateY(-7px);
-        }
-
-        .number {
-            width: 44px;
-            height: 44px;
-
-            display: grid;
-            place-items: center;
-
-            background: var(--primary-light);
-
-            color: var(--primary);
-
-            border-radius: 13px;
-
-            font-weight: bold;
-
-            margin-bottom: 18px;
-        }
-
-        .card h3 {
-            margin-bottom: 8px;
-            font-size: 19px;
-        }
-
-        .card p {
-            color: var(--muted);
-            font-size: 14px;
-            margin-bottom: 20px;
-        }
-
-        .card-link {
-            display: inline-flex;
-            align-items: center;
-
-            color: var(--primary);
-
-            text-decoration: none;
-
-            font-size: 14px;
-            font-weight: bold;
-
-            transition: .25s;
-        }
-
-        .card-link:hover {
-            gap: 6px;
-        }
-
-
-        /* =========================
-           CTA
-        ========================= */
-
-        .cta {
-            max-width: 900px;
-
-            margin: 30px auto 80px;
-
-            padding: 55px 25px;
-
-            text-align: center;
-
-            background: var(--primary-light);
-
-            border-radius: 28px;
-        }
-
-        .cta h2 {
-            margin-bottom: 12px;
-        }
-
-        .cta p {
-            color: var(--muted);
-            margin-bottom: 25px;
-        }
-
-
-        /* =========================
-           TOP BUTTON
-        ========================= */
-
-        #topBtn {
-            position: fixed;
-
-            bottom: 25px;
-            left: 25px;
-
-            width: 45px;
-            height: 45px;
-
-            border: none;
-
-            border-radius: 14px;
-
-            background: var(--primary);
-            color: white;
-
-            cursor: pointer;
-
-            display: none;
-
-            z-index: 900;
-
-            font-size: 18px;
-
-            box-shadow: var(--shadow);
-        }
-
-
-        /* =========================
-           FOOTER
-        ========================= */
-
-        footer {
-            background: #17131b;
-
-            color: #ddd;
-
-            text-align: center;
-
-            padding: 40px 20px;
-        }
-
-        footer .logo {
-            margin-bottom: 8px;
-        }
-
-        footer p {
-            color: #aaa;
-            font-size: 13px;
-        }
-
-
-        /* =========================
-           MOBILE
-        ========================= */
-
-        @media (max-width: 800px) {
-
-            .menu-btn {
-                display: block;
-            }
-
-            .nav-menu {
-                display: none;
-
-                position: absolute;
-
-                top: 75px;
-
-                right: 15px;
-                left: 15px;
-
-                background: var(--card);
-
-                border: 1px solid var(--border);
-
-                border-radius: 18px;
-
-                padding: 10px;
-
-                box-shadow: var(--shadow);
-
-                flex-direction: column;
-
-                align-items: stretch;
-            }
-
-            .nav-menu.active {
-                display: flex;
-            }
-
-            .nav-menu a {
-                padding: 12px 15px;
-            }
-
-            .timeline {
-                grid-template-columns: 1fr;
-            }
-
-            .hero {
-                padding-top: 70px;
-            }
-
-            section {
-                padding-top: 55px;
-                padding-bottom: 55px;
-            }
-
-            .hero p {
-                font-size: 15px;
-            }
-
-        }
-
-    </style>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>روان‌شناسی‌نامه | تاریخ روان‌شناسی</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Tahoma, Arial, sans-serif;
+      background: #f8f7fb;
+      color: #292633;
+      line-height: 2;
+      transition: 0.3s;
+    }
+
+    body.dark {
+      background: #15141a;
+      color: #eee;
+    }
+
+    .progress {
+      position: fixed;
+      top: 0;
+      right: 0;
+      height: 4px;
+      width: 0%;
+      background: #8b6fb0;
+      z-index: 9999;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(15px);
+      background: rgba(255,255,255,0.85);
+      border-bottom: 1px solid #eee;
+    }
+
+    body.dark header {
+      background: rgba(25,24,30,0.9);
+      border-color: #333;
+    }
+
+    .nav {
+      max-width: 1100px;
+      margin: auto;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+      color: #76558f;
+      text-decoration: none;
+    }
+
+    .links {
+      display: flex;
+      gap: 25px;
+      align-items: center;
+    }
+
+    .links a {
+      text-decoration: none;
+      color: inherit;
+      font-size: 14px;
+    }
+
+    .links a:hover {
+      color: #76558f;
+    }
+
+    .dark-btn,
+    .menu-btn {
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-size: 20px;
+      color: inherit;
+    }
+
+    .menu-btn {
+      display: none;
+    }
+
+    /* Hero */
+
+    .hero {
+      max-width: 1100px;
+      margin: 70px auto 50px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 6px 15px;
+      border-radius: 30px;
+      background: #eee5f7;
+      color: #76558f;
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+
+    body.dark .eyebrow {
+      background: #352b40;
+      color: #d5bdf0;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      line-height: 1.5;
+      color: #33283d;
+      margin-bottom: 15px;
+    }
+
+    body.dark .hero h1 {
+      color: white;
+    }
+
+    .hero p {
+      max-width: 650px;
+      margin: auto;
+      color: #777;
+      font-size: 17px;
+    }
+
+    body.dark .hero p {
+      color: #aaa;
+    }
+
+    /* Search */
+
+    .search-box {
+      max-width: 650px;
+      margin: 35px auto 0;
+      position: relative;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 16px 20px;
+      border: 1px solid #ddd;
+      border-radius: 18px;
+      background: white;
+      color: #333;
+      font-family: inherit;
+      font-size: 14px;
+      outline: none;
+    }
+
+    body.dark .search-box input {
+      background: #211f28;
+      border-color: #444;
+      color: white;
+    }
+
+    .search-box input:focus {
+      border-color: #8b6fb0;
+    }
+
+    /* Articles */
+
+    .section {
+      max-width: 1100px;
+      margin: 0 auto 80px;
+      padding: 0 20px;
+    }
+
+    .section-title {
+      margin-bottom: 25px;
+    }
+
+    .section-title h2 {
+      font-size: 28px;
+      margin-bottom: 5px;
+    }
+
+    .section-title p {
+      color: #888;
+      font-size: 14px;
+    }
+
+    .articles {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 24px;
+      padding: 28px;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: 0 10px 35px rgba(0,0,0,0.05);
+      transition: transform 0.25s, box-shadow 0.25s;
+      display: block;
+    }
+
+    body.dark .card {
+      background: #211f28;
+      box-shadow: none;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.09);
+    }
+
+    .card-category {
+      display: inline-block;
+      background: #eee5f7;
+      color: #76558f;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      margin-bottom: 15px;
+    }
+
+    body.dark .card-category {
+      background: #352b40;
+      color: #d5bdf0;
+    }
+
+    .card h3 {
+      font-size: 20px;
+      line-height: 1.7;
+      margin-bottom: 12px;
+      color: #33283d;
+    }
+
+    body.dark .card h3 {
+      color: white;
+    }
+
+    .card p {
+      color: #777;
+      font-size: 14px;
+      line-height: 2;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    body.dark .card p {
+      color: #aaa;
+    }
+
+    .card-date {
+      margin-top: 18px;
+      font-size: 12px;
+      color: #999;
+    }
+
+    /* Loading */
+
+    .loading {
+      text-align: center;
+      padding: 60px 20px;
+      color: #888;
+      grid-column: 1 / -1;
+    }
+
+    .empty {
+      text-align: center;
+      padding: 50px 20px;
+      color: #888;
+      grid-column: 1 / -1;
+    }
+
+    .error {
+      text-align: center;
+      padding: 40px;
+      color: #b94a48;
+      grid-column: 1 / -1;
+    }
+
+    /* CTA */
+
+    .cta {
+      max-width: 1100px;
+      margin: 0 auto 80px;
+      padding: 45px 25px;
+      text-align: center;
+      border-radius: 28px;
+      background: #eee5f7;
+    }
+
+    body.dark .cta {
+      background: #2b2433;
+    }
+
+    .cta h2 {
+      margin-bottom: 10px;
+    }
+
+    .cta p {
+      color: #777;
+      margin-bottom: 20px;
+    }
+
+    body.dark .cta p {
+      color: #aaa;
+    }
+
+    .cta a {
+      display: inline-block;
+      background: #76558f;
+      color: white;
+      padding: 11px 22px;
+      border-radius: 14px;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    /* Footer */
+
+    footer {
+      text-align: center;
+      padding: 35px 20px;
+      border-top: 1px solid #eee;
+      color: #888;
+      font-size: 13px;
+    }
+
+    body.dark footer {
+      border-color: #333;
+    }
+
+    /* Top */
+
+    #topBtn {
+      position: fixed;
+      bottom: 25px;
+      left: 25px;
+      width: 45px;
+      height: 45px;
+      border: none;
+      border-radius: 50%;
+      background: #76558f;
+      color: white;
+      cursor: pointer;
+      display: none;
+      font-size: 18px;
+    }
+
+    /* Mobile */
+
+    @media (max-width: 800px) {
+
+      .articles {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .hero h1 {
+        font-size: 38px;
+      }
+    }
+
+    @media (max-width: 600px) {
+
+      .links {
+        display: none;
+        position: absolute;
+        top: 65px;
+        right: 15px;
+        left: 15px;
+        background: white;
+        padding: 20px;
+        border-radius: 18px;
+        flex-direction: column;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      }
+
+      body.dark .links {
+        background: #211f28;
+      }
+
+      .links.show {
+        display: flex;
+      }
+
+      .menu-btn {
+        display: block;
+      }
+
+      .articles {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        margin-top: 40px;
+      }
+
+      .hero h1 {
+        font-size: 32px;
+      }
+
+      .hero p {
+        font-size: 15px;
+      }
+    }
+  </style>
 </head>
-
 
 <body>
 
+<div class="progress" id="progress"></div>
 
-    <!-- =========================
-         PROGRESS
-    ========================= -->
+<header>
+  <div class="nav">
 
-    <div id="progress"></div>
+    <a href="index.html" class="logo">
+      روان‌شناسی‌نامه
+    </a>
 
+    <button class="menu-btn" id="menuBtn">☰</button>
 
-    <!-- =========================
-         HEADER
-    ========================= -->
+    <nav class="links" id="navLinks">
+      <a href="index.html">خانه</a>
+      <a href="page2.html">تاریخ روان‌شناسی</a>
+      <a href="page3.html">مکاتب روان‌شناسی</a>
 
-    <header>
+      <button class="dark-btn" id="darkBtn">🌙</button>
+    </nav>
 
-        <nav>
+  </div>
+</header>
 
-            <div class="logo">
-                روان‌شناسی<span>‌نامه</span>
-            </div>
 
+<section class="hero">
 
-            <div class="nav-menu" id="navMenu">
+  <span class="eyebrow">
+    HISTORY OF PSYCHOLOGY
+  </span>
 
-                <a href="index.html">
-                    🏠 صفحه اصلی
-                </a>
+  <h1>
+    روان‌شناسی‌نامه
+  </h1>
 
-                <a href="page2.html">
-                    📖 تاریخ روان‌شناسی
-                </a>
+  <p>
+    سفری از اندیشه‌های باستانی درباره ذهن و روح
+    تا شکل‌گیری روان‌شناسی علمی و مکاتب معاصر
+  </p>
 
-                <a href="page3.html">
-                    🧠 مکاتب روان‌شناسی
-                </a>
+  <div class="search-box">
 
-            </div>
-
-
-            <div class="nav-actions">
-
-                <button
-                    class="icon-btn"
-                    onclick="toggleDark()"
-                    id="darkBtn"
-                    aria-label="تغییر حالت تاریک"
-                >
-                    🌙
-                </button>
-
-
-                <button
-                    class="menu-btn"
-                    onclick="toggleMenu()"
-                    aria-label="باز کردن منو"
-                >
-                    ☰
-                </button>
-
-            </div>
-
-        </nav>
-
-    </header>
-
-
-
-    <!-- =========================
-         MAIN
-    ========================= -->
-
-    <main>
-
-
-        <!-- HERO -->
-
-        <div class="hero">
-
-            <div class="eyebrow">
-                HISTORY OF PSYCHOLOGY
-            </div>
-
-
-            <h1>
-                سفری در تاریخ<br>
-                ذهن انسان
-            </h1>
-
-
-            <p>
-                از پرسش‌های فلسفی درباره ذهن و روح،
-                تا شکل‌گیری روان‌شناسی به عنوان یک علم تجربی.
-            </p>
-
-
-            <div class="buttons">
-
-                <a
-                    href="article1.html"
-                    class="btn btn-primary"
-                >
-                    شروع مطالعه ←
-                </a>
-
-
-                <a
-                    href="#history"
-                    class="btn btn-secondary"
-                >
-                    مشاهده مسیر تاریخ
-                </a>
-
-            </div>
-
-        </div>
-
-
-
-        <!-- HISTORY -->
-
-        <section id="history">
-
-
-            <div class="section-title">
-
-                <h2>
-                    روان‌شناسی از کجا شروع شد؟
-                </h2>
-
-                <p>
-                    شش ایستگاه مهم در مسیر شکل‌گیری روان‌شناسی
-                </p>
-
-            </div>
-
-
-
-            <!-- SEARCH -->
-
-            <div class="search-box">
-
-                <input
-                    type="text"
-                    id="searchInput"
-                    placeholder="🔍 در تاریخ روان‌شناسی جست‌وجو کنید..."
-                    onkeyup="searchCards()"
-                >
-
-            </div>
-
-
-
-            <!-- CARDS -->
-
-            <div class="timeline">
-
-
-                <!-- CARD 1 -->
-
-                <article class="card searchable">
-
-                    <div class="number">
-                        ۱
-                    </div>
-
-                    <h3>
-                        دوران باستان
-                    </h3>
-
-                    <p>
-                        نخستین پرسش‌های جدی درباره ذهن،
-                        روح، شناخت و رفتار انسان در فلسفه باستان شکل گرفت.
-                    </p>
-
-                    <a
-                        href="article1.html"
-                        class="card-link"
-                    >
-                        مطالعه مقاله ←
-                    </a>
-
-                </article>
-
-
-
-                <!-- CARD 2 -->
-
-                <article class="card searchable">
-
-                    <div class="number">
-                        ۲
-                    </div>
-
-                    <h3>
-                        ذهن و بدن
-                    </h3>
-
-                    <p>
-                        در دوره جدید، رابطه ذهن و بدن به یکی از
-                        مهم‌ترین مسائل فلسفی تبدیل شد.
-                    </p>
-
-                    <a
-                        href="article2.html"
-                        class="card-link"
-                    >
-                        مطالعه مقاله ←
-                    </a>
-
-                </article>
-
-
-
-                <!-- CARD 3 -->
-
-                <article class="card searchable">
-
-                    <div class="number">
-                        ۳
-                    </div>
-
-                    <h3>
-                        شکل‌گیری روش تجربی
-                    </h3>
-
-                    <p>
-                        پژوهش درباره دستگاه عصبی و فرایندهای حسی،
-                        مسیر مطالعه تجربی ذهن را هموار کرد.
-                    </p>
-
-                    <a
-                        href="article3.html"
-                        class="card-link"
-                    >
-                        مطالعه مقاله ←
-                    </a>
-
-                </article>
-
-
-
-                <!-- CARD 4 -->
-
-                <article class="card searchable">
-
-                    <div class="number">
-                        ۴
-                    </div>
-
-                    <h3>
-                        ۱۸۷۹؛ وونت
-                    </h3>
-
-                    <p>
-                        تأسیس آزمایشگاه وونت در لایپزیگ به نمادی مهم
-                        در تاریخ شکل‌گیری روان‌شناسی آزمایشگاهی تبدیل شد.
-                    </p>
-
-                    <a
-                        href="article4.html"
-                        class="card-link"
-                    >
-                        مطالعه مقاله ←
-                    </a>
-
-                </article>
-
-
-
-                <!-- CARD 5 -->
-
-                <article class="card searchable">
-
-                    <div class="number">
-                        ۵
-                    </div>
-
-                    <h3>
-                        مکاتب روان‌شناسی
-                    </h3>
-
-                    <p>
-                        در قرن بیستم، دیدگاه‌هایی مانند رفتارگرایی،
-                        روان‌کاوی، گشتالت و انسان‌گرایی گسترش یافتند.
-                    </p>
-
-                    <a
-                        href="article5.html"
-                        class="card-link"
-                    >
-                        مطالعه مقاله ←
-                    </a>
-
-                </article>
-
-
-
-                <!-- CARD 6 -->
-
-                <article class="card searchable">
-
-                    <div class="number">
-                        ۶
-                    </div>
-
-                    <h3>
-                        روان‌شناسی امروز
-                    </h3>
-
-                    <p>
-                        روان‌شناسی معاصر حوزه‌ای چندرشته‌ای است که از
-                        روش‌های تجربی و یافته‌های علوم مختلف استفاده می‌کند.
-                    </p>
-
-                    <a
-                        href="article6.html"
-                        class="card-link"
-                    >
-                        مطالعه مقاله ←
-                    </a>
-
-                </article>
-
-
-            </div>
-
-        </section>
-
-
-
-        <!-- CTA -->
-
-        <div class="cta">
-
-            <h2>
-                آماده‌ای وارد تاریخ روان‌شناسی بشی؟
-            </h2>
-
-            <p>
-                از نخستین پرسش‌های فلسفی شروع می‌کنیم
-                و قدم‌به‌قدم به روان‌شناسی معاصر می‌رسیم.
-            </p>
-
-            <a
-                href="article1.html"
-                class="btn btn-primary"
-            >
-                شروع مطالعه ←
-            </a>
-
-        </div>
-
-
-    </main>
-
-
-
-    <!-- TOP BUTTON -->
-
-    <button
-        id="topBtn"
-        onclick="goTop()"
-        aria-label="بازگشت به بالا"
+    <input
+      type="text"
+      id="search"
+      placeholder="جست‌وجو در مقاله‌ها..."
     >
-        ↑
-    </button>
+
+  </div>
+
+</section>
 
 
+<section class="section">
 
-    <!-- FOOTER -->
+  <div class="section-title">
+    <h2>آخرین مقاله‌ها</h2>
+    <p>
+      مقاله‌های منتشرشده در روان‌شناسی‌نامه
+    </p>
+  </div>
 
-    <footer>
+  <div class="articles" id="articles">
 
-        <div class="logo">
-            روان‌شناسی‌نامه
+    <div class="loading">
+      در حال بارگذاری مقاله‌ها...
+    </div>
+
+  </div>
+
+</section>
+
+
+<section class="cta">
+
+  <h2>
+    از کجا شروع کنیم؟
+  </h2>
+
+  <p>
+    اگر می‌خواهی مسیر شکل‌گیری روان‌شناسی را بهتر بشناسی،
+    از تاریخ آن شروع کن.
+  </p>
+
+  <a href="page2.html">
+    شروع مطالعه تاریخ روان‌شناسی ←
+  </a>
+
+</section>
+
+
+<footer>
+
+  <p>
+    روان‌شناسی‌نامه — روایت تاریخ روان‌شناسی
+  </p>
+
+</footer>
+
+
+<button id="topBtn">↑</button>
+
+
+<script>
+
+  /* =========================
+     Supabase
+  ========================= */
+
+  const SUPABASE_URL =
+    "https://wwzgywcezzzrgiqprdeg.supabase.co";
+
+  const SUPABASE_KEY =
+    "sb_publishable_uEoXARjUJ3XhVNWneTMZjQ_uTzwYyt8";
+
+  const { createClient } = supabase;
+
+  const db = createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
+
+
+  let allArticles = [];
+
+
+  /* =========================
+     دریافت مقاله‌ها
+  ========================= */
+
+  async function loadArticles() {
+
+    const articlesBox =
+      document.getElementById("articles");
+
+    const { data, error } = await db
+      .from("article")
+      .select("*")
+      .eq("status", "published")
+      .order("created_at", {
+        ascending: false
+      });
+
+
+    if (error) {
+
+      console.error(error);
+
+      articlesBox.innerHTML = `
+        <div class="error">
+          خطا در دریافت مقاله‌ها
         </div>
+      `;
+
+      return;
+    }
+
+
+    allArticles = data || [];
+
+    renderArticles(allArticles);
+  }
+
+
+  /* =========================
+     نمایش کارت‌ها
+  ========================= */
+
+  function renderArticles(articles) {
+
+    const articlesBox =
+      document.getElementById("articles");
+
+    if (!articles.length) {
+
+      articlesBox.innerHTML = `
+        <div class="empty">
+          هنوز مقاله‌ای منتشر نشده است.
+        </div>
+      `;
+
+      return;
+    }
+
+
+    articlesBox.innerHTML = "";
+
+
+    articles.forEach(article => {
+
+      const card =
+        document.createElement("a");
+
+      card.className = "card";
+
+      card.href =
+        "article.html?id=" + article.id;
+
+
+      const category =
+        article.category || "روان‌شناسی";
+
+
+      const content =
+        article.content || "";
+
+
+      const date =
+        article.created_at
+          ? new Date(article.created_at)
+              .toLocaleDateString("fa-IR")
+          : "";
+
+
+      card.innerHTML = `
+
+        <span class="card-category">
+          ${escapeHTML(category)}
+        </span>
+
+        <h3>
+          ${escapeHTML(article.title || "بدون عنوان")}
+        </h3>
 
         <p>
-            سفری در تاریخ شکل‌گیری علم روان‌شناسی
+          ${escapeHTML(content)}
         </p>
 
-    </footer>
+        <div class="card-date">
+          ${date}
+        </div>
 
+      `;
 
 
-    <!-- =========================
-         JAVASCRIPT
-    ========================= -->
+      articlesBox.appendChild(card);
 
-    <script>
+    });
 
+  }
 
-        /* =========================
-           MOBILE MENU
-        ========================= */
 
-        function toggleMenu() {
+  /* =========================
+     جلوگیری از ورود HTML
+  ========================= */
 
-            const menu =
-                document.getElementById("navMenu");
+  function escapeHTML(text) {
 
-            menu.classList.toggle("active");
+    const div =
+      document.createElement("div");
 
-        }
+    div.textContent = text;
 
+    return div.innerHTML;
+  }
 
 
-        /* =========================
-           DARK MODE
-        ========================= */
+  /* =========================
+     جست‌وجو
+  ========================= */
 
-        function toggleDark() {
+  document
+    .getElementById("search")
+    .addEventListener("input", function() {
 
-            document.body.classList.toggle("dark");
+      const query =
+        this.value.trim().toLowerCase();
 
-            const button =
-                document.getElementById("darkBtn");
 
+      if (!query) {
 
-            if (
-                document.body.classList.contains("dark")
-            ) {
+        renderArticles(allArticles);
 
-                button.innerHTML = "☀️";
+        return;
+      }
 
-                localStorage.setItem(
-                    "darkMode",
-                    "true"
-                );
 
-            } else {
+      const filtered =
+        allArticles.filter(article => {
 
-                button.innerHTML = "🌙";
+          const title =
+            (article.title || "").toLowerCase();
 
-                localStorage.setItem(
-                    "darkMode",
-                    "false"
-                );
+          const content =
+            (article.content || "").toLowerCase();
 
-            }
+          const category =
+            (article.category || "").toLowerCase();
 
-        }
 
+          return (
+            title.includes(query) ||
+            content.includes(query) ||
+            category.includes(query)
+          );
 
+        });
 
-        /* =========================
-           LOAD DARK MODE
-        ========================= */
 
-        if (
-            localStorage.getItem("darkMode") === "true"
-        ) {
+      renderArticles(filtered);
 
-            document.body.classList.add("dark");
+    });
 
-            document.getElementById("darkBtn").innerHTML =
-                "☀️";
 
-        }
+  /* =========================
+     Dark Mode
+  ========================= */
 
+  const darkBtn =
+    document.getElementById("darkBtn");
 
 
-        /* =========================
-           READING PROGRESS
-        ========================= */
+  if (
+    localStorage.getItem("darkMode") === "true"
+  ) {
 
-        window.addEventListener(
-            "scroll",
-            function () {
+    document.body.classList.add("dark");
 
-                const scrollTop =
-                    window.scrollY;
+    darkBtn.textContent = "☀️";
+  }
 
-                const pageHeight =
-                    document.documentElement.scrollHeight -
-                    document.documentElement.clientHeight;
 
+  darkBtn.addEventListener("click", () => {
 
-                const progress =
-                    (scrollTop / pageHeight) * 100;
+    document.body.classList.toggle("dark");
 
 
-                document.getElementById(
-                    "progress"
-                ).style.width =
-                    progress + "%";
+    const isDark =
+      document.body.classList.contains("dark");
 
 
-                /* TOP BUTTON */
+    localStorage.setItem(
+      "darkMode",
+      isDark
+    );
 
-                const topBtn =
-                    document.getElementById("topBtn");
 
+    darkBtn.textContent =
+      isDark ? "☀️" : "🌙";
 
-                if (scrollTop > 400) {
+  });
 
-                    topBtn.style.display =
-                        "block";
 
-                } else {
+  /* =========================
+     Mobile Menu
+  ========================= */
 
-                    topBtn.style.display =
-                        "none";
+  document
+    .getElementById("menuBtn")
+    .addEventListener("click", () => {
 
-                }
+      document
+        .getElementById("navLinks")
+        .classList.toggle("show");
 
-            }
-        );
+    });
 
 
+  /* =========================
+     Reading Progress
+  ========================= */
 
-        /* =========================
-           SEARCH
-        ========================= */
+  window.addEventListener("scroll", () => {
 
-        function searchCards() {
+    const scrollTop =
+      window.scrollY;
 
-            const input =
-                document
-                    .getElementById("searchInput")
-                    .value
-                    .toLowerCase();
 
+    const documentHeight =
+      document.documentElement.scrollHeight -
+      window.innerHeight;
 
-            const cards =
-                document.querySelectorAll(
-                    ".searchable"
-                );
 
+    const percent =
+      documentHeight > 0
+        ? (scrollTop / documentHeight) * 100
+        : 0;
 
-            cards.forEach(
-                function (card) {
 
-                    const text =
-                        card.innerText
-                            .toLowerCase();
+    document.getElementById(
+      "progress"
+    ).style.width =
+      percent + "%";
 
 
-                    if (
-                        text.includes(input)
-                    ) {
+    const topBtn =
+      document.getElementById("topBtn");
 
-                        card.style.display =
-                            "";
 
-                    } else {
+    if (scrollTop > 400) {
 
-                        card.style.display =
-                            "none";
+      topBtn.style.display = "block";
 
-                    }
+    } else {
 
-                }
-            );
+      topBtn.style.display = "none";
 
-        }
+    }
 
+  });
 
 
-        /* =========================
-           GO TOP
-        ========================= */
+  /* =========================
+     Back to top
+  ========================= */
 
-        function goTop() {
+  document
+    .getElementById("topBtn")
+    .addEventListener("click", () => {
 
-            window.scrollTo({
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
 
-                top: 0,
+    });
 
-                behavior: "smooth"
 
-            });
+  /* =========================
+     شروع
+  ========================= */
 
-        }
+  loadArticles();
 
-
-
-        /* =========================
-           CLOSE MOBILE MENU
-           AFTER CLICK
-        ========================= */
-
-        document
-            .querySelectorAll(".nav-menu a")
-            .forEach(
-                function (link) {
-
-                    link.addEventListener(
-                        "click",
-                        function () {
-
-                            document
-                                .getElementById("navMenu")
-                                .classList
-                                .remove("active");
-
-                        }
-                    );
-
-                }
-            );
-
-    </script>
-
+</script>
 
 </body>
-
-  </html>
+</html>
