@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>دوران باستان | روان‌شناسی‌نامه</title>
+
+    <style>
+
+        :root {
+            --bg: #faf8fb;
+            --card: #ffffff;
+            --text: #302b35;
+            --muted: #716977;
+            --primary: #604a78;
+            --primary-light: #eee8f3;
+            --border: #e9e3eb;
+            --header: rgba(255,255,255,.90);
+            --shadow: 0 15px 45px rgba(50,40,60,.08);
+        }
+
+        body.dark {
+            --bg: #17151a;
+            --card: #211e25;
+            --text: #f4f0f5;
+            --muted: #b7afb9;
+            --primary: #c8aee0;
+            --primary-light: #302638;
+            --border: #39333d;
+            --header: rgba(25,22,29,.94);
+            --shadow: 0 15px 45px rgba(0,0,0,.30);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Tahoma, Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 2;
+            transition: background .3s, color .3s;
+        }
+
+        /* Progress */
+
+        #progress {
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 4px;
+            width: 0;
+            background: var(--primary);
+            z-index: 9999;
+        }
+
+        /* Header */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: var(--header);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        nav {
+            max-width: 1100px;
+            min-height: 70px;
+            margin: auto;
+            padding: 0 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 21px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .logo span {
+            color: var(--text);
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--muted);
+            padding: 8px 13px;
+            border-radius: 10px;
+            font-size: 14px;
+            transition: .25s;
+        }
+
+        .nav-menu a:hover {
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 7px;
+        }
+
+        .icon-btn,
+        .menu-btn {
+            width: 42px;
+            height: 42px;
+
+            border: 1px solid var(--border);
+            border-radius: 12px;
+
+            background: var(--card);
+            color: var(--text);
+
+            cursor: pointer;
+            font-size: 19px;
+        }
+
+        .menu-btn {
+            display: none;
+        }
+
+        /* Hero */
+
+        .article-hero {
+            max-width: 900px;
+            margin: auto;
+            padding: 90px 20px 65px;
+            text-align: center;
+        }
+
+        .eyebrow {
+            color: var(--primary);
+            font-size: 12px;
+            letter-spacing: 3px;
+            font-weight: bold;
+        }
+
+        .article-hero h1 {
+            font-size: clamp(34px, 5vw, 58px);
+            line-height: 1.4;
+            margin: 18px 0;
+        }
+
+        .article-hero p {
+            color: var(--muted);
+            max-width: 700px;
+            margin: auto;
+            font-size: 16px;
+        }
+
+        .meta {
+            margin-top: 25px;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        /* Article */
+
+        .article {
+            max-width: 850px;
+            margin: auto;
+            padding: 0 20px 80px;
+        }
+
+        .article-section {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            padding: 30px;
+            margin-bottom: 22px;
+            box-shadow: var(--shadow);
+        }
+
+        .article-section h2 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .article-section h3 {
+            font-size: 19px;
+            margin: 25px 0 8px;
+            color: var(--primary);
+        }
+
+        .article-section p {
+            color: var(--text);
+            font-size: 15px;
+            margin-bottom: 14px;
+        }
+
+        .highlight {
+            background: var(--primary-light);
+            border-right: 4px solid var(--primary);
+            padding: 20px;
+            border-radius: 14px;
+            margin: 25px 0;
+        }
+
+        .highlight strong {
+            color: var(--primary);
+        }
+
+        /* Timeline */
+
+        .mini-timeline {
+            display: grid;
+            gap: 14px;
+            margin-top: 20px;
+        }
+
+        .timeline-item {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            gap: 15px;
+            align-items: start;
+        }
+
+        .timeline-year {
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* Sources */
+
+        .sources {
+            background: var(--primary-light);
+        }
+
+        .sources ol {
+            padding-right: 25px;
+        }
+
+        .sources li {
+            margin: 12px 0;
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        .sources a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* Navigation */
+
+        .article-nav {
+            max-width: 850px;
+            margin: auto;
+            padding: 0 20px 80px;
+
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .nav-card {
+            flex: 1;
+            text-decoration: none;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 18px 20px;
+            color: var(--text);
+            transition: .25s;
+        }
+
+        .nav-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+        }
+
+        .nav-card small {
+            display: block;
+            color: var(--muted);
+            margin-bottom: 4px;
+        }
+
+        .nav-card.next {
+            text-align: left;
+        }
+
+        /* Footer */
+
+        footer {
+            background: #17131b;
+            color: #ddd;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        footer p {
+            color: #aaa;
+            font-size: 13px;
+        }
+
+        /* Top */
+
+        #topBtn {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+
+            width: 45px;
+            height: 45px;
+
+            border: none;
+            border-radius: 14px;
+
+            background: var(--primary);
+            color: white;
+
+            cursor: pointer;
+            display: none;
+            z-index: 900;
+
+            font-size: 18px;
+        }
+
+        /* Mobile */
+
+        @media (max-width: 800px) {
+
+            .menu-btn {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+
+                position: absolute;
+                top: 75px;
+                right: 15px;
+                left: 15px;
+
+                background: var(--card);
+                border: 1px solid var(--border);
+                border-radius: 18px;
+
+                padding: 10px;
+
+                box-shadow: var(--shadow);
+
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .nav-menu a {
+                padding: 12px 15px;
+            }
+
+            .article-hero {
+                padding-top: 65px;
+            }
+
+            .article-section {
+                padding: 23px;
+            }
+
+            .timeline-item {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .article-nav {
+                flex-direction: column;
+            }
+
+            .nav-card.next {
+                text-align: right;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+<div id="progress"></div>
+
+
+<header>
+
+    <nav>
+
+        <div class="logo">
+            روان‌شناسی<span>‌نامه</span>
+        </div>
+
+        <div class="nav-menu" id="navMenu">
+
+            <a href="index.html">
+                🏠 صفحه اصلی
+            </a>
+
+            <a href="article1.html">
+                🏛️ دوران باستان
+            </a>
+
+            <a href="page2.html">
+                📖 تاریخ روان‌شناسی
+            </a>
+
+            <a href="page3.html">
+                🧠 مکاتب
+            </a>
+
+        </div>
+
+        <div class="nav-actions">
+
+            <button
+                class="icon-btn"
+                onclick="toggleDark()"
+                id="darkBtn"
+                aria-label="تغییر حالت تاریک">
+                🌙
+            </button>
+
+            <button
+                class="menu-btn"
+                onclick="toggleMenu()"
+                aria-label="باز کردن منو">
+                ☰
+            </button>
+
+        </div>
+
+    </nav>
+
+</header>
+
+
+<main>
+
+
+    <!-- HERO -->
+
+    <div class="article-hero">
+
+        <div class="eyebrow">
+            ARTICLE 01 · ANCIENT PSYCHOLOGY
+        </div>
+
+        <h1>
+            روان‌شناسی در دوران باستان
+        </h1>
+
+        <p>
+            پیش از آنکه روان‌شناسی به یک علم مستقل تبدیل شود،
+            پرسش‌هایی درباره ذهن، روح، شناخت و رفتار انسان
+            قرن‌ها در قلمرو فلسفه بررسی می‌شدند.
+        </p>
+
+        <div class="meta">
+            🏛️ یونان باستان · فلسفه · تاریخ روان‌شناسی
+        </div>
+
+    </div>
+
+
+    <article class="article">
+
+
+        <!-- INTRO -->
+
+        <section class="article-section">
+
+            <h2>
+                پیش از روان‌شناسی علمی
+            </h2>
+
+            <p>
+                روان‌شناسی به معنای امروزی آن در دوران باستان وجود نداشت.
+                نه آزمایشگاه‌های روان‌شناسی وجود داشتند، نه آزمون‌های
+                استاندارد و نه روش‌های آماری امروزی.
+            </p>
+
+            <p>
+                با این حال، بسیاری از پرسش‌هایی که بعدها در روان‌شناسی
+                اهمیت پیدا کردند، بسیار قدیمی‌اند:
+                انسان چگونه فکر می‌کند؟ چرا احساسات و امیال بر رفتار
+                اثر می‌گذارند؟ رابطه ذهن و بدن چیست؟ و چه چیزی انسان
+                را از دیگر موجودات زنده متمایز می‌کند؟
+            </p>
+
+            <div class="highlight">
+                <strong>نکته مهم:</strong>
+                نباید نظریه‌های فیلسوفان باستان را با «روان‌شناسی علمی»
+                یکی دانست. اهمیت آنها بیشتر در شکل‌دادن به پرسش‌ها و
+                چارچوب‌های فکری‌ای است که بعدها بر مطالعه ذهن و رفتار
+                تأثیر گذاشتند.
+            </div>
+
+        </section>
+
+
+        <!-- SOUL -->
+
+        <section class="article-section">
+
+            <h2>
+                «روح» در اندیشه یونانی چه معنایی داشت؟
+            </h2>
+
+            <p>
+                یکی از مفاهیم مرکزی در اندیشه یونانی واژه
+                <strong>psyche</strong> بود که معمولاً «روح» ترجمه می‌شود.
+                اما معنای آن با مفهوم محدود و امروزی «ذهن» یکسان نیست.
+            </p>
+
+            <p>
+                در جریان تحول اندیشه یونانی، psyche به تدریج با موضوعاتی
+                مانند زندگی، ادراک، تفکر، میل، هیجان و ویژگی‌های اخلاقی
+                پیوند پیدا کرد. بنابراین بررسی psyche فقط بررسی «افکار»
+                انسان نبود؛ بلکه پرسشی درباره ماهیت موجود زنده و شیوه
+                زندگی او نیز محسوب می‌شد.
+            </p>
+
+            <p>
+                در نهایت، این مفهوم در نظریه‌های افلاطون و به‌ویژه
+                ارسطو به شکل فلسفی منسجم‌تری درآمد.
+            </p>
+
+        </section>
+
+
+        <!-- PLATO -->
+
+        <section class="article-section">
+
+            <h2>
+                افلاطون؛ ساختار و کارکردهای روح
+            </h2>
+
+            <p>
+                افلاطون، فیلسوف آتنی قرن چهارم پیش از میلاد، در آثار
+                مختلف خود درباره ماهیت روح و رابطه آن با زندگی انسان
+                بحث کرد.
+            </p>
+
+            <p>
+                در برخی از گفت‌وگوهای او، روح با توانایی‌هایی مانند
+                استدلال، میل و کنترل رفتار مرتبط است. در
+                <strong>جمهوری</strong>، افلاطون مدلی سه‌بخشی از روح
+                ارائه می‌کند که در آن بخش عقلانی، بخش هیجانی یا
+                spirited، و بخش میل‌محور در توضیح رفتار انسان نقش دارند.
+            </p>
+
+            <p>
+                هدف افلاطون صرفاً توصیف ذهن نبود؛ او این بحث را با
+                پرسش‌های اخلاقی نیز پیوند می‌داد: چگونه انسان می‌تواند
+                زندگی خوبی داشته باشد و چگونه عقل باید با امیال و
+                هیجان‌ها ارتباط برقرار کند؟
+            </p>
+
+            <div class="highlight">
+                <strong>اهمیت تاریخی:</strong>
+                افلاطون یکی از نخستین متفکرانی بود که درباره رابطه
+                میان فرایندهای مختلف روانی و رفتار انسان به شکلی
+                نظام‌مند بحث کرد.
+            </div>
+
+        </section>
+
+
+        <!-- ARISTOTLE -->
+
+        <section class="article-section">
+
+            <h2>
+                ارسطو؛ مطالعه منظم‌تر نفس و زندگی
+            </h2>
+
+            <p>
+                ارسطو، شاگرد افلاطون، نگاه متفاوت و گسترده‌ای به
+                psyche داشت. مهم‌ترین اثر او در این زمینه
+                <strong>De Anima</strong> یا «درباره نفس» است.
+            </p>
+
+            <p>
+                ارسطو روان‌شناسی را در چارچوب مطالعه «نفس» و ویژگی‌های
+                آن قرار می‌دهد؛ اما منظور او از نفس چیزی بسیار گسترده‌تر
+                از مفهوم امروزی ذهن است.
+            </p>
+
+            <p>
+                از دیدگاه او، بررسی نفس به مطالعه کارکردهای موجودات زنده
+                مربوط می‌شود. به همین دلیل، بحث او فقط درباره انسان نیست؛
+                بلکه گیاهان و حیوانات نیز در نظریه او جای دارند.
+            </p>
+
+            <h3>
+                از تغذیه تا ادراک و تفکر
+            </h3>
+
+            <p>
+                ارسطو میان توانایی‌های مختلف موجودات زنده تمایز قائل
+                می‌شود؛ از کارکردهای مرتبط با تغذیه و رشد گرفته تا
+                ادراک حسی، میل و فعالیت‌های عقلانی.
+            </p>
+
+            <p>
+                به همین دلیل، روان‌شناسی ارسطو را نمی‌توان صرفاً
+                «نظریه ذهن انسان» دانست؛ این نظریه بخشی از تلاش گسترده‌تر
+                او برای توضیح ویژگی‌های موجودات زنده بود.
+            </p>
+
+        </section>
+
+
+        <!-- DIFFERENCE -->
+
+        <section class="article-section">
+
+            <h2>
+                تفاوت افلاطون و ارسطو چه بود؟
+            </h2>
+
+            <p>
+                هر دو فیلسوف درباره psyche و زندگی روانی انسان بحث کردند،
+                اما مسیر فکری آنها یکسان نبود.
+            </p>
+
+            <div class="mini-timeline">
+
+                <div class="timeline-item">
+
+                    <div class="timeline-year">
+                        افلاطون
+                    </div>
+
+                    <div>
+                        تأکید بیشتری بر نقش عقل، اخلاق و نظم درونی
+                        روح داشت و بحث درباره روح را با مسئله
+                        زندگی خوب و فضیلت پیوند می‌داد.
+                    </div>
+
+                </div>
+
+
+                <div class="timeline-item">
+
+                    <div class="timeline-year">
+                        ارسطو
+                    </div>
+
+                    <div>
+                        به بررسی منظم‌تر توانایی‌های موجودات زنده،
+                        از تغذیه و ادراک تا تفکر، پرداخت و این بحث را
+                        با زیست‌شناسی و فلسفه طبیعت پیوند داد.
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- LEGACY -->
+
+        <section class="article-section">
+
+            <h2>
+                میراث روان‌شناختی یونان باستان
+            </h2>
+
+            <p>
+                اهمیت یونان باستان در تاریخ روان‌شناسی به این معنا نیست
+                که فیلسوفان آن زمان «روان‌شناس» به معنای امروزی بودند.
+                آنها روش‌های تجربی و استانداردهای پژوهشی روان‌شناسی
+                معاصر را در اختیار نداشتند.
+            </p>
+
+            <p>
+                اهمیت تاریخی آنها در این است که پرسش‌هایی بنیادی درباره
+                ذهن، رفتار، ادراک، انگیزش، هیجان، اخلاق و رابطه بدن و
+                psyche را وارد بحث فلسفی کردند.
+            </p>
+
+            <p>
+                این میراث بعدها در دوره‌های مختلف ادامه پیدا کرد و
+                سرانجام، با پیوند یافتن فلسفه با فیزیولوژی و روش تجربی،
+                زمینه برای ظهور روان‌شناسی به عنوان یک رشته علمی مستقل
+                فراهم شد.
+            </p>
+
+            <div class="highlight">
+
+                <strong>
+                    جمع‌بندی:
+                </strong>
+
+                روان‌شناسی علمی در یونان باستان متولد نشد؛
+                اما بسیاری از پرسش‌های بنیادی آن از همان‌جا شکل گرفتند.
+
+            </div>
+
+        </section>
+
+
+        <!-- SOURCES -->
+
+        <section class="article-section sources">
+
+            <h2>
+                📚 منابع و مطالعه بیشتر
+            </h2>
+
+            <ol>
+
+                <li>
+                    Stanford Encyclopedia of Philosophy —
+                    <a
+                        href="https://plato.stanford.edu/entries/ancient-soul/"
+                        target="_blank"
+                        rel="noopener">
+                        Ancient Theories of Soul
+                    </a>
+                </li>
+
+                <li>
+                    Stanford Encyclopedia of Philosophy —
+                    <a
+                        href="https://plato.stanford.edu/entries/aristotle-psychology/"
+                        target="_blank"
+                        rel="noopener">
+                        Aristotle’s Psychology
+                    </a>
+                </li>
+
+                <li>
+                    Stanford Encyclopedia of Philosophy —
+                    مدخل پژوهشی درباره نظریه‌های روح در فلسفه باستان
+                </li>
+
+                <li>
+                    American Psychological Association —
+                    <a
+                        href="https://www.apa.org/pubs/journals/hop/"
+                        target="_blank"
+                        rel="noopener">
+                        History of Psychology
+                    </a>
+                </li>
+
+            </ol>
+
+        </section>
+
+    </article>
+
+
+    <!-- ARTICLE NAVIGATION -->
+
+    <div class="article-nav">
+
+        <a
+            href="index.html"
+            class="nav-card">
+
+            <small>
+                ← بازگشت
+            </small>
+
+            صفحه اصلی
+
+        </a>
+
+
+        <a
+            href="article2.html"
+            class="nav-card next">
+
+            <small>
+                مقاله بعدی →
+            </small>
+
+            ذهن و بدن؛ از دکارت تا مسئله دوگانه‌انگاری
+
+        </a>
+
+    </div>
+
+
+</main>
+
+
+<button
+    id="topBtn"
+    onclick="goTop()">
+    ↑
+</button>
+
+
+<footer>
+
+    <div class="logo">
+        روان‌شناسی‌نامه
+    </div>
+
+    <p>
+        سفری در تاریخ شکل‌گیری علم روان‌شناسی
+    </p>
+
+</footer>
+
+
+<script>
+
+    /* Mobile menu */
+
+    function toggleMenu() {
+
+        const menu =
+            document.getElementById("navMenu");
+
+        menu.classList.toggle("active");
+
+    }
+
+
+    /* Dark mode */
+
+    function toggleDark() {
+
+        document.body.classList.toggle("dark");
+
+        const button =
+            document.getElementById("darkBtn");
+
+
+        if (
+            document.body.classList.contains("dark")
+        ) {
+
+            button.innerHTML = "☀️";
+
+            localStorage.setItem(
+                "darkMode",
+                "true"
+            );
+
+        } else {
+
+            button.innerHTML = "🌙";
+
+            localStorage.setItem(
+                "darkMode",
+                "false"
+            );
+
+        }
+
+    }
+
+
+    /* Remember dark mode */
+
+    if (
+        localStorage.getItem("darkMode") === "true"
+    ) {
+
+        document.body.classList.add("dark");
+
+        document.getElementById("darkBtn").innerHTML =
+            "☀️";
+
+    }
+
+
+    /* Reading progress */
+
+    window.addEventListener(
+        "scroll",
+        function () {
+
+            const scrollTop =
+                window.scrollY;
+
+            const pageHeight =
+                document.documentElement.scrollHeight -
+                document.documentElement.clientHeight;
+
+            const progress =
+                (scrollTop / pageHeight) * 100;
+
+            document.getElementById("progress").style.width =
+                progress + "%";
+
+
+            /* Top button */
+
+            const topBtn =
+                document.getElementById("topBtn");
+
+            if (scrollTop > 400) {
+
+                topBtn.style.display = "block";
+
+            } else {
+
+                topBtn.style.display = "none";
+
+            }
+
+        }
+    );
+
+
+    /* Go top */
+
+    function goTop() {
+
+        window.scrollTo({
+
+            top: 0,
+
+            behavior: "smooth"
+
+        });
+
+    }
+
+
+    /* Close mobile menu */
+
+    document
+        .querySelectorAll(".nav-menu a")
+        .forEach(function(link) {
+
+            link.addEventListener(
+                "click",
+                function() {
+
+                    document
+                        .getElementById("navMenu")
+                        .classList
+                        .remove("active");
+
+                }
+            );
+
+        });
+
+</script>
+
+</body>
+</html>
