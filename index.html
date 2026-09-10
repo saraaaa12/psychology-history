@@ -1,7 +1,16 @@
-<!DOCTYPE html><html lang="fa" dir="rtl">
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>روان‌شناسی‌نامه | تاریخ و اندیشه روان‌شناسی</title><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>روان‌شناسی‌نامه | تاریخ و اندیشه روان‌شناسی</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+
 @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap');
 
 :root{
@@ -42,6 +51,7 @@ a{
 button,input{
   font-family:inherit;
 }
+
 
 /* ================= NAVBAR ================= */
 
@@ -113,6 +123,7 @@ button,input{
   cursor:pointer;
 }
 
+
 /* ================= HERO ================= */
 
 .hero{
@@ -124,6 +135,7 @@ button,input{
   position:relative;
   display:flex;
   align-items:center;
+
   background:
     radial-gradient(circle at 10% 20%,rgba(255,255,255,.8),transparent 25%),
     radial-gradient(circle at 88% 75%,rgba(255,255,255,.65),transparent 23%),
@@ -196,7 +208,8 @@ button,input{
   border:1px solid rgba(220,205,211,.9);
 }
 
-/* floating psychology elements */
+
+/* ================= HERO ART ================= */
 
 .hero-art{
   position:absolute;
@@ -254,6 +267,7 @@ button,input{
   bottom:35px;
 }
 
+
 /* ================= SECTION ================= */
 
 .section{
@@ -288,7 +302,8 @@ button,input{
   border-radius:12px;
 }
 
-/* ================= PSYCHOLOGY CATEGORIES ================= */
+
+/* ================= CATEGORIES ================= */
 
 .categories{
   display:grid;
@@ -355,6 +370,7 @@ button,input{
   opacity:.07;
 }
 
+
 /* ================= TIMELINE ================= */
 
 .timeline{
@@ -387,6 +403,63 @@ button,input{
   font-size:12px;
   margin:0;
 }
+
+
+/* ================= SEARCH ================= */
+
+.search-box{
+  margin-bottom:25px;
+  position:relative;
+}
+
+.search-input{
+  width:100%;
+  padding:16px 52px 16px 48px;
+  border-radius:18px;
+  border:1px solid var(--border);
+  background:rgba(255,253,251,.95);
+  color:var(--text);
+  font-size:14px;
+  outline:none;
+  box-shadow:0 8px 25px rgba(91,67,79,.06);
+  transition:.2s;
+}
+
+.search-input:focus{
+  border-color:#d7a3bf;
+  box-shadow:0 8px 30px rgba(189,113,152,.12);
+}
+
+.search-icon{
+  position:absolute;
+  right:18px;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:20px;
+  pointer-events:none;
+}
+
+.clear-search{
+  position:absolute;
+  left:12px;
+  top:50%;
+  transform:translateY(-50%);
+  border:0;
+  background:#f5e8ee;
+  color:#9a6881;
+  width:30px;
+  height:30px;
+  border-radius:10px;
+  cursor:pointer;
+  display:none;
+}
+
+.search-info{
+  margin-top:9px;
+  color:var(--muted);
+  font-size:11px;
+}
+
 
 /* ================= ARTICLES ================= */
 
@@ -459,6 +532,7 @@ button,input{
   margin-top:12px;
 }
 
+
 /* ================= QUOTE ================= */
 
 .quote{
@@ -483,6 +557,7 @@ button,input{
   color:#51454c;
 }
 
+
 /* ================= FOOTER ================= */
 
 footer{
@@ -502,6 +577,7 @@ footer{
 footer p{
   font-size:11px;
 }
+
 
 /* ================= MOBILE ================= */
 
@@ -602,154 +678,403 @@ footer p{
   .quote p{
     font-size:16px;
   }
+
+  .search-input{
+    font-size:13px;
+    padding:14px 48px 14px 45px;
+  }
 }
-</style></head><body><!-- NAVBAR --><nav class="navbar">  <a class="logo" href="index.html">
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+  <a class="logo" href="index.html">
+
     <div class="logo-icon">🧠</div>
+
     <span>روان‌شناسی‌نامه</span>
-  </a>  <div class="nav-links">
+
+  </a>
+
+
+  <div class="nav-links">
+
     <a href="index.html">خانه</a>
+
     <a href="page2.html">تاریخ روان‌شناسی</a>
+
     <a href="page3.html">مکاتب</a>
+
     <a href="#articles">مقالات</a>
-  </div>  <div class="nav-actions">
+
+  </div>
+
+
+  <div class="nav-actions">
+
     <button class="nav-btn" onclick="toggleDark()">☾</button>
+
     <button class="nav-btn mobile-menu" onclick="toggleMenu()">☰</button>
-  </div></nav><!-- HERO --><section class="hero">  <div class="hero-content"><div class="eyebrow">
-  ✦ تاریخ، نظریه‌ها و اندیشه‌های روان‌شناسی
-</div>
 
-<h1>
-  سفری به دنیای
-  <span>ذهن انسان</span>
-</h1>
+  </div>
 
-<p>
-  از فلسفه‌های باستانی تا فروید، آدلر، یونگ و روان‌شناسی معاصر؛
-  داستان شکل‌گیری علمی که تلاش می‌کند ذهن، رفتار و تجربه انسان را بفهمد.
-</p>
+</nav>
 
-<div class="hero-buttons">
-  <a class="primary-btn" href="page2.html">
-    شروع سفر در تاریخ روان‌شناسی
-  </a>
 
-  <a class="secondary-btn" href="#articles">
-    خواندن مقالات
-  </a>
-</div>
+<!-- ================= HERO ================= -->
 
-  </div>  <div class="hero-art"><div class="float-card freud">
-  🧠 فروید
-</div>
+<section class="hero">
 
-<div class="float-card adler">
-  ♙ آدلر
-</div>
+  <div class="hero-content">
 
-<div class="float-card jung">
-  ✦ یونگ
-</div>
+    <div class="eyebrow">
+      ✦ تاریخ، نظریه‌ها و اندیشه‌های روان‌شناسی
+    </div>
 
-<div class="float-card neuron">
-  ⚡ نورون
-</div>
 
-<div class="brain">
-  🧠
-</div>
+    <h1>
+      سفری به دنیای
+      <span>ذهن انسان</span>
+    </h1>
 
-  </div></section><!-- CATEGORIES --><section class="section">  <div class="section-head">
+
+    <p>
+      از فلسفه‌های باستانی تا فروید، آدلر، یونگ و روان‌شناسی معاصر؛
+      داستان شکل‌گیری علمی که تلاش می‌کند ذهن، رفتار و تجربه انسان را بفهمد.
+    </p>
+
+
+    <div class="hero-buttons">
+
+      <a class="primary-btn" href="page2.html">
+        شروع سفر در تاریخ روان‌شناسی
+      </a>
+
+      <a class="secondary-btn" href="#articles">
+        خواندن مقالات
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <div class="hero-art">
+
+    <div class="float-card freud">
+      🧠 فروید
+    </div>
+
+    <div class="float-card adler">
+      ♙ آدلر
+    </div>
+
+    <div class="float-card jung">
+      ✦ یونگ
+    </div>
+
+    <div class="float-card neuron">
+      ⚡ نورون
+    </div>
+
+    <div class="brain">
+      🧠
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= CATEGORIES ================= -->
+
+<section class="section">
+
+  <div class="section-head">
+
     <div>
-      <h2 class="section-title">دنیای روان‌شناسی</h2>
+
+      <h2 class="section-title">
+        دنیای روان‌شناسی
+      </h2>
+
       <p class="section-subtitle">
         چند مسیر برای شناخت بهتر تاریخ و اندیشه‌های روان‌شناسی
       </p>
+
     </div>
-  </div>  <div class="categories"><a class="category" href="page2.html">
-  <div class="category-icon">⌛</div>
-  <h3>تاریخ روان‌شناسی</h3>
-  <p>از اندیشه‌های باستانی تا شکل‌گیری روان‌شناسی علمی</p>
-  <div class="category-decoration">⌛</div>
-</a>
 
-<a class="category" href="page3.html">
-  <div class="category-icon">🧠</div>
-  <h3>مکاتب روان‌شناسی</h3>
-  <p>شناخت رویکردها، نظریه‌ها و چهره‌های مهم</p>
-  <div class="category-decoration">🧠</div>
-</a>
+  </div>
 
-<a class="category" href="#articles">
-  <div class="category-icon">📖</div>
-  <h3>مقالات</h3>
-  <p>مطالب آموزشی درباره مفاهیم و نظریه‌های روان‌شناسی</p>
-  <div class="category-decoration">📖</div>
-</a>
 
-<a class="category" href="#thinkers">
-  <div class="category-icon">✦</div>
-  <h3>چهره‌های تأثیرگذار</h3>
-  <p>فروید، آدلر، یونگ و دیگر اندیشمندان این حوزه</p>
-  <div class="category-decoration">✦</div>
-</a>
+  <div class="categories">
 
-  </div></section><!-- THINKERS --><section class="section" id="thinkers">  <div class="section-head">
+    <a class="category" href="page2.html">
+
+      <div class="category-icon">⌛</div>
+
+      <h3>تاریخ روان‌شناسی</h3>
+
+      <p>
+        از اندیشه‌های باستانی تا شکل‌گیری روان‌شناسی علمی
+      </p>
+
+      <div class="category-decoration">⌛</div>
+
+    </a>
+
+
+    <a class="category" href="page3.html">
+
+      <div class="category-icon">🧠</div>
+
+      <h3>مکاتب روان‌شناسی</h3>
+
+      <p>
+        شناخت رویکردها، نظریه‌ها و چهره‌های مهم
+      </p>
+
+      <div class="category-decoration">🧠</div>
+
+    </a>
+
+
+    <a class="category" href="#articles">
+
+      <div class="category-icon">📖</div>
+
+      <h3>مقالات</h3>
+
+      <p>
+        مطالب آموزشی درباره مفاهیم و نظریه‌های روان‌شناسی
+      </p>
+
+      <div class="category-decoration">📖</div>
+
+    </a>
+
+
+    <a class="category" href="#thinkers">
+
+      <div class="category-icon">✦</div>
+
+      <h3>چهره‌های تأثیرگذار</h3>
+
+      <p>
+        فروید، آدلر، یونگ و دیگر اندیشمندان این حوزه
+      </p>
+
+      <div class="category-decoration">✦</div>
+
+    </a>
+
+  </div>
+
+</section>
+
+
+<!-- ================= THINKERS ================= -->
+
+<section class="section" id="thinkers">
+
+  <div class="section-head">
+
     <div>
-      <h2 class="section-title">چهره‌های ماندگار</h2>
+
+      <h2 class="section-title">
+        چهره‌های ماندگار
+      </h2>
+
       <p class="section-subtitle">
         اندیشمندانی که مسیر روان‌شناسی را تغییر دادند
       </p>
+
     </div>
-  </div>  <div class="timeline"><div class="timeline-card">
-  <div class="timeline-number">01 · روان‌کاوی</div>
-  <h3>زیگموند فروید</h3>
-  <p>
-    یکی از تأثیرگذارترین چهره‌های تاریخ روان‌شناسی و بنیان‌گذار روان‌کاوی.
-  </p>
-</div>
 
-<div class="timeline-card">
-  <div class="timeline-number">02 · روان‌شناسی فردی</div>
-  <h3>آلفرد آدلر</h3>
-  <p>
-    از چهره‌های مهم تاریخ روان‌شناسی که بر احساس حقارت، سبک زندگی و روابط اجتماعی تأکید داشت.
-  </p>
-</div>
+  </div>
 
-<div class="timeline-card">
-  <div class="timeline-number">03 · روان‌شناسی تحلیلی</div>
-  <h3>کارل گوستاو یونگ</h3>
-  <p>
-    بنیان‌گذار روان‌شناسی تحلیلی و مطرح‌کننده مفاهیمی مانند ناخودآگاه جمعی.
-  </p>
-</div>
 
-  </div></section><!-- ARTICLES --><section class="section" id="articles">  <div class="section-head"><div>
-  <h2 class="section-title">آخرین مقالات</h2>
-  <p class="section-subtitle">
-    مطالب تازه روان‌شناسی‌نامه
-  </p>
-</div>
+  <div class="timeline">
 
-  </div>  <div id="articlesContainer" class="articles"><div style="text-align:center;color:#9a8d92;padding:40px;">
-  در حال دریافت مقالات...
-</div>
+    <div class="timeline-card">
 
-  </div></section><!-- QUOTE --><section class="section">  <div class="quote"><div class="quote-symbol">❝</div>
+      <div class="timeline-number">
+        01 · روان‌کاوی
+      </div>
 
-<p>
-  شناخت ذهن انسان، سفری است که هنوز پایان نیافته است.
-</p>
+      <h3>
+        زیگموند فروید
+      </h3>
 
-<div class="quote-symbol">❞</div>
+      <p>
+        یکی از تأثیرگذارترین چهره‌های تاریخ روان‌شناسی و بنیان‌گذار روان‌کاوی.
+      </p>
 
-  </div></section><!-- FOOTER --><footer>  <div class="footer-logo">
+    </div>
+
+
+    <div class="timeline-card">
+
+      <div class="timeline-number">
+        02 · روان‌شناسی فردی
+      </div>
+
+      <h3>
+        آلفرد آدلر
+      </h3>
+
+      <p>
+        از چهره‌های مهم تاریخ روان‌شناسی که بر احساس حقارت، سبک زندگی و روابط اجتماعی تأکید داشت.
+      </p>
+
+    </div>
+
+
+    <div class="timeline-card">
+
+      <div class="timeline-number">
+        03 · روان‌شناسی تحلیلی
+      </div>
+
+      <h3>
+        کارل گوستاو یونگ
+      </h3>
+
+      <p>
+        بنیان‌گذار روان‌شناسی تحلیلی و مطرح‌کننده مفاهیمی مانند ناخودآگاه جمعی.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= ARTICLES ================= -->
+
+<section class="section" id="articles">
+
+
+  <div class="section-head">
+
+    <div>
+
+      <h2 class="section-title">
+        مقالات
+      </h2>
+
+      <p class="section-subtitle">
+        مطالب روان‌شناسی‌نامه
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <!-- SEARCH -->
+
+  <div class="search-box">
+
+    <div class="search-icon">
+      🔎
+    </div>
+
+    <input
+      id="searchInput"
+      class="search-input"
+      type="search"
+      placeholder="جست‌وجو در عنوان، دسته‌بندی یا متن مقاله..."
+      autocomplete="off"
+    >
+
+    <button
+      id="clearSearch"
+      class="clear-search"
+      type="button"
+      onclick="clearSearch()"
+    >
+      ×
+    </button>
+
+    <div id="searchInfo" class="search-info">
+      در حال دریافت مقالات...
+    </div>
+
+  </div>
+
+
+  <div
+    id="articlesContainer"
+    class="articles"
+  >
+
+    <div style="
+      text-align:center;
+      color:#9a8d92;
+      padding:40px;
+    ">
+      در حال دریافت مقالات...
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= QUOTE ================= -->
+
+<section class="section">
+
+  <div class="quote">
+
+    <div class="quote-symbol">
+      ❝
+    </div>
+
+    <p>
+      شناخت ذهن انسان، سفری است که هنوز پایان نیافته است.
+    </p>
+
+    <div class="quote-symbol">
+      ❞
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+  <div class="footer-logo">
     🧠 روان‌شناسی‌نامه
-  </div>  <p>
+  </div>
+
+  <p>
     تاریخ، نظریه‌ها و اندیشه‌های روان‌شناسی
-  </p>  <p>
+  </p>
+
+  <p>
     © تمامی مطالب برای استفاده آموزشی ارائه شده‌اند.
-  </p></footer><script>
+  </p>
+
+</footer>
+
+
+<script>
+
 
 /* ================= SUPABASE ================= */
 
@@ -766,12 +1091,21 @@ const db =
   );
 
 
-/* ================= ARTICLES ================= */
+/* ================= DATA ================= */
+
+let allArticles = [];
+
+
+/* ================= LOAD ARTICLES ================= */
 
 async function loadArticles(){
 
   const container =
     document.getElementById("articlesContainer");
+
+  const searchInfo =
+    document.getElementById("searchInfo");
+
 
   const { data, error } =
     await db
@@ -779,6 +1113,7 @@ async function loadArticles(){
       .select("*")
       .eq("status","published")
       .order("created_at",{ascending:false});
+
 
   if(error){
 
@@ -794,12 +1129,20 @@ async function loadArticles(){
       </div>
     `;
 
+    searchInfo.textContent =
+      "خطا در دریافت مقالات";
+
     console.error(error);
 
     return;
   }
 
-  if(!data || data.length === 0){
+
+  allArticles =
+    data || [];
+
+
+  if(allArticles.length === 0){
 
     container.innerHTML = `
       <div style="
@@ -812,12 +1155,56 @@ async function loadArticles(){
       </div>
     `;
 
+    searchInfo.textContent =
+      "هنوز مقاله‌ای منتشر نشده است.";
+
     return;
   }
 
+
+  searchInfo.textContent =
+    `${allArticles.length} مقاله منتشر شده`;
+
+
+  renderArticles(allArticles);
+
+}
+
+
+/* ================= RENDER ARTICLES ================= */
+
+function renderArticles(articles){
+
+  const container =
+    document.getElementById("articlesContainer");
+
+
+  if(!articles || articles.length === 0){
+
+    container.innerHTML = `
+      <div style="
+        text-align:center;
+        padding:45px;
+        color:#9a8d92;
+        background:#fffdfb;
+        border:1px solid #eadfe0;
+        border-radius:20px;
+      ">
+        🔎
+        <br><br>
+        مقاله‌ای با این عبارت پیدا نشد.
+      </div>
+    `;
+
+    return;
+  }
+
+
   container.innerHTML = "";
 
-  data.forEach(article => {
+
+  articles.forEach(article => {
+
 
     const card =
       document.createElement("a");
@@ -848,6 +1235,7 @@ async function loadArticles(){
       image.loading =
         "lazy";
 
+
       image.onerror =
         function(){
 
@@ -858,6 +1246,7 @@ async function loadArticles(){
           `;
 
         };
+
 
       card.appendChild(image);
 
@@ -918,6 +1307,7 @@ async function loadArticles(){
     date.className =
       "article-date";
 
+
     if(article.created_at){
 
       const dateObject =
@@ -945,12 +1335,107 @@ async function loadArticles(){
 }
 
 
+/* ================= SEARCH ================= */
+
+const searchInput =
+  document.getElementById("searchInput");
+
+const clearButton =
+  document.getElementById("clearSearch");
+
+const searchInfo =
+  document.getElementById("searchInfo");
+
+
+searchInput.addEventListener(
+  "input",
+  function(){
+
+    const query =
+      this.value.trim().toLowerCase();
+
+
+    if(query){
+
+      clearButton.style.display =
+        "block";
+
+    }else{
+
+      clearButton.style.display =
+        "none";
+
+      searchInfo.textContent =
+        `${allArticles.length} مقاله منتشر شده`;
+
+      renderArticles(allArticles);
+
+      return;
+
+    }
+
+
+    const results =
+      allArticles.filter(article => {
+
+        const title =
+          String(article.title || "")
+            .toLowerCase();
+
+        const category =
+          String(article.category || "")
+            .toLowerCase();
+
+        const content =
+          String(article.content || "")
+            .toLowerCase();
+
+
+        return (
+          title.includes(query) ||
+          category.includes(query) ||
+          content.includes(query)
+        );
+
+      });
+
+
+    searchInfo.textContent =
+      `${results.length} نتیجه برای «${this.value.trim()}»`;
+
+
+    renderArticles(results);
+
+  }
+);
+
+
+/* ================= CLEAR SEARCH ================= */
+
+function clearSearch(){
+
+  searchInput.value = "";
+
+  clearButton.style.display =
+    "none";
+
+  searchInfo.textContent =
+    `${allArticles.length} مقاله منتشر شده`;
+
+  renderArticles(allArticles);
+
+  searchInput.focus();
+
+}
+
+
 /* ================= DARK MODE ================= */
 
 function toggleDark(){
 
   const dark =
     document.body.dataset.dark === "1";
+
 
   if(dark){
 
@@ -971,6 +1456,7 @@ function toggleDark(){
 
     document.body.style.color =
       "#f7edf3";
+
   }
 
 }
@@ -982,6 +1468,7 @@ function toggleMenu(){
 
   const nav =
     document.querySelector(".nav-links");
+
 
   if(nav.style.display === "flex"){
 
@@ -1026,5 +1513,7 @@ function toggleMenu(){
 
 loadArticles();
 
-</script></body>
-</html>
+</script>
+
+</body>
+  </html>
