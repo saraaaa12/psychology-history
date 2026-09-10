@@ -1,23 +1,101 @@
-<!DOCTYPE html><html lang="fa" dir="rtl">
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>مکاتب روان‌شناسی | روان‌شناسی‌نامه</title><style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>مکاتب روان‌شناسی | روان‌شناسی‌نامه</title>
+
+<style>
+
 @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap');
 
+
+/* =========================
+   THEME
+========================= */
+
 :root{
+
   --bg:#fbf6f0;
+
   --pink:#e6a5c1;
   --pink-dark:#b86d94;
+
   --lilac:#c9b9dc;
   --cream:#f3e9df;
+
   --green:#cbd9cf;
   --blue:#cdd8e8;
+
   --text:#393336;
   --muted:#897b81;
+
   --white:#fffdfb;
+
   --border:#eadfe0;
+
+  --card:#fffdfb;
+
+  --navbar:rgba(255,253,251,.9);
+
+  --button:#f7edf2;
+
+  --button-text:#765568;
+
+  --tag-bg:#f7edf1;
+  --tag-text:#806273;
+
+  --footer:#eee5df;
+  --footer-text:#786c71;
+  --footer-logo:#50454a;
+
   --shadow:0 14px 40px rgba(85,65,75,.09);
+
+  --transition:.25s;
+
 }
+
+
+/* DARK MODE */
+
+body.dark{
+
+  --bg:#242025;
+
+  --text:#f4edf1;
+
+  --muted:#b9aeb4;
+
+  --white:#302a31;
+
+  --card:#302a31;
+
+  --border:#453b44;
+
+  --navbar:rgba(48,42,49,.92);
+
+  --button:#3d333c;
+
+  --button-text:#ead6e0;
+
+  --tag-bg:#40343d;
+  --tag-text:#e5c4d3;
+
+  --footer:#1d191e;
+  --footer-text:#aa9da4;
+  --footer-logo:#eee3e8;
+
+  --shadow:0 14px 40px rgba(0,0,0,.25);
+
+}
+
+
+/* =========================
+   GENERAL
+========================= */
 
 *{
   box-sizing:border-box;
@@ -28,168 +106,397 @@ html{
 }
 
 body{
+
   margin:0;
+
   background:var(--bg);
+
   color:var(--text);
+
   font-family:'Vazirmatn',Tahoma,Arial,sans-serif;
+
   line-height:1.9;
+
+  transition:
+    background-color var(--transition),
+    color var(--transition);
+
 }
 
-/* NAVBAR */
+a{
+  text-decoration:none;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
 
 .navbar{
+
   width:min(1180px,92%);
+
   margin:18px auto;
+
   padding:13px 18px;
-  background:rgba(255,253,251,.9);
+
+  background:var(--navbar);
+
   border:1px solid var(--border);
+
   border-radius:22px;
+
   display:flex;
+
   align-items:center;
+
   justify-content:space-between;
+
   position:sticky;
+
   top:12px;
+
   z-index:30;
+
   box-shadow:0 8px 30px rgba(80,60,70,.06);
+
   backdrop-filter:blur(14px);
+
+  transition:
+    background var(--transition),
+    border-color var(--transition),
+    box-shadow var(--transition);
+
 }
 
 .logo{
+
   display:flex;
+
   align-items:center;
+
   gap:10px;
+
   font-weight:800;
+
+  color:var(--text);
+
 }
 
 .logo-icon{
+
   width:42px;
   height:42px;
+
   border-radius:14px;
+
   background:linear-gradient(135deg,#f3c5d9,#cdbce0);
+
   display:flex;
+
   align-items:center;
   justify-content:center;
+
   font-size:22px;
+
 }
 
 .nav-links{
+
   display:flex;
+
   gap:6px;
+
 }
 
 .nav-links a{
+
   padding:8px 13px;
+
   border-radius:12px;
+
   font-size:13px;
-  color:#665b60;
+
+  color:var(--muted);
+
+  transition:
+    background var(--transition),
+    color var(--transition);
+
 }
 
 .nav-links a:hover,
 .nav-links .active{
+
   background:#f7e9f0;
+
   color:var(--pink-dark);
+
+}
+
+body.dark .nav-links a:hover,
+body.dark .nav-links .active{
+
+  background:#40333d;
+
+  color:#e5a9c4;
+
 }
 
 .nav-actions{
+
   display:flex;
+
   gap:6px;
+
 }
 
 .nav-actions button{
+
   border:0;
-  background:#f7edf2;
-  color:#765568;
+
+  background:var(--button);
+
+  color:var(--button-text);
+
   padding:8px 11px;
+
   border-radius:11px;
+
   cursor:pointer;
+
+  transition:
+    background var(--transition),
+    color var(--transition);
+
 }
 
 .mobile{
   display:none;
 }
 
-/* HERO */
+
+/* =========================
+   HERO
+========================= */
 
 .hero{
+
   width:min(1180px,92%);
+
   min-height:400px;
+
   margin:25px auto 0;
+
   border-radius:38px;
+
   overflow:hidden;
+
   position:relative;
+
   display:flex;
+
   align-items:center;
+
   background:
-    radial-gradient(circle at 85% 20%,rgba(255,255,255,.75),transparent 24%),
-    radial-gradient(circle at 10% 80%,rgba(255,255,255,.6),transparent 25%),
-    linear-gradient(135deg,#f4dce7,#f4ebe2 50%,#ded5e9);
+
+    radial-gradient(
+      circle at 85% 20%,
+      rgba(255,255,255,.75),
+      transparent 24%
+    ),
+
+    radial-gradient(
+      circle at 10% 80%,
+      rgba(255,255,255,.6),
+      transparent 25%
+    ),
+
+    linear-gradient(
+      135deg,
+      #f4dce7,
+      #f4ebe2 50%,
+      #ded5e9
+    );
+
+}
+
+body.dark .hero{
+
+  background:
+
+    radial-gradient(
+      circle at 85% 20%,
+      rgba(255,255,255,.08),
+      transparent 24%
+    ),
+
+    radial-gradient(
+      circle at 10% 80%,
+      rgba(255,255,255,.06),
+      transparent 25%
+    ),
+
+    linear-gradient(
+      135deg,
+      #49323f,
+      #3b3431 50%,
+      #383044
+    );
+
 }
 
 .hero-content{
+
   padding:60px;
+
   max-width:700px;
+
   position:relative;
+
   z-index:3;
+
 }
 
 .eyebrow{
+
   display:inline-block;
+
   padding:6px 14px;
+
   border-radius:30px;
+
   background:rgba(255,255,255,.72);
+
   color:#806273;
+
   font-size:12px;
+
   margin-bottom:15px;
+
+}
+
+body.dark .eyebrow{
+
+  background:rgba(255,255,255,.1);
+
+  color:#e3c7d4;
+
 }
 
 .hero h1{
+
   margin:0;
+
   font-size:45px;
+
   line-height:1.4;
+
 }
 
 .hero h1 span{
+
   color:var(--pink-dark);
+
+}
+
+body.dark .hero h1 span{
+
+  color:#e8a9c3;
+
 }
 
 .hero p{
+
   color:#776a6e;
+
   font-size:14px;
+
   max-width:600px;
+
   margin:13px 0 0;
+
+}
+
+body.dark .hero p{
+
+  color:#d0c2c9;
+
 }
 
 .hero-art{
+
   position:absolute;
+
   left:35px;
+
   bottom:0;
+
   width:370px;
+
   height:360px;
+
 }
 
 .big-brain{
+
   position:absolute;
+
   width:205px;
   height:205px;
+
   left:75px;
   top:75px;
+
   border-radius:50%;
+
   background:rgba(255,253,251,.72);
+
   display:flex;
+
   align-items:center;
   justify-content:center;
+
   font-size:105px;
+
   box-shadow:0 20px 50px rgba(80,60,75,.1);
+
+}
+
+body.dark .big-brain{
+
+  background:rgba(255,255,255,.09);
+
+  box-shadow:0 20px 50px rgba(0,0,0,.22);
+
 }
 
 .floating{
+
   position:absolute;
+
   padding:9px 13px;
+
   background:rgba(255,253,251,.88);
+
   border-radius:16px;
+
   box-shadow:0 10px 25px rgba(80,60,75,.09);
+
   color:#6a5b62;
+
   font-size:11px;
+
+}
+
+body.dark .floating{
+
+  background:rgba(48,42,49,.9);
+
+  color:#d9cbd1;
+
+  box-shadow:0 10px 25px rgba(0,0,0,.2);
+
 }
 
 .f1{left:5px;top:45px}
@@ -197,59 +504,104 @@ body{
 .f3{left:15px;bottom:45px}
 .f4{right:25px;bottom:15px}
 
-/* SECTION */
+
+/* =========================
+   SECTION
+========================= */
 
 .section{
+
   width:min(1180px,92%);
+
   margin:65px auto;
+
 }
 
 .section-head{
+
   margin-bottom:25px;
+
 }
 
 .section-head h2{
+
   margin:0;
+
   font-size:26px;
+
 }
 
 .section-head p{
+
   color:var(--muted);
+
   font-size:13px;
+
   margin:4px 0 0;
+
 }
 
-/* SCHOOL CARDS */
+
+/* =========================
+   SCHOOL CARDS
+========================= */
 
 .schools{
+
   columns:3 280px;
+
   column-gap:18px;
+
 }
 
 .school{
+
   break-inside:avoid;
+
   display:block;
+
   margin-bottom:18px;
-  background:var(--white);
+
+  background:var(--card);
+
   border:1px solid var(--border);
+
   border-radius:27px;
+
   overflow:hidden;
+
   box-shadow:var(--shadow);
-  transition:.25s;
+
+  transition:
+    transform var(--transition),
+    background var(--transition),
+    border-color var(--transition),
+    box-shadow var(--transition);
+
 }
 
 .school:hover{
+
   transform:translateY(-6px);
+
 }
 
 .school-top{
+
   min-height:155px;
+
   padding:24px;
+
   position:relative;
+
   display:flex;
+
   align-items:flex-start;
+
   justify-content:space-between;
+
   overflow:hidden;
+
 }
 
 .school:nth-child(1) .school-top{
@@ -284,151 +636,336 @@ body{
   background:#e7eee8;
 }
 
+
+/* Dark card headers */
+
+body.dark .school:nth-child(1) .school-top{
+  background:#4a3540;
+}
+
+body.dark .school:nth-child(2) .school-top{
+  background:#40394d;
+}
+
+body.dark .school:nth-child(3) .school-top{
+  background:#374239;
+}
+
+body.dark .school:nth-child(4) .school-top{
+  background:#493e34;
+}
+
+body.dark .school:nth-child(5) .school-top{
+  background:#36414f;
+}
+
+body.dark .school:nth-child(6) .school-top{
+  background:#493c2f;
+}
+
+body.dark .school:nth-child(7) .school-top{
+  background:#403849;
+}
+
+body.dark .school:nth-child(8) .school-top{
+  background:#374239;
+}
+
 .school-icon{
+
   width:60px;
   height:60px;
+
   border-radius:19px;
+
   background:rgba(255,255,255,.72);
+
   display:flex;
+
   align-items:center;
   justify-content:center;
+
   font-size:31px;
+
   box-shadow:0 8px 20px rgba(80,60,70,.06);
+
+}
+
+body.dark .school-icon{
+
+  background:rgba(255,255,255,.1);
+
+  box-shadow:0 8px 20px rgba(0,0,0,.15);
+
 }
 
 .school-number{
+
   color:rgba(70,60,65,.45);
+
   font-size:11px;
+
+}
+
+body.dark .school-number{
+
+  color:rgba(245,235,240,.45);
+
 }
 
 .school-decoration{
+
   position:absolute;
+
   left:-12px;
+
   bottom:-40px;
+
   font-size:110px;
+
   opacity:.08;
+
 }
 
 .school-body{
+
   padding:20px 22px 23px;
+
 }
 
 .school-body h3{
+
   margin:0 0 5px;
+
   font-size:18px;
+
 }
 
 .school-body .founder{
+
   color:var(--pink-dark);
+
   font-size:11px;
+
   font-weight:700;
+
+}
+
+body.dark .school-body .founder{
+
+  color:#e3a6bf;
+
 }
 
 .school-body p{
+
   color:var(--muted);
+
   font-size:11px;
+
   margin:10px 0 0;
+
 }
 
 .tags{
+
   margin-top:13px;
+
 }
 
 .tag{
+
   display:inline-block;
-  background:#f7edf1;
-  color:#806273;
+
+  background:var(--tag-bg);
+
+  color:var(--tag-text);
+
   padding:3px 8px;
+
   border-radius:12px;
+
   font-size:9px;
+
   margin:2px;
+
 }
 
-/* FEATURE */
+
+/* =========================
+   FEATURE
+========================= */
 
 .feature{
+
   display:grid;
+
   grid-template-columns:1fr 1fr;
+
   gap:18px;
+
 }
 
 .feature-card{
-  background:var(--white);
+
+  background:var(--card);
+
   border:1px solid var(--border);
+
   border-radius:27px;
+
   padding:27px;
+
   box-shadow:var(--shadow);
+
+  transition:
+    background var(--transition),
+    border-color var(--transition),
+    box-shadow var(--transition);
+
 }
 
 .feature-card.highlight{
-  background:linear-gradient(135deg,#f0e5f1,#f7e4ec);
+
+  background:linear-gradient(
+    135deg,
+    #f0e5f1,
+    #f7e4ec
+  );
+
+}
+
+body.dark .feature-card.highlight{
+
+  background:linear-gradient(
+    135deg,
+    #393342,
+    #45313b
+  );
+
 }
 
 .feature-icon{
+
   font-size:38px;
+
 }
 
 .feature-card h3{
+
   margin:7px 0;
+
   font-size:18px;
+
 }
 
 .feature-card p{
+
   color:var(--muted);
+
   font-size:12px;
+
 }
 
-/* COMPARISON */
+
+/* =========================
+   COMPARISON
+========================= */
 
 .compare{
+
   display:grid;
+
   grid-template-columns:repeat(4,1fr);
+
   gap:13px;
+
 }
 
 .compare-item{
-  background:var(--white);
+
+  background:var(--card);
+
   border:1px solid var(--border);
+
   border-radius:21px;
+
   padding:19px;
+
+  transition:
+    background var(--transition),
+    border-color var(--transition),
+    box-shadow var(--transition);
+
 }
 
 .compare-icon{
+
   font-size:25px;
+
 }
 
 .compare-item h3{
+
   font-size:14px;
+
   margin:5px 0;
+
 }
 
 .compare-item p{
+
   color:var(--muted);
+
   font-size:10px;
+
   margin:0;
+
 }
 
-/* FOOTER */
+
+/* =========================
+   FOOTER
+========================= */
 
 footer{
+
   margin-top:70px;
+
   padding:40px 20px;
+
   text-align:center;
-  background:#eee5df;
-  color:#786c71;
+
+  background:var(--footer);
+
+  color:var(--footer-text);
+
+  transition:
+    background var(--transition),
+    color var(--transition);
+
 }
 
 .footer-logo{
+
   font-size:20px;
+
   font-weight:800;
-  color:#50454a;
+
+  color:var(--footer-logo);
+
 }
 
 footer p{
+
   font-size:11px;
+
 }
 
-/* MOBILE */
+
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:850px){
 
@@ -445,639 +982,1033 @@ footer p{
   }
 
   .hero-content{
+
     align-self:flex-start;
+
     padding:45px 30px;
+
   }
 
   .hero h1{
+
     font-size:36px;
+
   }
 
   .hero-art{
+
     left:-20px;
+
     transform:scale(.72);
+
     transform-origin:bottom left;
+
   }
 
   .feature{
+
     grid-template-columns:1fr;
+
   }
 
   .compare{
+
     grid-template-columns:repeat(2,1fr);
+
   }
+
 }
+
 
 @media(max-width:520px){
 
   .hero{
+
     width:94%;
+
     border-radius:30px;
+
   }
 
   .hero-content{
+
     padding:40px 24px;
+
   }
 
   .hero h1{
+
     font-size:31px;
+
   }
 
   .hero-art{
+
     left:-80px;
+
     transform:scale(.62);
+
   }
 
   .section{
+
     width:94%;
+
     margin:48px auto;
+
   }
 
   .compare{
+
     grid-template-columns:1fr;
+
   }
+
 }
-</style></head><body><!-- NAVBAR --><nav class="navbar">  <a class="logo" href="index.html">
-    <div class="logo-icon">🧠</div>
-    <span>روان‌شناسی‌نامه</span>
-  </a>  <div class="nav-links"><a href="index.html">خانه</a>
 
-<a href="page2.html">
-  تاریخ روان‌شناسی
-</a>
+</style>
 
-<a href="page3.html" class="active">
-  مکاتب
-</a>
+</head>
 
-<a href="index.html#articles">
-  مقالات
-</a>
 
-  </div>  <div class="nav-actions"><button onclick="toggleDark()">☾</button>
+<body>
 
-<button class="mobile" onclick="toggleMenu()">
-  ☰
-</button>
 
-  </div></nav><!-- HERO --><section class="hero">  <div class="hero-content"><div class="eyebrow">
-  ✦ نظریه‌ها و رویکردهای روان‌شناسی
-</div>
+<!-- =========================
+     NAVBAR
+========================= -->
 
-<h1>
-  مکاتب مختلف،
-  <span>نگاه‌های متفاوت</span>
-</h1>
+<nav class="navbar">
 
-<p>
-  هر مکتب تلاش کرده از زاویه‌ای متفاوت به انسان،
-  ذهن و رفتار نگاه کند. از ساختارگرایی و کارکردگرایی
-  تا روان‌کاوی، رفتارگرایی، گشتالت و رویکردهای شناختی.
-</p>
+  <a class="logo" href="index.html">
 
-  </div>  <div class="hero-art"><div class="floating f1">
-  ✦ فروید
-</div>
-
-<div class="floating f2">
-  🧠 شناخت
-</div>
-
-<div class="floating f3">
-  ◌ رفتار
-</div>
-
-<div class="floating f4">
-  ♡ انسان‌گرایی
-</div>
-
-<div class="big-brain">
-  🧠
-</div>
-
-  </div></section><!-- INTRO --><section class="section">  <div class="section-head"><h2>
-  مکاتب روان‌شناسی چه هستند؟
-</h2>
-
-<p>
-  مجموعه‌ای از دیدگاه‌ها که درباره موضوع، روش و هدف روان‌شناسی برداشت‌های متفاوتی دارند.
-</p>
-
-  </div>  <div class="feature"><div class="feature-card highlight">
-
-  <div class="feature-icon">🧠</div>
-
-  <h3>
-    یک انسان، چند زاویه نگاه
-  </h3>
-
-  <p>
-    یک رفتار می‌تواند از دیدگاه‌های مختلف توضیح داده شود.
-    برای مثال، یک رفتار ممکن است از منظر یادگیری،
-    فرایندهای شناختی، تعارض‌های روانی یا عوامل زیستی بررسی شود.
-  </p>
-
-</div>
-
-<div class="feature-card">
-
-  <div class="feature-icon">✦</div>
-
-  <h3>
-    چرا شناخت مکاتب مهم است؟
-  </h3>
-
-  <p>
-    شناخت تاریخ مکاتب کمک می‌کند بفهمیم نظریه‌های روان‌شناسی
-    چگونه شکل گرفته‌اند و چرا روان‌شناسان درباره رفتار و ذهن
-    انسان توضیح‌های متفاوتی ارائه کرده‌اند.
-  </p>
-
-</div>
-
-  </div></section><!-- SCHOOLS --><section class="section">  <div class="section-head"><h2>
-  مکاتب مهم روان‌شناسی
-</h2>
-
-<p>
-  برای ورود به هر مکتب، کارت موردنظر را انتخاب کن.
-</p>
-
-  </div>  <div class="schools"><!-- PSYCHOANALYSIS -->
-
-<a class="school" href="school-psychoanalysis.html">
-
-  <div class="school-top">
-
-    <div class="school-icon">
-      🧔🏻
+    <div class="logo-icon">
+      🧠
     </div>
 
-    <div class="school-number">
-      01
-    </div>
+    <span>
+      روان‌شناسی‌نامه
+    </span>
 
-    <div class="school-decoration">
-      ✦
-    </div>
+  </a>
+
+
+  <div class="nav-links">
+
+    <a href="index.html">
+      خانه
+    </a>
+
+    <a href="page2.html">
+      تاریخ روان‌شناسی
+    </a>
+
+    <a href="page3.html" class="active">
+      مکاتب
+    </a>
+
+    <a href="index.html#articles">
+      مقالات
+    </a>
 
   </div>
 
-  <div class="school-body">
 
-    <h3>
-      روان‌کاوی
-    </h3>
+  <div class="nav-actions">
 
-    <div class="founder">
-      زیگموند فروید
+    <button
+      id="themeButton"
+      onclick="toggleDark()"
+      aria-label="تغییر حالت نمایش"
+    >
+      ☾
+    </button>
+
+    <button
+      class="mobile"
+      onclick="toggleMenu()"
+      aria-label="باز کردن منو"
+    >
+      ☰
+    </button>
+
+  </div>
+
+</nav>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+  <div class="hero-content">
+
+    <div class="eyebrow">
+      ✦ نظریه‌ها و رویکردهای روان‌شناسی
     </div>
+
+    <h1>
+      مکاتب مختلف،
+      <span>نگاه‌های متفاوت</span>
+    </h1>
 
     <p>
-      تمرکز بر فرایندهای ناهشیار، تعارض‌های روانی
-      و نقش تجربه‌های اولیه در شخصیت.
+      هر مکتب تلاش کرده از زاویه‌ای متفاوت به انسان،
+      ذهن و رفتار نگاه کند. از ساختارگرایی و کارکردگرایی
+      تا روان‌کاوی، رفتارگرایی، گشتالت و رویکردهای شناختی.
     </p>
 
-    <div class="tags">
-      <span class="tag">ناهشیار</span>
-      <span class="tag">تعارض</span>
-      <span class="tag">رویا</span>
+  </div>
+
+
+  <div class="hero-art">
+
+    <div class="floating f1">
+      ✦ فروید
+    </div>
+
+    <div class="floating f2">
+      🧠 شناخت
+    </div>
+
+    <div class="floating f3">
+      ◌ رفتار
+    </div>
+
+    <div class="floating f4">
+      ♡ انسان‌گرایی
+    </div>
+
+    <div class="big-brain">
+      🧠
     </div>
 
   </div>
 
-</a>
+</section>
 
 
-<!-- BEHAVIORISM -->
+<!-- =========================
+     INTRO
+========================= -->
 
-<a class="school" href="school-behaviorism.html">
+<section class="section">
 
-  <div class="school-top">
+  <div class="section-head">
 
-    <div class="school-icon">
-      🐾
-    </div>
-
-    <div class="school-number">
-      02
-    </div>
-
-    <div class="school-decoration">
-      ◌
-    </div>
-
-  </div>
-
-  <div class="school-body">
-
-    <h3>
-      رفتارگرایی
-    </h3>
-
-    <div class="founder">
-      واتسون و اسکینر
-    </div>
+    <h2>
+      مکاتب روان‌شناسی چه هستند؟
+    </h2>
 
     <p>
-      تأکید بر رفتار قابل مشاهده و نقش محیط،
-      یادگیری و تقویت در شکل‌گیری رفتار.
+      مجموعه‌ای از دیدگاه‌ها که درباره موضوع، روش و هدف روان‌شناسی برداشت‌های متفاوتی دارند.
     </p>
 
-    <div class="tags">
-      <span class="tag">یادگیری</span>
-      <span class="tag">تقویت</span>
-      <span class="tag">رفتار</span>
+  </div>
+
+
+  <div class="feature">
+
+    <div class="feature-card highlight">
+
+      <div class="feature-icon">
+        🧠
+      </div>
+
+      <h3>
+        یک انسان، چند زاویه نگاه
+      </h3>
+
+      <p>
+        یک رفتار می‌تواند از دیدگاه‌های مختلف توضیح داده شود.
+        برای مثال، یک رفتار ممکن است از منظر یادگیری،
+        فرایندهای شناختی، تعارض‌های روانی یا عوامل زیستی بررسی شود.
+      </p>
+
+    </div>
+
+
+    <div class="feature-card">
+
+      <div class="feature-icon">
+        ✦
+      </div>
+
+      <h3>
+        چرا شناخت مکاتب مهم است؟
+      </h3>
+
+      <p>
+        شناخت تاریخ مکاتب کمک می‌کند بفهمیم نظریه‌های روان‌شناسی
+        چگونه شکل گرفته‌اند و چرا روان‌شناسان درباره رفتار و ذهن
+        انسان توضیح‌های متفاوتی ارائه کرده‌اند.
+      </p>
+
     </div>
 
   </div>
 
-</a>
+</section>
 
 
-<!-- GESTALT -->
+<!-- =========================
+     SCHOOLS
+========================= -->
 
-<a class="school" href="school-gestalt.html">
+<section class="section">
 
-  <div class="school-top">
+  <div class="section-head">
 
-    <div class="school-icon">
-      ◉
-    </div>
-
-    <div class="school-number">
-      03
-    </div>
-
-    <div class="school-decoration">
-      ◉
-    </div>
-
-  </div>
-
-  <div class="school-body">
-
-    <h3>
-      گشتالت
-    </h3>
-
-    <div class="founder">
-      ورتهایمر، کُهلر و کافکا
-    </div>
+    <h2>
+      مکاتب مهم روان‌شناسی
+    </h2>
 
     <p>
-      توجه به تجربه آگاهانه و این ایده که
-      کل تجربه را نمی‌توان صرفاً از اجزای آن فهمید.
+      برای ورود به هر مکتب، کارت موردنظر را انتخاب کن.
     </p>
 
-    <div class="tags">
-      <span class="tag">ادراک</span>
-      <span class="tag">کل</span>
-      <span class="tag">تجربه</span>
-    </div>
+  </div>
+
+
+  <div class="schools">
+
+
+    <!-- PSYCHOANALYSIS -->
+
+    <a class="school" href="school-psychoanalysis.html">
+
+      <div class="school-top">
+
+        <div class="school-icon">
+          🧔🏻
+        </div>
+
+        <div class="school-number">
+          01
+        </div>
+
+        <div class="school-decoration">
+          ✦
+        </div>
+
+      </div>
+
+
+      <div class="school-body">
+
+        <h3>
+          روان‌کاوی
+        </h3>
+
+        <div class="founder">
+          زیگموند فروید
+        </div>
+
+        <p>
+          تمرکز بر فرایندهای ناهشیار، تعارض‌های روانی
+          و نقش تجربه‌های اولیه در شخصیت.
+        </p>
+
+        <div class="tags">
+
+          <span class="tag">
+            ناهشیار
+          </span>
+
+          <span class="tag">
+            تعارض
+          </span>
+
+          <span class="tag">
+            رویا
+          </span>
+
+        </div>
+
+      </div>
+
+    </a>
+
+
+    <!-- BEHAVIORISM -->
+
+    <a class="school" href="school-behaviorism.html">
+
+      <div class="school-top">
+
+        <div class="school-icon">
+          🐾
+        </div>
+
+        <div class="school-number">
+          02
+        </div>
+
+        <div class="school-decoration">
+          ◌
+        </div>
+
+      </div>
+
+
+      <div class="school-body">
+
+        <h3>
+          رفتارگرایی
+        </h3>
+
+        <div class="founder">
+          واتسون و اسکینر
+        </div>
+
+        <p>
+          تأکید بر رفتار قابل مشاهده و نقش محیط،
+          یادگیری و تقویت در شکل‌گیری رفتار.
+        </p>
+
+        <div class="tags">
+
+          <span class="tag">
+            یادگیری
+          </span>
+
+          <span class="tag">
+            تقویت
+          </span>
+
+          <span class="tag">
+            رفتار
+          </span>
+
+        </div>
+
+      </div>
+
+    </a>
+
+
+    <!-- GESTALT -->
+
+    <a class="school" href="school-gestalt.html">
+
+      <div class="school-top">
+
+        <div class="school-icon">
+          ◉
+        </div>
+
+        <div class="school-number">
+          03
+        </div>
+
+        <div class="school-decoration">
+          ◉
+        </div>
+
+      </div>
+
+
+      <div class="school-body">
+
+        <h3>
+          گشتالت
+        </h3>
+
+        <div class="founder">
+          ورتهایمر، کُهلر و کافکا
+        </div>
+
+        <p>
+          توجه به تجربه آگاهانه و این ایده که
+          کل تجربه را نمی‌توان صرفاً از اجزای آن فهمید.
+        </p>
+
+        <div class="tags">
+
+          <span class="tag">
+            ادراک
+          </span>
+
+          <span class="tag">
+            کل
+          </span>
+
+          <span class="tag">
+            تجربه
+          </span>
+
+        </div>
+
+      </div>
+
+    </a>
+
+
+    <!-- HUMANISTIC -->
+
+    <a class="school" href="school-humanistic.html">
+
+      <div class="school-top">
+
+        <div class="school-icon">
+          🌱
+        </div>
+
+        <div class="school-number">
+          04
+        </div>
+
+        <div class="school-decoration">
+          ✿
+        </div>
+
+      </div>
+
+
+      <div class="school-body">
+
+        <h3>
+          انسان‌گرایی
+        </h3>
+
+        <div class="founder">
+          راجرز و مزلو
+        </div>
+
+        <p>
+          تأکید بر تجربه شخصی، انتخاب، رشد فردی
+          و حرکت انسان به سوی تحقق ظرفیت‌های خود.
+        </p>
+
+        <div class="tags">
+
+          <span class="tag">
+            رشد
+          </span>
+
+          <span class="tag">
+            خود
+          </span>
+
+          <span class="tag">
+            تحقق
+          </span>
+
+        </div>
+
+      </div>
+
+    </a>
+
+
+    <!-- COGNITIVE -->
+
+    <a class="school" href="school-cognitive.html">
+
+      <div class="school-top">
+
+        <div class="school-icon">
+          💭
+        </div>
+
+        <div class="school-number">
+          05
+        </div>
+
+        <div class="school-decoration">
+          💭
+        </div>
+
+      </div>
+
+
+      <div class="school-body">
+
+        <h3>
+          شناختی
+        </h3>
+
+        <div class="founder">
+          رویکرد شناختی
+        </div>
+
+        <p>
+          مطالعه فرایندهایی مانند توجه، حافظه،
+          تفکر، زبان و حل مسئله.
+        </p>
+
+        <div class="tags">
+
+          <span class="tag">
+            حافظه
+          </span>
+
+          <span class="tag">
+            تفکر
+          </span>
+
+          <span class="tag">
+            توجه
+          </span>
+
+        </div>
+
+      </div>
+
+    </a>
+
+
+    <!-- BIOLOGICAL -->
+
+    <a class="school" href="school-biological.html">
+
+      <div class="school-top">
+
+        <div class="school-icon">
+          🧬
+        </div>
+
+        <div class="school-number">
+          06
+        </div>
+
+        <div class="school-decoration">
+          🧬
+        </div>
+
+      </div>
+
+
+      <div class="school-body">
+
+        <h3>
+          زیستی
+        </h3>
+
+        <div class="founder">
+          رویکرد زیستی
+        </div>
+
+        <p>
+          بررسی رفتار و فرایندهای روانی با توجه به مغز،
+          دستگاه عصبی، ژنتیک و فرایندهای زیستی.
+        </p>
+
+        <div class="tags">
+
+          <span class="tag">
+            مغز
+          </span>
+
+          <span class="tag">
+            نورون
+          </span>
+
+          <span class="tag">
+            ژنتیک
+          </span>
+
+        </div>
+
+      </div>
+
+    </a>
+
+
+    <!-- STRUCTURALISM -->
+
+    <a class="school" href="school-structuralism.html">
+
+      <div class="school-top">
+
+        <div class="school-icon">
+          ◫
+        </div>
+
+        <div class="school-number">
+          07
+        </div>
+
+        <div class="school-decoration">
+          ◫
+        </div>
+
+      </div>
+
+
+      <div class="school-body">
+
+        <h3>
+          ساختارگرایی
+        </h3>
+
+        <div class="founder">
+          ادوارد تیچنر
+        </div>
+
+        <p>
+          تلاش برای مطالعه ساختار تجربه آگاهانه
+          و عناصر تشکیل‌دهنده آن.
+        </p>
+
+        <div class="tags">
+
+          <span class="tag">
+            آگاهی
+          </span>
+
+          <span class="tag">
+            تجربه
+          </span>
+
+          <span class="tag">
+            درون‌نگری
+          </span>
+
+        </div>
+
+      </div>
+
+    </a>
+
+
+    <!-- FUNCTIONALISM -->
+
+    <a class="school" href="school-functionalism.html">
+
+      <div class="school-top">
+
+        <div class="school-icon">
+          ⚙
+        </div>
+
+        <div class="school-number">
+          08
+        </div>
+
+        <div class="school-decoration">
+          ⚙
+        </div>
+
+      </div>
+
+
+      <div class="school-body">
+
+        <h3>
+          کارکردگرایی
+        </h3>
+
+        <div class="founder">
+          ویلیام جیمز
+        </div>
+
+        <p>
+          توجه به کارکرد فرایندهای ذهنی و نقش آن‌ها
+          در سازگاری فرد با محیط.
+        </p>
+
+        <div class="tags">
+
+          <span class="tag">
+            کارکرد
+          </span>
+
+          <span class="tag">
+            سازگاری
+          </span>
+
+          <span class="tag">
+            محیط
+          </span>
+
+        </div>
+
+      </div>
+
+    </a>
 
   </div>
 
-</a>
+</section>
 
 
-<!-- HUMANISTIC -->
+<!-- =========================
+     COMPARISON
+========================= -->
 
-<a class="school" href="school-humanistic.html">
+<section class="section">
 
-  <div class="school-top">
+  <div class="section-head">
 
-    <div class="school-icon">
-      🌱
-    </div>
-
-    <div class="school-number">
-      04
-    </div>
-
-    <div class="school-decoration">
-      ✿
-    </div>
-
-  </div>
-
-  <div class="school-body">
-
-    <h3>
-      انسان‌گرایی
-    </h3>
-
-    <div class="founder">
-      راجرز و مزلو
-    </div>
+    <h2>
+      هر مکتب بیشتر روی چه چیزی تمرکز دارد؟
+    </h2>
 
     <p>
-      تأکید بر تجربه شخصی، انتخاب، رشد فردی
-      و حرکت انسان به سوی تحقق ظرفیت‌های خود.
+      یک نگاه سریع برای مقایسه رویکردها
     </p>
 
-    <div class="tags">
-      <span class="tag">رشد</span>
-      <span class="tag">خود</span>
-      <span class="tag">تحقق</span>
+  </div>
+
+
+  <div class="compare">
+
+
+    <div class="compare-item">
+
+      <div class="compare-icon">
+        🧔🏻
+      </div>
+
+      <h3>
+        روان‌کاوی
+      </h3>
+
+      <p>
+        ناهشیار و تعارض‌های روانی
+      </p>
+
+    </div>
+
+
+    <div class="compare-item">
+
+      <div class="compare-icon">
+        🐾
+      </div>
+
+      <h3>
+        رفتارگرایی
+      </h3>
+
+      <p>
+        رفتار و یادگیری
+      </p>
+
+    </div>
+
+
+    <div class="compare-item">
+
+      <div class="compare-icon">
+        ◉
+      </div>
+
+      <h3>
+        گشتالت
+      </h3>
+
+      <p>
+        ادراک و کل تجربه
+      </p>
+
+    </div>
+
+
+    <div class="compare-item">
+
+      <div class="compare-icon">
+        🌱
+      </div>
+
+      <h3>
+        انسان‌گرایی
+      </h3>
+
+      <p>
+        رشد و تجربه شخصی
+      </p>
+
+    </div>
+
+
+    <div class="compare-item">
+
+      <div class="compare-icon">
+        💭
+      </div>
+
+      <h3>
+        شناختی
+      </h3>
+
+      <p>
+        تفکر و پردازش اطلاعات
+      </p>
+
+    </div>
+
+
+    <div class="compare-item">
+
+      <div class="compare-icon">
+        🧬
+      </div>
+
+      <h3>
+        زیستی
+      </h3>
+
+      <p>
+        مغز و دستگاه عصبی
+      </p>
+
+    </div>
+
+
+    <div class="compare-item">
+
+      <div class="compare-icon">
+        ◫
+      </div>
+
+      <h3>
+        ساختارگرایی
+      </h3>
+
+      <p>
+        ساختار تجربه آگاهانه
+      </p>
+
+    </div>
+
+
+    <div class="compare-item">
+
+      <div class="compare-icon">
+        ⚙
+      </div>
+
+      <h3>
+        کارکردگرایی
+      </h3>
+
+      <p>
+        کارکرد ذهن و سازگاری
+      </p>
+
     </div>
 
   </div>
 
-</a>
+</section>
 
 
-<!-- COGNITIVE -->
+<!-- =========================
+     FINAL NOTE
+========================= -->
 
-<a class="school" href="school-cognitive.html">
+<section class="section">
 
-  <div class="school-top">
+  <div class="feature-card highlight">
 
-    <div class="school-icon">
-      💭
+    <div class="feature-icon">
+      🧠
     </div>
-
-    <div class="school-number">
-      05
-    </div>
-
-    <div class="school-decoration">
-      💭
-    </div>
-
-  </div>
-
-  <div class="school-body">
 
     <h3>
-      شناختی
+      هیچ مکتبی به تنهایی تمام روان انسان را توضیح نمی‌دهد.
     </h3>
 
-    <div class="founder">
-      رویکرد شناختی
-    </div>
-
     <p>
-      مطالعه فرایندهایی مانند توجه، حافظه،
-      تفکر، زبان و حل مسئله.
+      تاریخ روان‌شناسی نشان می‌دهد که هر رویکرد،
+      بخشی از مسئله را برجسته کرده است.
+      شناخت این تفاوت‌ها به ما کمک می‌کند هنگام مطالعه
+      نظریه‌های روان‌شناسی، نگاه دقیق‌تر و انتقادی‌تری داشته باشیم.
     </p>
 
-    <div class="tags">
-      <span class="tag">حافظه</span>
-      <span class="tag">تفکر</span>
-      <span class="tag">توجه</span>
-    </div>
-
   </div>
 
-</a>
+</section>
 
 
-<!-- BIOLOGICAL -->
+<!-- =========================
+     FOOTER
+========================= -->
 
-<a class="school" href="school-biological.html">
+<footer>
 
-  <div class="school-top">
-
-    <div class="school-icon">
-      🧬
-    </div>
-
-    <div class="school-number">
-      06
-    </div>
-
-    <div class="school-decoration">
-      🧬
-    </div>
-
-  </div>
-
-  <div class="school-body">
-
-    <h3>
-      زیستی
-    </h3>
-
-    <div class="founder">
-      رویکرد زیستی
-    </div>
-
-    <p>
-      بررسی رفتار و فرایندهای روانی با توجه به مغز،
-      دستگاه عصبی، ژنتیک و فرایندهای زیستی.
-    </p>
-
-    <div class="tags">
-      <span class="tag">مغز</span>
-      <span class="tag">نورون</span>
-      <span class="tag">ژنتیک</span>
-    </div>
-
-  </div>
-
-</a>
-
-
-<!-- STRUCTURALISM -->
-
-<a class="school" href="school-structuralism.html">
-
-  <div class="school-top">
-
-    <div class="school-icon">
-      ◫
-    </div>
-
-    <div class="school-number">
-      07
-    </div>
-
-    <div class="school-decoration">
-      ◫
-    </div>
-
-  </div>
-
-  <div class="school-body">
-
-    <h3>
-      ساختارگرایی
-    </h3>
-
-    <div class="founder">
-      ادوارد تیچنر
-    </div>
-
-    <p>
-      تلاش برای مطالعه ساختار تجربه آگاهانه
-      و عناصر تشکیل‌دهنده آن.
-    </p>
-
-    <div class="tags">
-      <span class="tag">آگاهی</span>
-      <span class="tag">تجربه</span>
-      <span class="tag">درون‌نگری</span>
-    </div>
-
-  </div>
-
-</a>
-
-
-<!-- FUNCTIONALISM -->
-
-<a class="school" href="school-functionalism.html">
-
-  <div class="school-top">
-
-    <div class="school-icon">
-      ⚙
-    </div>
-
-    <div class="school-number">
-      08
-    </div>
-
-    <div class="school-decoration">
-      ⚙
-    </div>
-
-  </div>
-
-  <div class="school-body">
-
-    <h3>
-      کارکردگرایی
-    </h3>
-
-    <div class="founder">
-      ویلیام جیمز
-    </div>
-
-    <p>
-      توجه به کارکرد فرایندهای ذهنی و نقش آن‌ها
-      در سازگاری فرد با محیط.
-    </p>
-
-    <div class="tags">
-      <span class="tag">کارکرد</span>
-      <span class="tag">سازگاری</span>
-      <span class="tag">محیط</span>
-    </div>
-
-  </div>
-
-</a>
-
-  </div></section><!-- COMPARISON --><section class="section">  <div class="section-head"><h2>
-  هر مکتب بیشتر روی چه چیزی تمرکز دارد؟
-</h2>
-
-<p>
-  یک نگاه سریع برای مقایسه رویکردها
-</p>
-
-  </div>  <div class="compare"><div class="compare-item">
-  <div class="compare-icon">🧔🏻</div>
-  <h3>روان‌کاوی</h3>
-  <p>ناهشیار و تعارض‌های روانی</p>
-</div>
-
-<div class="compare-item">
-  <div class="compare-icon">🐾</div>
-  <h3>رفتارگرایی</h3>
-  <p>رفتار و یادگیری</p>
-</div>
-
-<div class="compare-item">
-  <div class="compare-icon">◉</div>
-  <h3>گشتالت</h3>
-  <p>ادراک و کل تجربه</p>
-</div>
-
-<div class="compare-item">
-  <div class="compare-icon">🌱</div>
-  <h3>انسان‌گرایی</h3>
-  <p>رشد و تجربه شخصی</p>
-</div>
-
-<div class="compare-item">
-  <div class="compare-icon">💭</div>
-  <h3>شناختی</h3>
-  <p>تفکر و پردازش اطلاعات</p>
-</div>
-
-<div class="compare-item">
-  <div class="compare-icon">🧬</div>
-  <h3>زیستی</h3>
-  <p>مغز و دستگاه عصبی</p>
-</div>
-
-<div class="compare-item">
-  <div class="compare-icon">◫</div>
-  <h3>ساختارگرایی</h3>
-  <p>ساختار تجربه آگاهانه</p>
-</div>
-
-<div class="compare-item">
-  <div class="compare-icon">⚙</div>
-  <h3>کارکردگرایی</h3>
-  <p>کارکرد ذهن و سازگاری</p>
-</div>
-
-  </div></section><!-- FINAL NOTE --><section class="section">  <div class="feature-card highlight"><div class="feature-icon">
-  🧠
-</div>
-
-<h3>
-  هیچ مکتبی به تنهایی تمام روان انسان را توضیح نمی‌دهد.
-</h3>
-
-<p>
-  تاریخ روان‌شناسی نشان می‌دهد که هر رویکرد،
-  بخشی از مسئله را برجسته کرده است.
-  شناخت این تفاوت‌ها به ما کمک می‌کند هنگام مطالعه
-  نظریه‌های روان‌شناسی، نگاه دقیق‌تر و انتقادی‌تری داشته باشیم.
-</p>
-
-  </div></section><footer>  <div class="footer-logo">
+  <div class="footer-logo">
     🧠 روان‌شناسی‌نامه
-  </div>  <p>
+  </div>
+
+  <p>
     تاریخ، نظریه‌ها و اندیشه‌های روان‌شناسی
-  </p>  <p>
+  </p>
+
+  <p>
     © روان‌شناسی‌نامه
-  </p></footer><script>
+  </p>
+
+</footer>
+
+
+<script>
+
+/* =========================
+   DARK MODE
+========================= */
+
+function applyTheme(){
+
+  const savedTheme =
+    localStorage.getItem("psychologyTheme");
+
+  const isDark =
+    savedTheme === "dark";
+
+  document.body.classList.toggle(
+    "dark",
+    isDark
+  );
+
+  const button =
+    document.getElementById("themeButton");
+
+  if(button){
+
+    button.textContent =
+      isDark ? "☀️" : "☾";
+
+  }
+
+}
+
+
+/* تغییر حالت و ذخیره آن */
 
 function toggleDark(){
 
-  const dark =
-    document.body.dataset.dark === "1";
+  const isDark =
+    document.body.classList.contains("dark");
 
-  if(dark){
+  if(isDark){
 
-    document.body.dataset.dark = "0";
-
-    document.body.style.background =
-      "#fbf6f0";
-
-    document.body.style.color =
-      "#393336";
+    localStorage.setItem(
+      "psychologyTheme",
+      "light"
+    );
 
   }else{
 
-    document.body.dataset.dark = "1";
-
-    document.body.style.background =
-      "#242025";
-
-    document.body.style.color =
-      "#f7edf3";
+    localStorage.setItem(
+      "psychologyTheme",
+      "dark"
+    );
 
   }
 
+  applyTheme();
+
 }
 
+
+/* =========================
+   MOBILE MENU
+========================= */
 
 function toggleMenu(){
 
@@ -1091,18 +2022,39 @@ function toggleMenu(){
   }else{
 
     nav.style.display = "flex";
+
     nav.style.position = "absolute";
+
     nav.style.top = "65px";
+
     nav.style.right = "0";
+
     nav.style.left = "0";
-    nav.style.background = "#fffdfb";
+
+    nav.style.background =
+      "var(--card)";
+
     nav.style.padding = "12px";
+
+    nav.style.border =
+      "1px solid var(--border)";
+
     nav.style.borderRadius = "18px";
+
     nav.style.flexDirection = "column";
 
   }
 
 }
 
-</script></body>
-</html>
+
+/* =========================
+   START
+========================= */
+
+applyTheme();
+
+</script>
+
+</body>
+          </html>
